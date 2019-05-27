@@ -9,6 +9,11 @@ import org.springframework.web.bind.annotation.*;
 public class MateriaController {
     MateriaService gestorMaterias = new MateriaService();
 
+    @RequestMapping(method = RequestMethod.GET, value = "/materia/{idMateria}")
+    public Materia getMateria(@PathVariable String idMateria) {
+        return this.gestorMaterias.get(idMateria);
+    }
+
     @RequestMapping(method = RequestMethod.GET, value="/materias")
     public Iterable<Materia> todasLasMaterias() {return  gestorMaterias.getMaterias();}
 

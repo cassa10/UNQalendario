@@ -26,6 +26,11 @@ task cucumber() {
 
 dependencies {
     compile group: 'info.cukes', name: 'cucumber-jvm', version: '1.2.5', ext: 'pom'
+    testCompile 'org.assertj:assertj-core:3.9.0'
+    testCompile 'io.cucumber:cucumber-java:2.4.0'
+    testCompile 'io.cucumber:cucumber-junit:2.4.0'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.2'
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.2'
     testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'
     testCompile group: 'info.cukes', name: 'cucumber-spring', version: '1.2.5'
     compile 'org.mongodb:mongo-java-driver:3.3.0'

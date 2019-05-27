@@ -16,12 +16,15 @@ public class MateriaService {
         return this.materiaDAO.find("");
     }
 
-    public Materia agregarMateria(Materia materia) {
+    public void agregarMateria(Materia materia) {
         this.materiaDAO.save(materia);
-        return materia;
     }
 
     public Iterable<Materia> filtrarMateriasPorNombre(String nombre) {
         return this.materiaDAO.find("{ nombre : { $regex : \".*#.*\" } }", nombre);
+    }
+
+    public Materia get(String idMateria) {
+        return this.materiaDAO.get(idMateria);
     }
 }
