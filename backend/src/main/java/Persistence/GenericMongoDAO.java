@@ -4,6 +4,7 @@ import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
+import org.jongo.Update;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,6 +40,16 @@ public class GenericMongoDAO<T> {
 	public T get(String id) {
 		ObjectId objectId = new ObjectId(id);
 		return this.mongoCollection.findOne(objectId).as(this.entityType);
+	}
+
+	public void update(String query, Object... parameters) {
+
+		try {
+			this.mongoCollection.update(query, parameters);
+		} catch (Exception e) {
+			throw new RuntimeException(e);
+		}
+
 	}
 
 	public List<T> find(String query, Object... parameters) {
