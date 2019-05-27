@@ -15,7 +15,10 @@ public class Usuario {
     private List<Tarea> notificaciones;
     private List<Materia> materiasSuscritas;
 
-    public Usuario() {}
+    public Usuario() {
+        this.notificaciones = new ArrayList<>();
+        this.materiasSuscritas = new ArrayList<>();
+    }
 
     public Usuario(String nombre, String password){
         this.nombre = nombre;
@@ -42,5 +45,9 @@ public class Usuario {
 
     public void agregarMateriaSubscrita(Materia materia) {
         this.materiasSuscritas.add(materia);
+    }
+
+    public List<Materia> getMateriasSuscritas() {
+        return materiasSuscritas;
     }
 }

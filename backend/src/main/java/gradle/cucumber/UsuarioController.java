@@ -36,8 +36,8 @@ public class UsuarioController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/suscribir/{idMateria}")
-    public ResponseEntity suscribirAMateria(@PathVariable String idMateria, @RequestBody String idUsuario){
-        this.usuarioService.suscribirA(idUsuario, idMateria);
-        return ResponseEntity.ok(idUsuario + idMateria);
+    public ResponseEntity suscribirAMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> data){
+        this.usuarioService.suscribirA(data.get("idUsuario"), idMateria);
+        return ResponseEntity.ok(this.usuarioService.get(data.get("idUsuario")));
     }
 }

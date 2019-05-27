@@ -31,9 +31,14 @@ public class UsuarioService {
     }
 
     public void suscribirA(String idUsuario, String idMateria) {
-        //Usuario usuarioRecuperado = this.usuarioDAO.get(idUsuario);
-        //Materia materiaRecuperado = this.materiaDAO.get(idMateria);
+        Usuario usuarioRecuperado = this.usuarioDAO.get(idUsuario);
+        Materia materiaRecuperado = this.materiaDAO.get(idMateria);
 
-        //usuarioRecuperado.agregarMateriaSubscrita(materiaRecuperado);
+        usuarioRecuperado.agregarMateriaSubscrita(materiaRecuperado);
+
+        /*
+        * Refactorizar FUERTE
+        */
+        this.usuarioDAO.update("{ nombre: # },{ $set: { materiasSuscritas: # }}", usuarioRecuperado.getNombre(), usuarioRecuperado.getMateriasSuscritas());
     }
 }
