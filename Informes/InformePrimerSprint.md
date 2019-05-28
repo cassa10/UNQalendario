@@ -1,21 +1,23 @@
 # Informe del Primer Sprint
 
-## User stories propuestas:
+## User Stories propuestas/estimadas:
 
 - Como Usuario Iniciar Sesion y Registrarse **(Completado)**
 
 - Como estudiante quiero buscar una materia por nombre **(Completado)**
 
-- Como estudiante quiero suscribirme a una materia
+- Como estudiante quiero suscribirme a una materia **(Incompleta)**
 
-- Como profesor quiero publicar una tarea en una fecha del calendario 
+- Como profesor quiero publicar una tarea en una fecha del calendario **(Incompleta)** 
 
-- Como profesor quiero administrar una materia
+- Como profesor quiero administrar una materia **(Incompleta)**
+
+---
 
 ## Retrospectiva:
 
 
-<span style="color:yellow">**Buenas:**</span>
+<span style="color:lightblue">**Buenas:**</span>
 
 - El tiempo promedio para desarrollar una  user story fue **“Bajo”**
 
@@ -39,3 +41,6 @@ TP Bomberman
 
 - Respetar mas la planificacion y proponer un tiempo minimo de dedicación.   
 
+---
+
+[Volver](https://github.com/cassa10/UNQalendario)

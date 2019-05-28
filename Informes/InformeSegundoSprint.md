@@ -1,6 +1,6 @@
 # Informe del Segundo Sprint
 
-## User Stories con **StoryPoints**
+## User Stories estimadas con **StoryPoints**
 
 - Como estudiante quiero suscribirme a una materia **(StoryPoints: 4)** 
  
@@ -13,7 +13,6 @@
 - Como estudiante quiero que me notifiquen cuando un profesor agregue una tarea a un calendario suscripto **(StoryPoints: 3)** 
 
 ### **Total de Story Points:  17**
+---
 
-[Informe del Segundo Sprint](InformeSegundoSprint.md)
-
-[Al Repositorio](..)
+[Volver](https://github.com/cassa10/UNQalendario)
