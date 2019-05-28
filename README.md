@@ -1,5 +1,10 @@
 # UNQalendario
 
+### Objetivo
+La idea del proyecto es crear una plataforma web dirigido a los alumnos y profesores de la Universidad Nacional de Quilmes (UNQ). Cuyo objetivo principal es mejorar la comunicacion alumno-profesor, y la organizacion de las materias, de manera clara y eficiente. 
+
+---
+
 ### Integrantes
 
 Nro | Nombre       		| Legajo | Mail
@@ -12,11 +17,16 @@ Nro | Nombre       		| Legajo | Mail
 
 ----
 ## Para correr el proyecto localmente:
-- Tener instalado: Mongodb, gradle con version mayor a 4.7(Para uso de spring), nodejs y npm
+- Tener instalado: 
+    - Mongodb 
+    - Gradle con version mayor a 4.7(Para uso de spring) 
+    - nodejs 
+    - npm
+    
 - Correr UNQalendarioApplication para levantar Spring
 
 - Ir a "\UNQalendario\frontend"
-- Escribir en la consola npm install y luego npm start
+- Escribir en la consola npm install y luego npm start **(Importar solo la carpeta backend en IntelliJ antes de ejecutar npm)**
 - Abrir localhost:3000 en browser
 
 ----
