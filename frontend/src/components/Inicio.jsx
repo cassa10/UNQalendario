@@ -8,15 +8,20 @@ class Inicio extends React.Component {
     this.state = {
       materias: [],
       materiasFiltradas: [],
-      usuario: {
-        materiasSuscritas: [],
-      },
+      materiasSuscritasDelUsuario: [],
+      usuario: '',
     };
   }
 
   componentDidMount() {
     this.traerTodasLasMaterias();
     this.traerUsuario();
+    this.traerMateriasSuscritasDelUsuario();
+  }
+
+  traerMateriasSuscritasDelUsuario() {
+    API.get(`/materias/${this.props.location.state.username}`)
+      .then(response => this.setState({ materiasSuscritasDelUsuario: response }));
   }
 
   traerUsuario() {
@@ -41,7 +46,7 @@ class Inicio extends React.Component {
 
   suscribirseAMateria(idMateria) {
     API.post(`/suscribir/${idMateria}`, { idUsuario: this.props.location.state.username })
-      .then(response => this.setState({ usuario: response }));
+      .then(response => this.setState({ materiasSuscritasDelUsuario: response }));
   }
 
   crearAlertaDeNoHayMateriasParaSuscribirse() {
@@ -54,7 +59,7 @@ class Inicio extends React.Component {
 
   crearVisualizacionMaterias() {
     const materiasNoSuscritas = this.state.materiasFiltradas
-      .filter(m => this.state.usuario.materiasSuscritas
+      .filter(m => this.state.materiasSuscritasDelUsuario
         .map(materia => materia.id).indexOf(m.id) === -1);
     if (materiasNoSuscritas.length === 0) {
       return (

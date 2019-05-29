@@ -15,9 +15,15 @@ public class Materia {
     private List<Usuario> suscriptores;
     private List<Tarea> tareas;
 
-    public Materia(){}
+    public Materia(){
+        this.setUp();
+    }
     public Materia(String nombre){
         this.nombre = nombre;
+        this.setUp();
+    }
+
+    private void setUp() {
         this.tareas = new ArrayList<>();
         this.suscriptores = new ArrayList<>();
     }
@@ -35,11 +41,15 @@ public class Materia {
     }
 
     public void agregarSuscriptor(Usuario usuario) {
-        this.suscriptores.add(usuario);
+        if(this.suscriptores.stream().allMatch(u -> !usuario.getId().equals(u.getId()))) {this.suscriptores.add(usuario);}
     }
 
     public void agregarTarea(Tarea tarea) {
         this.tareas.add(tarea);
         this.suscriptores.forEach(usuario -> usuario.agregarNotificacion(tarea));
+    }
+
+    public List<Tarea> getTareas() {
+        return tareas;
     }
 }

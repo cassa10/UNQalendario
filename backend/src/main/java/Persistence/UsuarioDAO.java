@@ -12,8 +12,4 @@ public class UsuarioDAO extends GenericMongoDAO<Usuario> {
         super(Usuario.class);
     }
 
-    public void suscribirUsuario(String idUsuario, List<Materia> materias) {
-        ObjectId objectId = new ObjectId(idUsuario);
-        this.mongoCollection.update("{ _id: # }", objectId).with("{ $set: { materiasSuscritas: # }}", materias);
-    }
 }
