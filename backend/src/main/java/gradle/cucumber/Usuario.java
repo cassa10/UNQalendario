@@ -13,18 +13,19 @@ public class Usuario {
     private String nombre;
     private String password;
     private List<Tarea> notificaciones;
-    private List<Materia> materiasSuscritas;
 
     public Usuario() {
-        this.notificaciones = new ArrayList<>();
-        this.materiasSuscritas = new ArrayList<>();
+        this.setUp();
     }
 
     public Usuario(String nombre, String password){
         this.nombre = nombre;
         this.password = password;
+        this.setUp();
+    }
+
+    private void setUp() {
         this.notificaciones = new ArrayList<>();
-        this.materiasSuscritas = new ArrayList<>();
     }
 
     public String getId() {
@@ -43,11 +44,4 @@ public class Usuario {
         this.notificaciones.add(tarea);
     }
 
-    public void agregarMateriaSubscrita(Materia materia) {
-        this.materiasSuscritas.add(materia);
-    }
-
-    public List<Materia> getMateriasSuscritas() {
-        return materiasSuscritas;
-    }
 }

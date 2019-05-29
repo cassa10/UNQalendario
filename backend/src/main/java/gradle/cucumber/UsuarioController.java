@@ -38,6 +38,11 @@ public class UsuarioController {
     @RequestMapping(method = RequestMethod.POST, value = "/suscribir/{idMateria}")
     public ResponseEntity suscribirAMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> data){
         this.usuarioService.suscribirA(data.get("idUsuario"), idMateria);
-        return ResponseEntity.ok(this.usuarioService.get(data.get("idUsuario")));
+        return ResponseEntity.ok(this.usuarioService.getMaterias(data.get("idUsuario")));
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/materias/{idUsuario}")
+    public ResponseEntity getMaterias(@PathVariable String idUsuario) {
+        return ResponseEntity.ok(this.usuarioService.getMaterias(idUsuario));
     }
 }

@@ -5,6 +5,8 @@ import Persistence.UsuarioDAO;
 import gradle.cucumber.Materia;
 import gradle.cucumber.Usuario;
 
+import java.util.List;
+
 public class UsuarioService {
     private UsuarioDAO usuarioDAO;
     private MateriaDAO materiaDAO;
@@ -34,11 +36,12 @@ public class UsuarioService {
         Usuario usuarioRecuperado = this.usuarioDAO.get(idUsuario);
         Materia materiaRecuperado = this.materiaDAO.get(idMateria);
 
-        usuarioRecuperado.agregarMateriaSubscrita(materiaRecuperado);
+        materiaRecuperado.agregarSuscriptor(usuarioRecuperado);
 
-        /*
-        * Refactorizar FUERTE
-        */
-        this.usuarioDAO.update("{ nombre: # },{ $set: { materiasSuscritas: # }}", usuarioRecuperado.getNombre(), usuarioRecuperado.getMateriasSuscritas());
+        this.materiaDAO.suscribirUsuario(idMateria, materiaRecuperado.getSuscriptores());
+    }
+
+    public List<Materia> getMaterias(String idUsuario) {
+        return this.materiaDAO.getMateriasDe(idUsuario);
     }
 }

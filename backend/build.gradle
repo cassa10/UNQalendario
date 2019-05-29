@@ -29,6 +29,7 @@ dependencies {
     testCompile 'org.assertj:assertj-core:3.9.0'
     testCompile 'io.cucumber:cucumber-java:2.4.0'
     testCompile 'io.cucumber:cucumber-junit:2.4.0'
+    testCompile group: 'org.junit.vintage', name: 'junit-vintage-engine', version: '5.2.0'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.0.2'
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.0.2'
     testCompile group: 'info.cukes', name: 'cucumber-junit', version: '1.2.5'

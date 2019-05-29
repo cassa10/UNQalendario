@@ -42,10 +42,10 @@ public class GenericMongoDAO<T> {
 		return this.mongoCollection.findOne(objectId).as(this.entityType);
 	}
 
-	public void update(String query, Object... parameters) {
+	public void update(String searchQuery, String modifierQuery) {
 
 		try {
-			this.mongoCollection.update(query, parameters);
+			this.mongoCollection.update(searchQuery).with(modifierQuery);
 		} catch (Exception e) {
 			throw new RuntimeException(e);
 		}

@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Inicio from './Inicio';
 import InicioSession from './InicioSession';
 import CreacionCuenta from './CreacionCuenta';
+import Administracion from './Administracion';
 
 export default class App extends React.Component {
   render() {
@@ -15,6 +16,7 @@ export default class App extends React.Component {
         <Switch>
           <Route path="/inicio" render={props => <div><Inicio {...props} /> </div>} />
           <Route path="/crearCuenta" render={() => <CreacionCuenta />} />
+          <Route exact path="/administracion" render={() => <Administracion />} />
           <Route path="/" render={props => <div><InicioSession {...props} /> </div>} />
         </Switch>
       </BrowserRouter>
