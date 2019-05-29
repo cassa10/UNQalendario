@@ -8,7 +8,9 @@ class Inicio extends React.Component {
     this.state = {
       materias: [],
       materiasFiltradas: [],
-      usuario: '',
+      usuario: {
+        materiasSuscritas: [],
+      },
     };
   }
 
@@ -38,7 +40,7 @@ class Inicio extends React.Component {
   }
 
   suscribirseAMateria(idMateria) {
-    API.post(`/suscribir/${idMateria}`, { idUsuario: this.state.usuario.id })
+    API.post(`/suscribir/${idMateria}`, { idUsuario: this.props.location.state.username })
       .then(response => this.setState({ usuario: response }));
   }
 
@@ -65,7 +67,6 @@ class Inicio extends React.Component {
   render() {
     return (
       <div className="container">
-        {console.log(this.state.usuario)}
         <h1>
           UNQalendario
         </h1>

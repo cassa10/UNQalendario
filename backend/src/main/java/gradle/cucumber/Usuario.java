@@ -44,7 +44,7 @@ public class Usuario {
     }
 
     public void agregarMateriaSubscrita(Materia materia) {
-        this.materiasSuscritas.add(materia);
+        if(this.materiasSuscritas.stream().allMatch(m -> !materia.getId().equals(m.getId()))) {this.materiasSuscritas.add(materia);}
     }
 
     public List<Materia> getMateriasSuscritas() {

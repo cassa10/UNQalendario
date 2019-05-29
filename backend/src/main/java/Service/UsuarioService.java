@@ -36,9 +36,6 @@ public class UsuarioService {
 
         usuarioRecuperado.agregarMateriaSubscrita(materiaRecuperado);
 
-        /*
-        * Refactorizar FUERTE
-        */
-        this.usuarioDAO.update("{ nombre: # },{ $set: { materiasSuscritas: # }}", usuarioRecuperado.getNombre(), usuarioRecuperado.getMateriasSuscritas());
+        this.usuarioDAO.suscribirUsuario(idUsuario, usuarioRecuperado.getMateriasSuscritas());
     }
 }
