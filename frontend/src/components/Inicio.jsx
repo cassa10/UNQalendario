@@ -44,8 +44,24 @@ class Inicio extends React.Component {
       .then(response => this.setState({ usuario: response }));
   }
 
+  crearAlertaDeNoHayMateriasParaSuscribirse() {
+    return (
+      <div className="alert alert-primary col-12" role="alert">
+        No hay materias en las que te puedas suscribir!
+      </div>
+    );
+  }
+
   crearVisualizacionMaterias() {
-    return this.state.materiasFiltradas.map(materia => (
+    const materiasNoSuscritas = this.state.materiasFiltradas
+      .filter(m => this.state.usuario.materiasSuscritas
+        .map(materia => materia.id).indexOf(m.id) === -1);
+    if (materiasNoSuscritas.length === 0) {
+      return (
+        this.crearAlertaDeNoHayMateriasParaSuscribirse()
+      );
+    }
+    return materiasNoSuscritas.map(materia => (
       <div className="col-3 pdb30" key={materia.id}>
         <div className="card text-center">
           <div className="card-header">
@@ -72,7 +88,7 @@ class Inicio extends React.Component {
         </h1>
         <div className="row pdb30">
           <div className="col-8">
-            <input className="form-control mr-sm-2" type="search" placeholder="Materia..." aria-label="Search" onChange={e => this.handlerBuscarMateria(e)} />
+            <input className="form-control mr-sm-2" type="search" placeholder="Buscar Materia..." aria-label="Search" onChange={e => this.handlerBuscarMateria(e)} />
           </div>
         </div>
         <div className="row">
