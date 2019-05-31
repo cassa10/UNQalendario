@@ -5,6 +5,7 @@ import org.jongo.marshall.jackson.oid.MongoObjectId;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class Materia {
@@ -14,6 +15,7 @@ public class Materia {
     private String nombre;
     private List<Usuario> suscriptores;
     private List<Tarea> tareas;
+    private List<Docente> administradores;
 
     public Materia(){
         this.setUp();
@@ -26,6 +28,7 @@ public class Materia {
     private void setUp() {
         this.tareas = new ArrayList<>();
         this.suscriptores = new ArrayList<>();
+        this.administradores =new ArrayList<>();
     }
 
     public String getId() {
@@ -51,5 +54,13 @@ public class Materia {
 
     public List<Tarea> getTareas() {
         return tareas;
+    }
+
+    public void agregarAdministrador(Docente nuevoAdmin) {
+        this.administradores.add(nuevoAdmin);
+    }
+
+    public List<Docente> admins() {
+        return this.administradores;
     }
 }
