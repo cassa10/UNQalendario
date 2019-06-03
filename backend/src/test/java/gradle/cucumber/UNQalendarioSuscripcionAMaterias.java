@@ -53,7 +53,7 @@ public class UNQalendarioSuscripcionAMaterias {
 
     @And("^Una Materia \"([^\"]*)\" sin suscriptores$")
     public void crearMateria(String nombreMateria){
-        this.materia =  this.materiaController.save(new Materia(nombreMateria));
+        this.materia =  this.materiaController.save(new Materia(nombreMateria,""));
     }
 
     @When("^Este Usuario se suscribe a la anterior materia$")
