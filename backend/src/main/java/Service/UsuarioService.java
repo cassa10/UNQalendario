@@ -44,4 +44,8 @@ public class UsuarioService {
     public List<Materia> getMaterias(String idUsuario) {
         return this.materiaDAO.getMateriasDe(idUsuario);
     }
+
+    public void borrarUsuarios(){
+        this.usuarioDAO.deleteAll();
+    }
 }
