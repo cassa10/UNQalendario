@@ -4,7 +4,6 @@ Feature: RegistroYInicioSesionDeUsuario
 
  Scenario: Un Usuario se registra y se guarda en la base de datos
     Given Un UsuarioController y un UsuarioService
-    And Base de Datos con Usuarios vacia
     And Un Usuario llamado "Pepito" con password "123"
     When El UsuarioController guarda a este usuario
     Then El Usuario aparece en la coleccion de Usuarios de la base de datos

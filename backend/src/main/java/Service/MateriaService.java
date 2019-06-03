@@ -2,6 +2,7 @@ package Service;
 
 import Persistence.MateriaDAO;
 import gradle.cucumber.Materia;
+import gradle.cucumber.Usuario;
 
 import java.util.List;
 
@@ -30,5 +31,19 @@ public class MateriaService {
 
     public void borrarMaterias(){
         this.materiaDAO.deleteAll();
+    }
+
+    public boolean tieneSuscriptor(Materia materia, Usuario usuario) {
+        //TODO
+        // REFACTOR MEJORAR A UNA QUERY DE MONGO
+
+        return this.get(materia.getId()).getSuscriptores().contains(usuario);
+    }
+
+    public int cantidadSuscriptores(Materia materia) {
+        //TODO
+        // REFACTOR MEJORAR A UNA QUERY DE MONGO
+
+        return this.get(materia.getId()).getSuscriptores().size();
     }
 }

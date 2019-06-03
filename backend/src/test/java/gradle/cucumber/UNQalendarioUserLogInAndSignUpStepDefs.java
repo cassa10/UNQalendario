@@ -32,11 +32,6 @@ public class UNQalendarioUserLogInAndSignUpStepDefs {
         this.usuarioService = new UsuarioService();
     }
 
-    @And("^Base de Datos con Usuarios vacia$")
-    public void vaciarUsuarios(){
-        usuarioService.borrarUsuarios();
-    }
-
     @And("^Un Usuario llamado \"([^\"]*)\" con password \"([^\"]*)\"$")
     public void crearUsuario(String nombre, String password){
         usuario = new Usuario(nombre,password);
