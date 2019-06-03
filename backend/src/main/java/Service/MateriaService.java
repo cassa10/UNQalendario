@@ -27,4 +27,8 @@ public class MateriaService {
     public Materia get(String idMateria) {
         return this.materiaDAO.get(idMateria);
     }
+
+    public void borrarMaterias(){
+        this.materiaDAO.deleteAll();
+    }
 }
