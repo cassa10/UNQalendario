@@ -24,7 +24,7 @@ public class Materia {
     }
     public Materia(String nombre,String nombreDocente){
         this.nombre = nombre;
-        nombreDocente = nombreDocente;
+        this.nombreDocente = nombreDocente;
         this.setUp();
     }
 
