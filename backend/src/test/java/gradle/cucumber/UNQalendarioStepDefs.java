@@ -8,7 +8,7 @@ import static junit.framework.TestCase.assertTrue;
 
 public class UNQalendarioStepDefs{
     private Materia materia;
-    private Docente docenteAdmin = new Docente();
+    private Docente docenteAdmin = new Docente("Cesar de redes");
 
     @Given("^Una materia sin administradores")
     public void inicializarMateria(){

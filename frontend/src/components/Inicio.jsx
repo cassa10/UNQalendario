@@ -78,7 +78,7 @@ class Inicio extends React.Component {
             </button>
           </div>
           <div className="card-footer text-muted">
-            Nombre del Profe
+            Admin: {materia.nombreDocente}
           </div>
         </div>
       </div>

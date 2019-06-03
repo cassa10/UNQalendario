@@ -2,6 +2,7 @@ package gradle.cucumber;
 
 import org.jongo.marshall.jackson.oid.MongoId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Materia {
     @MongoId
     @MongoObjectId
     private String id;
+    private String nombreDocente;
     private String nombre;
     private List<Usuario> suscriptores;
     private List<Tarea> tareas;
@@ -20,8 +22,9 @@ public class Materia {
     public Materia(){
         this.setUp();
     }
-    public Materia(String nombre){
+    public Materia(String nombre,String nombreDocente){
         this.nombre = nombre;
+        nombreDocente = nombreDocente;
         this.setUp();
     }
 
@@ -33,6 +36,9 @@ public class Materia {
 
     public String getId() {
         return id;
+    }
+    public String getNombreDocente() {
+        return nombreDocente;
     }
 
     public String getNombre() {
