@@ -12,4 +12,11 @@ public class MateriaTest extends TestCase {
 
         assertTrue(materia.admins().contains(docente));
     }
+    @Test
+    public void testCuandoCreoUnaMateriaConNombreDeAdministradorMiguelAhoraElNombreDeAdministradorEsMiguel(){
+        Materia materia = new Materia("Corte y confeccion","Miguel");
+
+
+        assertEquals(materia.getNombreDocente(),"Miguel");
+    }
 }
