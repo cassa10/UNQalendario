@@ -17,7 +17,7 @@ public class Materia {
     private String nombre;
     private List<Usuario> suscriptores;
     private List<Tarea> tareas;
-    //private List<Docente> administradores;
+    private List<Docente> administradores;
 
     public Materia(){
         this.setUp();
@@ -31,8 +31,7 @@ public class Materia {
     private void setUp() {
         this.tareas = new ArrayList<>();
         this.suscriptores = new ArrayList<>();
-       /* this.administradores =new ArrayList<>();
-        this.administradores.add(new Docente(nombreDocente));*/
+        this.administradores =new ArrayList<>();
     }
 
     public String getId() {
@@ -64,10 +63,10 @@ public class Materia {
     }
 
     public void agregarAdministrador(Docente nuevoAdmin) {
-        //this.administradores.add(nuevoAdmin);
+        this.administradores.add(nuevoAdmin);
     }
 
-    /*public List<Docente> admins() {
+    public List<Docente> admins() {
         return this.administradores;
-    }*/
+    }
 }
