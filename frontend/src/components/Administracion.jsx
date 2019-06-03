@@ -6,6 +6,7 @@ class Administracion extends React.Component {
     super(props);
     this.state = {
       nombreMateriaNueva: '',
+      nombreDocenteAdmin: '',
     };
   }
 
@@ -16,8 +17,12 @@ class Administracion extends React.Component {
     this.setState({ nombreMateriaNueva: e.target.value });
   }
 
+  handlerNombreDocente(e) {
+    this.setState({ nombreDocenteAdmin: e.target.value });
+  }
+
   crearMateriaNueva() {
-    API.post('/materia', { nombre: this.state.nombreMateriaNueva })
+    API.post('/materia', { nombre: this.state.nombreMateriaNueva, nombreDocente: this.state.nombreDocenteAdmin })
       .catch(error => console.log(error.response));
   }
 
@@ -33,6 +38,9 @@ class Administracion extends React.Component {
           </div>
           <div className="form-group mx-sm-3 mb-2">
             <input type="text" className="form-control" id="inputPassword2" placeholder="Nombre" onChange={e => this.handlerNombreMateria(e)} />
+          </div>
+          <div className="form-group mx-sm-3 mb-2">
+            <input type="text" className="form-control" id="inputPassword2" placeholder="Docente" onChange={e => this.handlerNombreDocente(e)} />
           </div>
           <button type="submit" className="btn btn-primary mb-2" onClick={() => this.crearMateriaNueva()}>Crear</button>
         </form>
