@@ -64,6 +64,7 @@ public class Materia {
 
     public void agregarAdministrador(Docente nuevoAdmin) {
         this.administradores.add(nuevoAdmin);
+        nuevoAdmin.administrarMateria(this);
     }
 
     public List<Docente> admins() {
