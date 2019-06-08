@@ -1,12 +1,12 @@
 package gradle.cucumber;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Tarea {
     private String nombreTarea;
-    private Date fechaTarea;
+    private LocalDate fechaTarea;
 
-    public Tarea(String nombre, Date fecha) {
+    public Tarea(String nombre, LocalDate fecha) {
         this.nombreTarea=nombre;
         this.fechaTarea=fecha;
     }
@@ -15,7 +15,7 @@ public class Tarea {
         return this.nombreTarea;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return this.fechaTarea;
     }
 

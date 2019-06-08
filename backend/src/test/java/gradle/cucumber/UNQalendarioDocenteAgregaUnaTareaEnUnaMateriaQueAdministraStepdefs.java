@@ -9,6 +9,7 @@ import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -35,10 +36,7 @@ public class UNQalendarioDocenteAgregaUnaTareaEnUnaMateriaQueAdministraStepdefs 
 
     @When("^Este Docente agrega una Tarea en la Materia en la fecha <(\\d+)-(\\d+)-(\\d+)> con el nombre \"([^\"]*)\"$")
     public void esteDocenteAgregaUnaTareaEnLaMateriaEnLaFechaConElNombre(int anio, int mes, int dia, String nombreTarea)  {
-        Date fecha;
-        fecha = new Date();
-        fecha.setYear(anio);
-        fecha.setMonth(mes);
+        LocalDate fecha = LocalDate.of(anio,mes,dia);
         this.tarea= new Tarea(nombreTarea,fecha);
         this.docenteAdmin.agregarTarea(this.materia,tarea);
 
