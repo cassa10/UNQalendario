@@ -70,4 +70,11 @@ public class Materia {
     public List<Docente> admins() {
         return this.administradores;
     }
+
+    public List<Tarea> mostrarTareas(Usuario usuario) {
+        if(suscriptores.contains(usuario)){
+            return tareas;
+        }
+        return new ArrayList<>();
+    }
 }

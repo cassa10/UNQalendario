@@ -10,9 +10,8 @@ public class Docente {
     public Docente(){}
     public Docente(String nombre) {
         this.nombre = nombre;
-        this.materiasAdministradas = new ArrayList<Materia>();
+        this.materiasAdministradas = new ArrayList<>();
     }
-
 
     public void administrarMateria(Materia materia) {
         this.materiasAdministradas.add(materia);

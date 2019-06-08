@@ -54,4 +54,7 @@ public class Usuario {
         return true;
     }
 
+    public List<Tarea> verTareas(Materia materia) {
+        return materia.mostrarTareas(this);
+    }
 }
