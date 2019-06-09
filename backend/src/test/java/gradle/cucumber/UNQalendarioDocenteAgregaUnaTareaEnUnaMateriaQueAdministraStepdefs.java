@@ -1,30 +1,14 @@
 package gradle.cucumber;
 
-import Service.MateriaService;
-import Service.UNQalendarioService;
-import Service.UsuarioService;
-import cucumber.api.PendingException;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.junit.Assert;
 
 import java.time.LocalDate;
-import java.util.Date;
-import java.util.List;
-
-import static java.time.LocalDate.of;
 
 public class UNQalendarioDocenteAgregaUnaTareaEnUnaMateriaQueAdministraStepdefs {
 
-
-    private UNQalendarioService unqalendarioService = new UNQalendarioService();
-    private UsuarioController usuarioController;
-    private UsuarioService usuarioService;
-    private MateriaController materiaController;
-    private MateriaService materiaService;
-    private Usuario usuario;
-    private List<Usuario> usuarios;
     private Materia materia;
     private Docente docenteAdmin = new Docente("Jano de Mate2");
     private Tarea tarea;

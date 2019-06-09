@@ -1,15 +1,15 @@
 package gradle.cucumber;
 
-import Service.MateriaService;
-import Service.UsuarioService;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+
 import java.time.LocalDate;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class VerTareasStepDefs {
 
@@ -32,7 +32,7 @@ public class VerTareasStepDefs {
 
     @And("^Un usuario suscrito a esa materia$")
     public void suscribirAMateria(){
-        usuario = new Usuario("juan","1234");
+        usuario = new Usuario("user","pass");
         materia.agregarSuscriptor(usuario);
     }
 
@@ -46,5 +46,28 @@ public class VerTareasStepDefs {
         assertEquals(2,tareasList.size());
         assertEquals(tarea1.getNombre(),tareasList.get(0).getNombre());
         assertEquals(tarea2.getNombre(),tareasList.get(1).getNombre());
+    }
+
+    @Given("^Una materia con un profesor$")
+    public void unaMateriaConUnProfesor() {
+        docente = new Docente("Fede");
+        materia = new Materia ("Estructuras","Fede");
+        materia.agregarAdministrador(docente);
+        tarea1 = new Tarea("Heap",LocalDate.of(2019,7,30));
+    }
+
+    @When("^Agrego una tarea a la materia$")
+    public void agregoUnaTareaALaMateria() {
+        docente.agregarTarea(materia,tarea1);
+    }
+
+    @And("^Le pregunto a la materia por las tareas$")
+    public void lePreguntoALaMateriaPorLasTareas() {
+        tareasList = materia.getTareas();
+    }
+
+    @Then("^La materia tiene una tarea$")
+    public void laMateriaTieneUnaTarea() {
+        assertEquals(1,tareasList.size());
     }
 }
