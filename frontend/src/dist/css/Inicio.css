@@ -1,11 +1,88 @@
-.logIn {
+.card-materia {
+  width: 350px; 
+  margin-bottom: 30px;
+  border: 1px solid rgb(218, 217, 219);
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12), 0px 2px 4px rgba(0, 0, 0, 0.14);
+  background: #FAFAFA;
 }
 
-.pdb30 {
-  padding-bottom: 30px;
+.card-titulo {
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 24px;
+  line-height: 28px;
+
+  color: rgba(0, 0, 0, 0.87);
 }
 
-#father {
-  flex: 1;
+.card-body {
+  padding-top: 0;
+  padding-bottom: 8px;
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 20px;
+  /* or 143% */
+
+  letter-spacing: 0.25px;
+
+  /* Black — Medium Emphasis */
+
+  color: rgba(0, 0, 0, 0.6);
+  mix-blend-mode: normal;
 }
 
+.header {
+  padding-top: 40px;
+  padding-left: 19px;
+}
+
+.card-name-bottom {
+  height: 16px;
+
+  /* Button / Roboto Medium */
+
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 16px;
+  /* identical to box height, or 114% */
+
+  padding-left: 30px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+
+  /* Primary — 500* */
+
+  color: #6202EE;
+  cursor: pointer;
+}
+
+.titulo-materias-divider {
+  font-size: 40px;
+  width: 50%;
+  border-bottom: 1px solid black;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 34px;
+  line-height: 40px;
+  /* identical to box height */
+
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+  margin-bottom: 40px;
+
+  /* Dark Color */
+
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.titulo-banner {
+  padding: 0px;
+}
