@@ -7,12 +7,10 @@ public class Docente {
     private String nombre;
     private List<Materia> materiasAdministradas;
 
-    public Docente(){}
     public Docente(String nombre) {
         this.nombre = nombre;
-        this.materiasAdministradas = new ArrayList<Materia>();
+        this.materiasAdministradas = new ArrayList<>();
     }
-
 
     public void administrarMateria(Materia materia) {
         this.materiasAdministradas.add(materia);
@@ -25,6 +23,6 @@ public class Docente {
     }
 
     private boolean tieneLaMateriaEnSuLista(Materia materia) {
-    return this.materiasAdministradas.contains(materia);
+        return this.materiasAdministradas.contains(materia);
     }
 }

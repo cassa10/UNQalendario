@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 
 public class Materia {
+
     @MongoId
     @MongoObjectId
     private String id;
@@ -22,6 +23,7 @@ public class Materia {
     public Materia(){
         this.setUp();
     }
+
     public Materia(String nombre,String nombreDocente){
         this.nombre = nombre;
         this.nombreDocente = nombreDocente;
@@ -37,6 +39,7 @@ public class Materia {
     public String getId() {
         return id;
     }
+
     public String getNombreDocente() {
         return nombreDocente;
     }
@@ -69,5 +72,12 @@ public class Materia {
 
     public List<Docente> admins() {
         return this.administradores;
+    }
+
+    public List<Tarea> mostrarTareas(Usuario usuario) {
+        if(suscriptores.contains(usuario)){
+            return tareas;
+        }
+        return new ArrayList<>();
     }
 }

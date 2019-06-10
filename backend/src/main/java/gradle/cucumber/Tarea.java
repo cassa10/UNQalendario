@@ -1,7 +1,6 @@
 package gradle.cucumber;
 
 import java.time.LocalDate;
-import java.util.Date;
 
 public class Tarea {
     private String nombreTarea;

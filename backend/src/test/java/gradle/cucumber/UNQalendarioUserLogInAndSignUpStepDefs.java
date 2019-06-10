@@ -8,10 +8,8 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static junit.framework.Assert.assertNotNull;
-import static junit.framework.Assert.assertNull;
-import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class UNQalendarioUserLogInAndSignUpStepDefs {
 
@@ -27,7 +25,7 @@ public class UNQalendarioUserLogInAndSignUpStepDefs {
     }
 
     @Given("^Un UsuarioController y un UsuarioService$")
-    public void setUṕUsuarioController(){
+    public void setUpUsuarioController(){
         this.usuarioController = new UsuarioController();
         this.usuarioService = new UsuarioService();
     }
