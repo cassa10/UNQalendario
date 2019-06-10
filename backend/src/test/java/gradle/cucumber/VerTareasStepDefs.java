@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class VerTareasStepDefs {
 
@@ -38,6 +37,7 @@ public class VerTareasStepDefs {
 
     @When("^El usuario quiere ver las tareas$")
     public void verTareasEnMateria(){
+        System.out.println("materia :" + materia.getNombre() + " usuario: " + usuario.getNombre() );
         tareasList = usuario.verTareas(materia);
     }
 
@@ -56,18 +56,23 @@ public class VerTareasStepDefs {
         tarea1 = new Tarea("Heap",LocalDate.of(2019,7,30));
     }
 
-    @When("^Agrego una tarea a la materia$")
+    @And("^Agrego una tarea a la materia$")
     public void agregoUnaTareaALaMateria() {
         docente.agregarTarea(materia,tarea1);
-    }
-
-    @And("^Le pregunto a la materia por las tareas$")
-    public void lePreguntoALaMateriaPorLasTareas() {
-        tareasList = materia.getTareas();
     }
 
     @Then("^La materia tiene una tarea$")
     public void laMateriaTieneUnaTarea() {
         assertEquals(1,tareasList.size());
+    }
+
+    @And("^Usuario no suscrito a esa materia$")
+    public void usuarioNoSuscritoAEsaMateria() {
+        usuario = new Usuario("Juan", "1234");
+    }
+
+    @Then("^La lista no tiene tareas$")
+    public void laListaNoTieneTareas() {
+        assertEquals(0,tareasList.size());
     }
 }

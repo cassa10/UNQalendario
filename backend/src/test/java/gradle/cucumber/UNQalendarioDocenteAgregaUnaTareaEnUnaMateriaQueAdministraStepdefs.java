@@ -23,10 +23,8 @@ public class UNQalendarioDocenteAgregaUnaTareaEnUnaMateriaQueAdministraStepdefs 
     @When("^Este Docente agrega una Tarea en la Materia en la fecha <(\\d+)-(\\d+)-(\\d+)> con el nombre \"([^\"]*)\"$")
     public void esteDocenteAgregaUnaTareaEnLaMateriaEnLaFechaConElNombre(int anio, int mes, int dia, String nombreTarea)  {
         LocalDate fecha = LocalDate.of(anio,mes,dia);
-
         this.tarea= new Tarea(nombreTarea,fecha);
         this.docenteAdmin.agregarTarea(this.materia,tarea);
-
     }
 
 
