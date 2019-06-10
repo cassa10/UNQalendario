@@ -21,15 +21,17 @@ public class UsuarioService {
     }
 
     public void guardarUsuario(Usuario usuario) {
+
         this.usuarioDAO.save(usuario);
     }
 
     public boolean verificarUsuarioValido(String usuario, String password) {
-        return this.usuarioDAO.find("{ nombre: # , password: #}", usuario , password).size() == 1;
+        return this.usuarioDAO.verificarUsuarioValido(usuario,password);
     }
 
     public Usuario getUsuarioPorNombre(String usuario) {
-        return this.usuarioDAO.find("{ nombre: # }", usuario).get(0);
+
+        return this.usuarioDAO.getUsuarioPorNombre(usuario);
     }
 
     public void suscribirA(String idUsuario, String idMateria) {
@@ -47,5 +49,9 @@ public class UsuarioService {
 
     public void borrarUsuarios(){
         this.usuarioDAO.deleteAll();
+    }
+
+    public boolean existeUsuario(Usuario usuario) {
+        return this.usuarioDAO.existeUsuario(usuario.getNombre());
     }
 }

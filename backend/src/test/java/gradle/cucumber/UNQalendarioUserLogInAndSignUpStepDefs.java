@@ -8,8 +8,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class UNQalendarioUserLogInAndSignUpStepDefs {
 
@@ -18,6 +17,7 @@ public class UNQalendarioUserLogInAndSignUpStepDefs {
     private UsuarioService usuarioService;
     private Usuario usuario;
     private Usuario usuarioGetFromUsuarioController;
+    private UsuarioYaExiste exceptionTest;
 
     @After
     public void cleanUpDataBase(){
@@ -36,7 +36,7 @@ public class UNQalendarioUserLogInAndSignUpStepDefs {
     }
 
     @When("^El UsuarioController guarda a este usuario$")
-    public void controllerUsuarioRecibeUsuario(){
+    public void controllerUsuarioRecibeUsuario() throws UsuarioYaExiste{
         this.usuarioController.guardarUsuario(this.usuario);
 
     }
@@ -47,7 +47,7 @@ public class UNQalendarioUserLogInAndSignUpStepDefs {
     }
 
     @And("^El Usuario \"([^\"]*)\" con password \"([^\"]*)\" en la Base de Datos$")
-    public void crearYGuardarUsuarioConPasswordENBaseDeDatos(String nombre, String password){
+    public void crearYGuardarUsuarioConPasswordENBaseDeDatos(String nombre, String password) throws UsuarioYaExiste{
         this.usuario = new Usuario(nombre,password);
         this.usuarioController.guardarUsuario(usuario);
     }
@@ -60,5 +60,21 @@ public class UNQalendarioUserLogInAndSignUpStepDefs {
     @Then("^Este metodo del UsuarioController devuelve al Usuario con ese id$")
     public void assertGetUsuarioControllerConUsuario(){
         assertEquals(this.usuarioGetFromUsuarioController,this.usuario);
+    }
+
+    @When("^El UsuarioController intenta guardar a este usuario$")
+    public void intentarGuardarUsuario(){
+        try{
+            this.usuarioController.guardarUsuario(this.usuario);
+        }catch (UsuarioYaExiste e){
+            this.exceptionTest = e;
+        }
+
+    }
+
+    @Then("^El UsuarioController lanza excepcion que ya existe ese nombre Usuario$")
+    public void assertExceptionYaExisteEseNombreUsuario(){
+        assertNotNull(this.exceptionTest);
+        assertEquals(this.exceptionTest.getClass(),UsuarioYaExiste.class);
     }
 }

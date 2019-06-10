@@ -1,7 +1,6 @@
 package gradle.cucumber;
 
 import Service.MateriaService;
-import gradle.cucumber.Materia;
 
 import org.springframework.web.bind.annotation.*;
 
@@ -12,7 +11,8 @@ import java.util.HashMap;
 @CrossOrigin
 @RestController
 public class MateriaController {
-    MateriaService gestorMaterias = new MateriaService();
+
+    private MateriaService gestorMaterias = new MateriaService();
 
     @RequestMapping(method = RequestMethod.GET, value = "/materia/{idMateria}")
     public Materia getMateria(@PathVariable String idMateria) {

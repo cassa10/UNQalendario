@@ -13,3 +13,10 @@ Feature: RegistroYInicioSesionDeUsuario
     And El Usuario "Pepito" con password "123" en la Base de Datos
     When El UsuarioController se le hace un get del id de este usuario
     Then Este metodo del UsuarioController devuelve al Usuario con ese id
+
+ Scenario: Un Usuario al intentar registrarse con un nombre usuario ya existente este no se crea y se lanza excepcion
+    Given Un UsuarioController y un UsuarioService
+    And El Usuario "Pepito" con password "123" en la Base de Datos
+    And Un Usuario llamado "Pepito" con password "asd"
+    When El UsuarioController intenta guardar a este usuario
+    Then El UsuarioController lanza excepcion que ya existe ese nombre Usuario

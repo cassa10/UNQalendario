@@ -42,12 +42,12 @@ public class UNQalendarioSuscripcionAMaterias {
     }
 
     @And("^El Usuario llamado \"([^\"]*)\" con password \"([^\"]*)\"$")
-    public void crearUsuario(String nombre, String password){
+    public void crearUsuario(String nombre, String password) throws UsuarioYaExiste{
         usuario =this.usuarioController.guardarUsuario(new Usuario(nombre,password));
     }
 
     @And("^Unos de los Usuarios llamado \"([^\"]*)\" con password \"([^\"]*)\"$")
-    public void crearUsuarioYPonerloEnLaListaDeUsuarios(String nombre, String password){
+    public void crearUsuarioYPonerloEnLaListaDeUsuarios(String nombre, String password) throws UsuarioYaExiste{
         usuarios.add(this.usuarioController.guardarUsuario(new Usuario(nombre,password)));
     }
 

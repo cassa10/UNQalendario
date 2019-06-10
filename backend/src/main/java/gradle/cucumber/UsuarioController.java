@@ -19,9 +19,13 @@ public class UsuarioController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/usuario")
-    public Usuario guardarUsuario(@RequestBody Usuario usuario) {
-        this.usuarioService.guardarUsuario(usuario);
-        return usuario;
+    public Usuario guardarUsuario(@RequestBody Usuario usuario) throws UsuarioYaExiste{
+       if(usuarioService.existeUsuario(usuario)) {
+         throw new UsuarioYaExiste();
+       }else{
+           this.usuarioService.guardarUsuario(usuario);
+           return usuario;
+       }
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "/verificar")
