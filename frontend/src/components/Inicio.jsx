@@ -13,7 +13,7 @@ class Inicio extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.traerTodasLasMaterias();
     this.traerUsuario();
     this.traerMateriasSuscritasDelUsuario();
@@ -67,18 +67,42 @@ class Inicio extends React.Component {
       );
     }
     return materiasNoSuscritas.map(materia => (
-      <div className="col-3 pdb30" key={materia.id}>
-        <div className="card text-center">
-          <div className="card-header">
-            {materia.nombre}
+      <div className="col-12 col-md-4">
+        <div className="card-materia">
+          <div className="header">
+            <h5 className="card-titulo ">
+              {materia.nombre}
+            </h5>
           </div>
-          <div className="card-body">
-            <button type="button" className="btn btn-primary" onClick={() => this.suscribirseAMateria(materia.id)}>
-              Suscribirse
-            </button>
+          <p className="card-body">
+            Nombre del profesor
+          </p>
+          <div>
+            <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
+              SUSCRIBIRSE
+            </p>
           </div>
-          <div className="card-footer text-muted">
-            Admin: {materia.nombreDocente}
+        </div>
+      </div>
+    ));
+  }
+
+  crearVisualizacionMateriasSuscritas() {
+    return this.state.materiasSuscritasDelUsuario.map(materia => (
+      <div className="col-12 col-md-4">
+        <div className="card-materia">
+          <div className="header">
+            <h5 className="card-titulo ">
+              {materia.nombre}
+            </h5>
+          </div>
+          <p className="card-body">
+            Nombre del profesor
+          </p>
+          <div>
+            <p role="presentation" className="card-name-bottom">
+              VER
+            </p>
           </div>
         </div>
       </div>
@@ -97,6 +121,19 @@ class Inicio extends React.Component {
           </div>
         </div>
         <div className="row">
+          <div className="col-12 titulo-banner">
+            <h4 className="titulo-materias-divider">
+              Suscripciones
+            </h4>
+          </div>
+          {this.crearVisualizacionMateriasSuscritas()}
+        </div>
+        <div className="row">
+          <div className="col-12 titulo-banner">
+            <h4 className="titulo-materias-divider">
+              Materias
+            </h4>
+          </div>
           {this.crearVisualizacionMaterias()}
         </div>
       </div>
