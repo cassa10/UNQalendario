@@ -37,7 +37,6 @@ public class VerTareasStepDefs {
 
     @When("^El usuario quiere ver las tareas$")
     public void verTareasEnMateria(){
-        System.out.println("materia :" + materia.getNombre() + " usuario: " + usuario.getNombre() );
         tareasList = usuario.verTareas(materia);
     }
 
