@@ -54,4 +54,8 @@ public class UsuarioService {
     public boolean existeUsuario(Usuario usuario) {
         return this.usuarioDAO.existeUsuario(usuario.getNombre());
     }
+
+    public boolean existeUsuarioId(String idUsuario) {
+        return this.usuarioDAO.existeUsuarioId(idUsuario);
+    }
 }

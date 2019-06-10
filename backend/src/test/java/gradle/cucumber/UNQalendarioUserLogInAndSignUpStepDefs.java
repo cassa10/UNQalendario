@@ -7,6 +7,9 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.springframework.http.ResponseEntity;
+
+import java.util.HashMap;
 
 import static org.junit.Assert.*;
 
@@ -18,6 +21,7 @@ public class UNQalendarioUserLogInAndSignUpStepDefs {
     private Usuario usuario;
     private Usuario usuarioGetFromUsuarioController;
     private UsuarioYaExiste exceptionTest;
+    private ResponseEntity responseTest;
 
     @After
     public void cleanUpDataBase(){
@@ -77,4 +81,28 @@ public class UNQalendarioUserLogInAndSignUpStepDefs {
         assertNotNull(this.exceptionTest);
         assertEquals(this.exceptionTest.getClass(),UsuarioYaExiste.class);
     }
+
+    @When("^El UsuarioController verifica si el Usuario \"([^\"]*)\" con password \"([^\"]*)\" existe$")
+    public void usuarioControllerVerificaSiElUsuarioConUnPasswordEspecificoExiste(String usuario,String password){
+        HashMap<String,String> data = new HashMap<>();
+        data.put("usuario",usuario);
+        data.put("password",password);
+        this.responseTest = this.usuarioController.checkerSiExisteUsuarioYPassword(data);
+    }
+
+    @Then("^El UsuarioController responde un ResponseEntity Ok con el id del Usuario$")
+    public void assertResponseEntityOkConElIdDelUsuario(){
+        assertEquals(this.responseTest.getBody(),this.usuario.getId());
+        //200 = Ok
+        assertEquals(this.responseTest.getStatusCodeValue(),200);
+    }
+
+    @Then("^El UsuarioController responde un ResponseEntity Not Found con descripcion Datos Invalidos$")
+    public void assertResponseEntityNotFoundConDescripcionDatosInvalidos(){
+        assertEquals(this.responseTest.getBody(),"Datos Invalidos");
+        //404 = Not Found
+        assertEquals(this.responseTest.getStatusCodeValue(),404);
+    }
+
+
 }

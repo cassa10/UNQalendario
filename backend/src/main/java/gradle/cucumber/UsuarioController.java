@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -47,6 +48,10 @@ public class UsuarioController {
 
     @RequestMapping(method = RequestMethod.GET, value = "/materias/{idUsuario}")
     public ResponseEntity getMaterias(@PathVariable String idUsuario) {
-        return ResponseEntity.ok(this.usuarioService.getMaterias(idUsuario));
+        if(! this.usuarioService.existeUsuarioId(idUsuario)){
+           return new ResponseEntity<>("El Usuario con el id " + idUsuario + " no existe", HttpStatus.NOT_FOUND);
+        }else{
+            return ResponseEntity.ok(this.usuarioService.getMaterias(idUsuario));
+        }
     }
 }
