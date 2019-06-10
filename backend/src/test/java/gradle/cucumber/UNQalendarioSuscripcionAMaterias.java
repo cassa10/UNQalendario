@@ -12,10 +12,10 @@ import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static junit.framework.Assert.assertNotNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -67,7 +67,10 @@ public class UNQalendarioSuscripcionAMaterias {
 
     @When("^Este Usuario se suscribe a la anterior materia$")
     public void usuarioSeSuscribeAMateria(){
-        this.usuarioService.suscribirA(usuario.getId(),materia.getId());
+
+        HashMap<String,String> data = new HashMap<>();
+        data.put("idUsuario",this.usuario.getId());
+        this.usuarioController.suscribirAMateria(materia.getId(),data);
     }
 
     @Then("^La materia posee un suscriptor cuyo usuario es el anteriormente suscrito$")
@@ -79,7 +82,12 @@ public class UNQalendarioSuscripcionAMaterias {
 
     @When("^Estos Usuarios se suscriben a la anterior materia$")
     public void suscribirListaDeUsuariosALaMateria(){
-        this.usuarios.forEach(u -> this.usuarioService.suscribirA(u.getId(),materia.getId()));
+        HashMap<String,String> data;
+        for(Usuario u: this.usuarios){
+            data = new HashMap<>();
+            data.put("idUsuario",u.getId());
+            this.usuarioController.suscribirAMateria(materia.getId(),data);
+        }
     }
 
     @Then("^La materia posee \"([^\"]*)\" suscriptores cuyos usuarios son los anteriormente suscritos$")
