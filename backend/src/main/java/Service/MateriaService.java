@@ -2,6 +2,7 @@ package Service;
 
 import Persistence.MateriaDAO;
 import gradle.cucumber.Materia;
+import gradle.cucumber.Tarea;
 import gradle.cucumber.Usuario;
 
 import java.util.List;
@@ -45,5 +46,13 @@ public class MateriaService {
         // REFACTOR MEJORAR A UNA QUERY DE MONGO
 
         return this.get(materia.getId()).getSuscriptores().size();
+    }
+
+    public void agregarTarea(String idMateria, Tarea tarea) {
+
+        Materia materia = materiaDAO.get(idMateria);
+        materia.agregarTarea(tarea);
+
+        materiaDAO.agregarTareas(idMateria,materia.getTareas());
     }
 }
