@@ -57,6 +57,19 @@ class Inicio extends React.Component {
     );
   }
 
+  ponerNombreDocente(materia) {
+    if (materia.nombreDocente.length === 0) {
+      return (
+        <p className="card-body">
+          Sin profesor asignado, por ahora.
+        </p>);
+    }
+    return (
+      <p className="card-body">
+        {materia.nombreDocente}
+      </p>);
+  }
+
   crearVisualizacionMaterias() {
     const materiasNoSuscritas = this.state.materiasFiltradas
       .filter(m => this.state.materiasSuscritasDelUsuario
@@ -74,9 +87,7 @@ class Inicio extends React.Component {
               {materia.nombre}
             </h5>
           </div>
-          <p className="card-body">
-            Nombre del profesor
-          </p>
+          {this.ponerNombreDocente(materia)}
           <div>
             <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
               SUSCRIBIRSE
@@ -96,9 +107,7 @@ class Inicio extends React.Component {
               {materia.nombre}
             </h5>
           </div>
-          <p className="card-body">
-            Nombre del profesor
-          </p>
+          {this.ponerNombreDocente(materia)}
           <div>
             <p role="presentation" className="card-name-bottom">
               VER
