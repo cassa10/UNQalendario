@@ -2,7 +2,12 @@ package gradle.cucumber;
 
 import Service.MateriaService;
 import gradle.cucumber.Materia;
+
 import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 
 @CrossOrigin
 @RestController
@@ -27,4 +32,17 @@ public class MateriaController {
     public Iterable<Materia> buscarMaterias(@PathVariable String nombre) {
         return gestorMaterias.filtrarMateriasPorNombre(nombre);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value ="/tarea/{idMateria}")
+    public Materia agregarTareaEnMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> body){
+
+        String fechaString = body.get("fechaEntrega");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+
+        Tarea tarea = new Tarea(body.get("nombreTarea"),LocalDate.parse(fechaString, formatter));
+        gestorMaterias.agregarTarea(idMateria,tarea);
+
+        return gestorMaterias.get(idMateria);
+    }
+
 }
