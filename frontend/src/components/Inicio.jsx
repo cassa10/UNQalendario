@@ -64,11 +64,17 @@ class Inicio extends React.Component {
     );
   }
 
-  crearDocentes(n) {
-    if (n === '') {
-      return 'Sin profesor asignado';
+  ponerNombreDocente(materia) {
+    if (materia.nombreDocente.length === 0) {
+      return (
+        <p className="card-body">
+          Sin profesor asignado, por ahora.
+        </p>);
     }
-    return n;
+    return (
+      <p className="card-body">
+        {materia.nombreDocente}
+      </p>);
   }
 
   crearVisualizacionMaterias() {
@@ -88,9 +94,7 @@ class Inicio extends React.Component {
               {materia.nombre}
             </h5>
           </div>
-          <p className="card-body">
-            {this.crearDocentes(materia.nombreDocente)}
-          </p>
+          {this.ponerNombreDocente(materia)}¿
           <div>
             <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
               SUSCRIBIRSE
@@ -110,9 +114,7 @@ class Inicio extends React.Component {
               {materia.nombre}
             </h5>
           </div>
-          <p className="card-body">
-            {this.crearDocentes(materia.nombreDocente)}
-          </p>
+          {this.ponerNombreDocente(materia)}
           <div>
             <p role="presentation" className="card-name-bottom" onClick={() => this.goToMateria(materia.id)}>
               Ver
