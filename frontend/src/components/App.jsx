@@ -8,14 +8,17 @@ import Inicio from './Inicio';
 import InicioSession from './InicioSession';
 import CreacionCuenta from './CreacionCuenta';
 import Administracion from './Administracion';
+import Navbar from './Navbar';
+import Materia from './Materia';
 
 export default class App extends React.Component {
   render() {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/inicio" render={props => <div><Inicio {...props} /> </div>} />
+          <Route path="/inicio" render={props => <div><Navbar /> <Inicio {...props} /> </div>} />
           <Route path="/crearCuenta" render={() => <CreacionCuenta />} />
+          <Route path="/materia/{id}" render={props => <div><Navbar /> <Materia {...props} /></div>} />
           <Route exact path="/administracion" render={() => <Administracion />} />
           <Route path="/" render={props => <div><InicioSession {...props} /> </div>} />
         </Switch>

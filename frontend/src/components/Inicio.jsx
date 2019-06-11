@@ -49,6 +49,13 @@ class Inicio extends React.Component {
       .then(response => this.setState({ materiasSuscritasDelUsuario: response }));
   }
 
+  goToMateria(id) {
+    this.props.history.push({
+      pathname: '/materia/{id}',
+      state: { idMateria: id },
+    });
+  }
+
   crearAlertaDeNoHayMateriasParaSuscribirse() {
     return (
       <div className="alert alert-primary col-12" role="alert">
@@ -87,7 +94,7 @@ class Inicio extends React.Component {
               {materia.nombre}
             </h5>
           </div>
-          {this.ponerNombreDocente(materia)}
+          {this.ponerNombreDocente(materia)}¿
           <div>
             <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
               SUSCRIBIRSE
@@ -109,8 +116,8 @@ class Inicio extends React.Component {
           </div>
           {this.ponerNombreDocente(materia)}
           <div>
-            <p role="presentation" className="card-name-bottom">
-              VER
+            <p role="presentation" className="card-name-bottom" onClick={() => this.goToMateria(materia.id)}>
+              Ver
             </p>
           </div>
         </div>
@@ -121,18 +128,10 @@ class Inicio extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1>
-          UNQalendario
-        </h1>
-        <div className="row pdb30">
-          <div className="col-8">
-            <input className="form-control mr-sm-2" type="search" placeholder="Buscar Materia..." aria-label="Search" onChange={e => this.handlerBuscarMateria(e)} />
-          </div>
-        </div>
         <div className="row">
           <div className="col-12 titulo-banner">
             <h4 className="titulo-materias-divider">
-              Suscripciones
+              Tus Materias
             </h4>
           </div>
           {this.crearVisualizacionMateriasSuscritas()}
