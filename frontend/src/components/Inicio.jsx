@@ -49,12 +49,26 @@ class Inicio extends React.Component {
       .then(response => this.setState({ materiasSuscritasDelUsuario: response }));
   }
 
+  goToMateria(id) {
+    this.props.history.push({
+      pathname: '/materia/{id}',
+      state: { idMateria: id },
+    });
+  }
+
   crearAlertaDeNoHayMateriasParaSuscribirse() {
     return (
       <div className="alert alert-primary col-12" role="alert">
         No hay materias en las que te puedas suscribir!
       </div>
     );
+  }
+
+  crearDocentes(n) {
+    if (n === '') {
+      return 'Sin profesor asignado';
+    }
+    return n;
   }
 
   crearVisualizacionMaterias() {
@@ -75,7 +89,7 @@ class Inicio extends React.Component {
             </h5>
           </div>
           <p className="card-body">
-            Nombre del profesor
+            {this.crearDocentes(materia.nombreDocente)}
           </p>
           <div>
             <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
@@ -97,11 +111,11 @@ class Inicio extends React.Component {
             </h5>
           </div>
           <p className="card-body">
-            Nombre del profesor
+            {this.crearDocentes(materia.nombreDocente)}
           </p>
           <div>
-            <p role="presentation" className="card-name-bottom">
-              VER
+            <p role="presentation" className="card-name-bottom" onClick={() => this.goToMateria(materia.id)}>
+              Ver
             </p>
           </div>
         </div>
@@ -112,18 +126,10 @@ class Inicio extends React.Component {
   render() {
     return (
       <div className="container">
-        <h1>
-          UNQalendario
-        </h1>
-        <div className="row pdb30">
-          <div className="col-8">
-            <input className="form-control mr-sm-2" type="search" placeholder="Buscar Materia..." aria-label="Search" onChange={e => this.handlerBuscarMateria(e)} />
-          </div>
-        </div>
         <div className="row">
           <div className="col-12 titulo-banner">
             <h4 className="titulo-materias-divider">
-              Suscripciones
+              Tus Materias
             </h4>
           </div>
           {this.crearVisualizacionMateriasSuscritas()}
