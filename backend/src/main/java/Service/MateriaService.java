@@ -55,4 +55,9 @@ public class MateriaService {
 
         materiaDAO.agregarTareas(idMateria,materia.getTareas());
     }
+
+    public void agregarAdministrador(Materia materia, Usuario usuario){
+        materia.agregarAdministrador(usuario);
+        this.materiaDAO.agregarAdministradores(materia,materia.getAdministradores());
+    }
 }

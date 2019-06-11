@@ -26,4 +26,9 @@ public class MateriaDAO extends GenericMongoDAO<Materia> {
         ObjectId objectId = new ObjectId(idMateria);
         this.mongoCollection.update("{ _id: # }", objectId).with("{ $set: { tareas: # }}", tareas);
     }
+
+    public void agregarAdministradores(Materia materia, List<Usuario> administradores) {
+        ObjectId objectId = new ObjectId(materia.getId());
+        this.mongoCollection.update("{ _id: # }", objectId).with("{ $set: { administradores: # }}", administradores);
+    }
 }

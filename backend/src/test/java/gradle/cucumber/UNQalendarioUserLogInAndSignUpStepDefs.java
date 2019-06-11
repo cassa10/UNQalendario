@@ -47,7 +47,7 @@ public class UNQalendarioUserLogInAndSignUpStepDefs {
 
     @Then("^El Usuario aparece en la coleccion de Usuarios de la base de datos$")
     public void estaUsuarioEnLaColleccionUsuarios(){
-        assertNotNull(this.usuarioService.getUsuarioPorNombre(usuario.getNombre()));
+        assertNotNull(this.usuarioService.getUsuarioPorNombre(usuario.getNombreUsuario()));
     }
 
     @And("^El Usuario \"([^\"]*)\" con password \"([^\"]*)\" en la Base de Datos$")

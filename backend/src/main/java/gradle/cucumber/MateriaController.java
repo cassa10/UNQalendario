@@ -2,6 +2,9 @@ package gradle.cucumber;
 
 import Service.MateriaService;
 
+import Service.UsuarioService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -11,8 +14,11 @@ import java.util.HashMap;
 @CrossOrigin
 @RestController
 public class MateriaController {
+    //TODO
+    // TESTIAR METEDOS EN GRIS(NO TESTEADO)
 
     private MateriaService gestorMaterias = new MateriaService();
+    private UsuarioService gestorUsuario = new UsuarioService();
 
     @RequestMapping(method = RequestMethod.GET, value = "/materia/{idMateria}")
     public Materia getMateria(@PathVariable String idMateria) {
@@ -20,7 +26,8 @@ public class MateriaController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/materias")
-    public Iterable<Materia> todasLasMaterias() {return  gestorMaterias.getMaterias();}
+    public Iterable<Materia> todasLasMaterias() { return gestorMaterias.getMaterias();
+    }
 
     @RequestMapping(method = RequestMethod.POST, value="/materia")
     public Materia save(@RequestBody Materia materia) {
@@ -44,5 +51,20 @@ public class MateriaController {
 
         return gestorMaterias.get(idMateria);
     }
+
+    @RequestMapping(method = RequestMethod.POST, value ="/administracion/{idMateria}")
+    public ResponseEntity agregarAdministradorAUnaMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> data){
+        Materia materia = this.gestorMaterias.get(idMateria);
+        String usuarioNombre = data.get("usuario");
+        if(this.gestorUsuario.existeNombreUsuario(usuarioNombre)){
+            Usuario usuario = gestorUsuario.getUsuarioPorNombre(usuarioNombre);
+            gestorMaterias.agregarAdministrador(materia, usuario);
+            return ResponseEntity.ok("Materia Updated");
+        }else{
+            return new ResponseEntity<>("Usuario Inexistente", HttpStatus.NOT_FOUND);
+        }
+    }
+
+
 
 }

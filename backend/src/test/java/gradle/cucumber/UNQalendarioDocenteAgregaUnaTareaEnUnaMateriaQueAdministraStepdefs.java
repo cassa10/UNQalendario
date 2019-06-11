@@ -10,12 +10,12 @@ import java.time.LocalDate;
 public class UNQalendarioDocenteAgregaUnaTareaEnUnaMateriaQueAdministraStepdefs {
 
     private Materia materia;
-    private Docente docenteAdmin = new Docente("Jano de Mate2");
+    private Usuario docenteAdmin = new Usuario("Jano","123","Jano","");
     private Tarea tarea;
 
     @And("^El docente \"([^\"]*)\" administrador de la Materia \"([^\"]*)\"$")
     public void elDocenteAdministradorDeLaMateria(String nombreDocente, String nombremateria){
-            this.materia = new Materia(nombremateria,nombreDocente);
+            this.materia = new Materia(nombremateria);
             this.materia.agregarAdministrador(this.docenteAdmin);
     }
 
@@ -24,7 +24,7 @@ public class UNQalendarioDocenteAgregaUnaTareaEnUnaMateriaQueAdministraStepdefs 
     public void esteDocenteAgregaUnaTareaEnLaMateriaEnLaFechaConElNombre(int anio, int mes, int dia, String nombreTarea)  {
         LocalDate fecha = LocalDate.of(anio,mes,dia);
         this.tarea= new Tarea(nombreTarea,fecha);
-        this.docenteAdmin.agregarTarea(this.materia,tarea);
+        this.materia.agregarTarea(tarea);
     }
 
 

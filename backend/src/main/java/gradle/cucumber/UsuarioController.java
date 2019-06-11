@@ -6,7 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
-import java.util.List;
 
 @CrossOrigin
 @RestController
@@ -21,7 +20,7 @@ public class UsuarioController {
 
     @RequestMapping(method = RequestMethod.POST, value = "/usuario")
     public Usuario guardarUsuario(@RequestBody Usuario usuario) throws UsuarioYaExiste{
-       if(usuarioService.existeUsuario(usuario)) {
+       if(usuarioService.existeNombreUsuario(usuario.getNombreUsuario())) {
          throw new UsuarioYaExiste();
        }else{
            this.usuarioService.guardarUsuario(usuario);

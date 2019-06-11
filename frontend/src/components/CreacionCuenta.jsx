@@ -11,6 +11,8 @@ class CreacionCuenta extends React.Component {
       showPass: 0,
       username: '',
       password: '',
+      name: '',
+      lastName: '',
       validInfo: '',
       imagesForSelect: [],
       imageselected: 'https://distrimar.s3.amazonaws.com/static/apm/img/misc/default_user.png',
@@ -34,10 +36,13 @@ class CreacionCuenta extends React.Component {
   }
 
   signUp() {
+    console.log(this.state);
     if (this.state.username !== '' || this.state.password !== '') {
       API.post('/usuario', {
-        nombre: this.state.username,
+        nombreUsuario: this.state.username,
         password: this.state.password,
+        nombrePersona: this.state.name,
+        apellido: this.state.lastName,
       })
         .then(() => this.props.history.push('/'))
         .catch(error => this.setState({ validInfo: error.response.data.message }));
@@ -52,6 +57,14 @@ class CreacionCuenta extends React.Component {
 
   handlerUsername(event) {
     this.setState({ username: event.target.value });
+  }
+
+  handlerName(event) {
+    this.setState({ name: event.target.value });
+  }
+
+  handlerLastName(event) {
+    this.setState({ lastName: event.target.value });
   }
 
   inputUsername() {
@@ -79,6 +92,32 @@ class CreacionCuenta extends React.Component {
         </span>
         <input className={classname} id="password" type="password" onChange={event => this.handlerPassword(event)} />
         <span className="focus-input100" data-placeholder="Contraseña" />
+      </div>
+    );
+  }
+
+  inputName() {
+    let classname = 'input100';
+    if (this.state.name !== '') {
+      classname = 'input100 has-val';
+    }
+    return (
+      <div className="wrap-input100">
+        <input className={classname} type="text" id="usuario" onChange={event => this.handlerName(event)} />
+        <span className="focus-input100" data-placeholder="Nombre" />
+      </div>
+    );
+  }
+
+  inputLastName() {
+    let classname = 'input100';
+    if (this.state.name !== '') {
+      classname = 'input100 has-val';
+    }
+    return (
+      <div className="wrap-input100">
+        <input className={classname} type="text" id="usuario" onChange={event => this.handlerLastName(event)} />
+        <span className="focus-input100" data-placeholder="Apellido" />
       </div>
     );
   }
@@ -166,6 +205,8 @@ class CreacionCuenta extends React.Component {
                 </div>
                 {this.inputUsername()}
                 {this.inputPassword()}
+                {this.inputName()}
+                {this.inputLastName()}
                 {this.inputInvalidUser()}
                 <div>
                   <button type="submit" className="btn btn-block btn-logIn" onClick={() => this.signUp()}> Crear Cuenta </button>

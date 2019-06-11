@@ -8,7 +8,7 @@ import static junit.framework.TestCase.assertTrue;
 
 public class UNQalendarioStepDefs{
     private Materia materia;
-    private Docente docenteAdmin = new Docente("Cesar de redes");
+    private Usuario docenteAdmin = new Usuario("Cesar","123","Cesar","Lopez");
 
     @Given("^Una materia sin administradores")
     public void inicializarMateria(){
@@ -22,6 +22,6 @@ public class UNQalendarioStepDefs{
 
     @Then("^un nuevo docente es ahora adminstrador de esa materia$")
     public void unNuevoDocenteEsAhoraAdminstradorDeEsaMateria() {
-        assertTrue(materia.admins().contains(docenteAdmin));
+        assertTrue(materia.getAdministradores().contains(docenteAdmin));
     }
 }
