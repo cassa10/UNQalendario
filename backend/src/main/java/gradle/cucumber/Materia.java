@@ -60,17 +60,13 @@ public class Materia {
         if(!this.suscriptores.contains(usuario)) {this.suscriptores.add(usuario);}
     }
 
-    public boolean esAdministrador(Usuario usuario){
-        return this.administradores.contains(usuario);
-    }
-
     public void agregarTarea(Tarea tarea) {
         this.tareas.add(tarea);
         this.suscriptores.forEach(usuario -> usuario.agregarNotificacion(tarea));
     }
 
     public void agregarAdministrador(Usuario nuevoAdmin) {
-        if(! this.esAdministrador(nuevoAdmin)){
+        if(! this.administradores.contains(nuevoAdmin)){
             this.administradores.add(nuevoAdmin);
         }
     }
@@ -84,9 +80,6 @@ public class Materia {
 
     @Override
     public boolean equals(Object obj){
-        if (this == obj) return true;
-        if (obj == null) return false;
-        if (this.getClass() != obj.getClass()) return false;
         Materia that = (Materia) obj;
         if (! this.getId().equals(that.getId())) return false;
         return true;

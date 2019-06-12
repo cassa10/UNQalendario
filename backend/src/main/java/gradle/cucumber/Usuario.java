@@ -55,10 +55,9 @@ public class Usuario {
     @Override
     public boolean equals(Object obj){
         if (this == obj) return true;
-        if (obj == null) return false;
-        if (this.getClass() != obj.getClass()) return false;
         Usuario that = (Usuario) obj;
-        if (! this.getId().equals(that.getId())) return false;
+        if (! this.getNombreUsuario().equals(that.getNombreUsuario())) return false;
+        if( ! this.getId().equals(that.getId())) return false;
         return true;
     }
 
