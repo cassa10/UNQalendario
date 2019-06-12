@@ -62,7 +62,7 @@ public class UNQalendarioSuscripcionAMaterias {
 
     @And("^Una Materia \"([^\"]*)\" sin suscriptores$")
     public void crearMateria(String nombreMateria){
-        this.materia =  this.materiaController.save(new Materia(nombreMateria,""));
+        this.materia =  this.materiaController.save(new Materia(nombreMateria));
     }
 
     @When("^Este Usuario se suscribe a la anterior materia$")
@@ -101,7 +101,7 @@ public class UNQalendarioSuscripcionAMaterias {
     @And("^Una de las Materias \"([^\"]*)\" donde esta suscrito el usuario anterior$")
     public void crearUnaDeLasMateriasYSuscribirAUsuario(String materiaNombre){
 
-        Materia tmpMateria = this.materiaController.save(new Materia(materiaNombre,""));
+        Materia tmpMateria = this.materiaController.save(new Materia(materiaNombre));
         this.usuarioService.suscribirA(usuario.getId(),tmpMateria.getId());
 
         tmpMateria = this.materiaService.get(tmpMateria.getId());

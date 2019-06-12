@@ -51,8 +51,8 @@ public class UsuarioService {
         this.usuarioDAO.deleteAll();
     }
 
-    public boolean existeUsuario(Usuario usuario) {
-        return this.usuarioDAO.existeUsuario(usuario.getNombre());
+    public boolean existeNombreUsuario(String usuarioNombre) {
+        return this.usuarioDAO.existeUsuario(usuarioNombre);
     }
 
     public boolean existeUsuarioId(String idUsuario) {

@@ -14,19 +14,17 @@ public class Materia {
     @MongoId
     @MongoObjectId
     private String id;
-    private String nombreDocente;
     private String nombre;
     private List<Usuario> suscriptores;
     private List<Tarea> tareas;
-    private List<Docente> administradores;
+    private List<Usuario> administradores;
 
     public Materia(){
         this.setUp();
     }
 
-    public Materia(String nombre,String nombreDocente){
+    public Materia(String nombre){
         this.nombre = nombre;
-        this.nombreDocente = nombreDocente;
         this.setUp();
     }
 
@@ -40,10 +38,6 @@ public class Materia {
         return id;
     }
 
-    public String getNombreDocente() {
-        return nombreDocente;
-    }
-
     public String getNombre() {
         return nombre;
     }
@@ -52,8 +46,18 @@ public class Materia {
         return suscriptores;
     }
 
+    public List<Tarea> getTareas() {
+        return tareas;
+    }
+
+    public List<Usuario> getAdministradores() {
+        return this.administradores;
+    }
+
     public void agregarSuscriptor(Usuario usuario) {
-        if(this.suscriptores.stream().allMatch(u -> !usuario.getId().equals(u.getId()))) {this.suscriptores.add(usuario);}
+        //TODO
+        // Query en DB
+        if(!this.suscriptores.contains(usuario)) {this.suscriptores.add(usuario);}
     }
 
     public void agregarTarea(Tarea tarea) {
@@ -61,23 +65,24 @@ public class Materia {
         this.suscriptores.forEach(usuario -> usuario.agregarNotificacion(tarea));
     }
 
-    public List<Tarea> getTareas() {
-        return tareas;
-    }
-
-    public void agregarAdministrador(Docente nuevoAdmin) {
-        this.administradores.add(nuevoAdmin);
-        nuevoAdmin.administrarMateria(this);
-    }
-
-    public List<Docente> admins() {
-        return this.administradores;
-    }
-
-    public List<Tarea> mostrarTareas(Usuario usuario) {
-        if(suscriptores.contains(usuario)){
-            return tareas;
+    public void agregarAdministrador(Usuario nuevoAdmin) {
+        if(! this.administradores.contains(nuevoAdmin)){
+            this.administradores.add(nuevoAdmin);
         }
-        return new ArrayList<>();
     }
+
+    public String getNombreDelDocente(){
+        if(this.getAdministradores().isEmpty()){
+            return "";
+        }
+        return this.getAdministradores().get(0).getNombreYApellido();
+    }
+
+    @Override
+    public boolean equals(Object obj){
+        Materia that = (Materia) obj;
+        if (! this.getId().equals(that.getId())) return false;
+        return true;
+    }
+
 }

@@ -65,7 +65,7 @@ class Inicio extends React.Component {
   }
 
   ponerNombreDocente(materia) {
-    if (materia.nombreDocente.length === 0) {
+    if (materia.administradores.length === 0) {
       return (
         <p className="card-body">
           Sin profesor asignado, por ahora.
@@ -73,7 +73,7 @@ class Inicio extends React.Component {
     }
     return (
       <p className="card-body">
-        {materia.nombreDocente}
+        { materia.administradores[0].nombrePersona.concat(', ', materia.administradores[0].apellido) }
       </p>);
   }
 
@@ -94,7 +94,7 @@ class Inicio extends React.Component {
               {materia.nombre}
             </h5>
           </div>
-          {this.ponerNombreDocente(materia)}¿
+          {this.ponerNombreDocente(materia)}
           <div>
             <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
               SUSCRIBIRSE

@@ -7,7 +7,7 @@
 
 - Como profesor (admin de materia) quiero publicar una tarea en una fecha **(5 puntos)** |
 
-- Como administrador quiero poder crear una cuenta a un profesor **(5 puntos)** |
+- Como administrador quiero poder hacer a un profesor administrador de su materia **(5 puntos)** | **(Completada)**
 
 
 ### **Total de Story Points:  18**
