@@ -58,7 +58,7 @@ public class Materia {
     public void agregarSuscriptor(Usuario usuario) {
         //TODO
         // Query en DB
-        if(!this.suscriptores.stream().map(Usuario::getId).collect(Collectors.toList()).contains(usuario.getId())){
+        if(!this.suscriptores.contains(usuario)){
             this.suscriptores.add(usuario);
         }
     }
