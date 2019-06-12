@@ -8,6 +8,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Materia {
 
@@ -57,7 +58,9 @@ public class Materia {
     public void agregarSuscriptor(Usuario usuario) {
         //TODO
         // Query en DB
-        if(!this.suscriptores.contains(usuario)) {this.suscriptores.add(usuario);}
+        if(!this.suscriptores.stream().map(Usuario::getId).collect(Collectors.toList()).contains(usuario.getId())){
+            this.suscriptores.add(usuario);
+        }
     }
 
     public void agregarTarea(Tarea tarea) {
