@@ -45,7 +45,7 @@ public class MateriaController {
             return new ResponseEntity<>("Path Invalido", HttpStatus.NOT_FOUND);
         }
         String fechaString = body.get("fechaEntrega");
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         Tarea tarea = new Tarea(body.get("nombreTarea"),LocalDate.parse(fechaString, formatter));
         gestorMaterias.agregarTarea(idMateria,tarea);

@@ -63,7 +63,7 @@ public class UNQalendarioAdminMateriaAgregaTarea {
 
     @When("^MateriaController se le pide agregar esta tarea en esa Materia$")
     public void materiaControllerAgregarTareaEnEsaMateria(){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         String fechaStr = tarea.getFecha().format(formatter);
 

@@ -36,7 +36,6 @@ class CreacionCuenta extends React.Component {
   }
 
   signUp() {
-    console.log(this.state);
     if (this.state.username !== '' || this.state.password !== '') {
       API.post('/usuario', {
         nombreUsuario: this.state.username,

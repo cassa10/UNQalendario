@@ -21,7 +21,8 @@ class Inicio extends React.Component {
 
   traerMateriasSuscritasDelUsuario() {
     API.get(`/materias/${this.props.location.state.username}`)
-      .then(response => this.setState({ materiasSuscritasDelUsuario: response }));
+      .then(response => this.setState({ materiasSuscritasDelUsuario: response }))
+      .catch(error => console.log(error));
   }
 
   traerUsuario() {
@@ -46,13 +47,14 @@ class Inicio extends React.Component {
 
   suscribirseAMateria(idMateria) {
     API.post(`/suscribir/${idMateria}`, { idUsuario: this.props.location.state.username })
-      .then(response => this.setState({ materiasSuscritasDelUsuario: response }));
+      .then(response => this.setState({ materiasSuscritasDelUsuario: response }))
+      .catch(error => console.log(error.response.data));
   }
 
   goToMateria(id) {
     this.props.history.push({
       pathname: '/materia/{id}',
-      state: { idMateria: id },
+      state: { idMateria: id, idUsuario: this.props.location.state.username },
     });
   }
 
@@ -87,7 +89,7 @@ class Inicio extends React.Component {
       );
     }
     return materiasNoSuscritas.map(materia => (
-      <div className="col-12 col-md-4">
+      <div className="col-12 col-md-4" key={materia.id}>
         <div className="card-materia">
           <div className="header">
             <h5 className="card-titulo ">
@@ -107,7 +109,7 @@ class Inicio extends React.Component {
 
   crearVisualizacionMateriasSuscritas() {
     return this.state.materiasSuscritasDelUsuario.map(materia => (
-      <div className="col-12 col-md-4">
+      <div className="col-12 col-md-4" key={materia.id}>
         <div className="card-materia">
           <div className="header">
             <h5 className="card-titulo ">
