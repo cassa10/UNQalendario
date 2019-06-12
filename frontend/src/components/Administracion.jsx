@@ -8,7 +8,9 @@ class Administracion extends React.Component {
       materias: [],
       nombreMateriaNueva: '',
       usuarioDocente: '',
-      idMateriaDelUsuario: '',
+      idMateriaDocente: '',
+      errorMessageAgregarDocente: '',
+      errorMessageCrearMateria: 'La materia no tiene nombre',
     };
   }
 
@@ -22,9 +24,29 @@ class Administracion extends React.Component {
   }
 
   agregarUsuarioDocenteAMateria() {
-    API.post(`/administracion/${this.state.idMateriaDelUsuario}`, { usuario: this.state.usuarioDocente })
-      .then(() => this.props.history.push('/administracion'))
-      .catch(response => this.handleErrorUsuarioInexistente(response));
+    if (this.state.idMateriaDocente === '') {
+      this.setState({ errorMessageAgregarDocente: 'No hay materias' });
+    } else {
+      API.post(`/administracion/${this.state.idMateriaDocente}`, { usuario: this.state.usuarioDocente })
+        .then(() => this.props.history.push('/administracion'))
+        .catch(error => this.handleErrorUsuarioInexistente(error));
+    }
+  }
+
+  inputInvalid(message) {
+    if (message !== '') {
+      return (
+        <div className="invalid">
+          <span className="oi oi-x" />
+          {message}
+        </div>
+      );
+    }
+    return undefined;
+  }
+
+  handleErrorUsuarioInexistente(error) {
+    this.setState({ errorMessageAgregarDocente: error.response.data });
   }
 
   handlerUsuarioDocente(e) {
@@ -32,17 +54,24 @@ class Administracion extends React.Component {
   }
 
   handlerNombreMateria(e) {
+    if (e.target.value !== '') {
+      this.setState({ errorMessageCrearMateria: '' });
+    } else {
+      this.setState({ errorMessageCrearMateria: 'La materia no tiene nombre' });
+    }
     this.setState({ nombreMateriaNueva: e.target.value });
   }
 
   handlerIdMateriaDocente(e) {
-    this.setState({ idMateriaDelUsuario: e.target.value.nombre });
+    this.setState({ idMateriaDocente: e.target.value });
   }
 
   crearMateriaNueva() {
-    API.post('/materia', { nombre: this.state.nombreMateriaNueva })
-      .then(() => this.props.history.push('/administracion'))
-      .catch(error => console.log(error.response));
+    if (this.state.nombreMateriaNueva !== '') {
+      API.post('/materia', { nombre: this.state.nombreMateriaNueva })
+        .then(() => this.props.history.push('/administracion'))
+        .catch(error => console.log(error.response));
+    }
   }
 
   crearMateriasOptions() {
@@ -66,23 +95,28 @@ class Administracion extends React.Component {
           </div>
           <button type="submit" className="btn btn-primary mb-2" onClick={() => this.crearMateriaNueva()}>Crear</button>
         </form>
+        <div>
+          {this.inputInvalid(this.state.errorMessageCrearMateria)}
+        </div>
 
         <form className="form-inline">
-          <div className="form-group mb-2">
+          <div className="form-group mx-sm-3 mb-2">
               Agregar Docente(Admin) a una materia:
           </div>
-          <div className="input-group mb-2">
-            <select className="form-control" value={this.state.value} onChange={e => this.handlerIdMateriaDocente(e)} placeholder="Materias">
-              <option selected value="" disabled> Materias </option>
+          <div className="input-group mx-sm-3 mb-2">
+            <select className="form-control" value={this.state.value} onChange={e => this.handlerIdMateriaDocente(e)}>
+              <option selected value="" disabled> No hay materias </option>
               {this.crearMateriasOptions()}
             </select>
           </div>
           <div>
-            <input type="text" className="form-control" id="inputPassword2" placeholder="Usuario del Docente" onChange={e => this.handlerUsuarioDocente(e)} />
-            <button type="submit" className="btn btn-primary mb-2" onClick={() => this.asignarDocente()}>Asignar</button>
+            <input type="text" className="form-control" id="inputPassword3" placeholder="Usuario del Docente" onChange={e => this.handlerUsuarioDocente(e)} />
+            <button type="submit" className="btn btn-primary mx-sm-3 mb-2" onClick={() => this.agregarUsuarioDocenteAMateria()}>Asignar</button>
+          </div>
+          <div>
+            {this.inputInvalid(this.state.errorMessageAgregarDocente)}
           </div>
         </form>
-        
       </div>
     );
   }
