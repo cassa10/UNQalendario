@@ -79,7 +79,7 @@ public class Usuario {
         return this.getNombrePersona() +", "+this.getApellido();
     }
 
-    public List<Tarea> verTareas(Materia materia) {
-        return materia.mostrarTareas(this);
+    public List<Tarea> getNotificaciones(){
+        return this.notificaciones;
     }
 }

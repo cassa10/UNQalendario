@@ -46,8 +46,18 @@ public class Materia {
         return suscriptores;
     }
 
+    public List<Tarea> getTareas() {
+        return tareas;
+    }
+
+    public List<Usuario> getAdministradores() {
+        return this.administradores;
+    }
+
     public void agregarSuscriptor(Usuario usuario) {
-        if(this.suscriptores.stream().noneMatch(u -> usuario.getId().equals(u.getId()))) {this.suscriptores.add(usuario);}
+        //TODO
+        // Query en DB
+        if(!this.suscriptores.contains(usuario)) {this.suscriptores.add(usuario);}
     }
 
     public boolean esAdministrador(Usuario usuario){
@@ -59,19 +69,12 @@ public class Materia {
         this.suscriptores.forEach(usuario -> usuario.agregarNotificacion(tarea));
     }
 
-    public List<Tarea> getTareas() {
-        return tareas;
-    }
-
     public void agregarAdministrador(Usuario nuevoAdmin) {
-        if(! this.getAdministradores().contains(nuevoAdmin)){
+        if(! this.esAdministrador(nuevoAdmin)){
             this.administradores.add(nuevoAdmin);
         }
     }
 
-    public List<Usuario> getAdministradores() {
-        return this.administradores;
-    }
     public String getNombreDelDocente(){
         if(this.getAdministradores().isEmpty()){
             return "";
@@ -79,10 +82,14 @@ public class Materia {
         return this.getAdministradores().get(0).getNombreYApellido();
     }
 
-    public List<Tarea> mostrarTareas(Usuario usuario) {
-        if(suscriptores.contains(usuario)){
-            return tareas;
-        }
-        return new ArrayList<>();
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (this.getClass() != obj.getClass()) return false;
+        Materia that = (Materia) obj;
+        if (! this.getId().equals(that.getId())) return false;
+        return true;
     }
+
 }

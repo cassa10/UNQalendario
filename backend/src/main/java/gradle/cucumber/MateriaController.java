@@ -26,8 +26,7 @@ public class MateriaController {
     }
 
     @RequestMapping(method = RequestMethod.GET, value="/materias")
-    public Iterable<Materia> todasLasMaterias() { return gestorMaterias.getMaterias();
-    }
+    public Iterable<Materia> todasLasMaterias() { return gestorMaterias.getMaterias(); }
 
     @RequestMapping(method = RequestMethod.POST, value="/materia")
     public Materia save(@RequestBody Materia materia) {
@@ -56,12 +55,12 @@ public class MateriaController {
     public ResponseEntity agregarAdministradorAUnaMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> data){
         Materia materia = this.gestorMaterias.get(idMateria);
         String usuarioNombre = data.get("usuario");
-        if(this.gestorUsuario.existeNombreUsuario(usuarioNombre)){
+        if(this.gestorUsuario.existeNombreUsuario(usuarioNombre) || this.gestorMaterias.existeMateriaConId(idMateria)){
             Usuario usuario = gestorUsuario.getUsuarioPorNombre(usuarioNombre);
             gestorMaterias.agregarAdministrador(materia, usuario);
             return ResponseEntity.ok("Materia Updated");
         }else{
-            return new ResponseEntity<>("Usuario Inexistente", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Datos Invalidos", HttpStatus.NOT_FOUND);
         }
     }
 

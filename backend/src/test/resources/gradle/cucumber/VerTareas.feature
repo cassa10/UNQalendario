@@ -1,4 +1,4 @@
-Feature: Ver tareas
+#Feature: Ver tareas
 
 #  Scenario: Cuando agrego una tarea a la materia la materia tiene una tarea
 #    Given Una materia con un profesor

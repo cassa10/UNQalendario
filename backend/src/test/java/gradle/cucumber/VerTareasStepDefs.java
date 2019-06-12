@@ -1,5 +1,6 @@
 package gradle.cucumber;
 
+import Service.UsuarioService;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -12,14 +13,20 @@ import static org.junit.Assert.assertEquals;
 
 public class VerTareasStepDefs {
 
+    //TODO
+    // TESTEAR DESDE CONTROLLER HASTA SERVICE
+
+    /*
     private Usuario docente;
     private Materia materia;
+    private MateriaController materiaController;
+    private UsuarioService usuarioService;
     private Tarea tarea1, tarea2;
     private Usuario usuario;
     private List<Tarea> tareasList;
-    //TODO
-    // TESTEAR DESDE CONTROLLER HASTA SERVICE
-/*
+
+
+
     @Given("^Una materia con tareas$")
     public void inicializarMateriaConTareas(){
         docente = new Usuario("fedekpo","123","Fede","Sawady");

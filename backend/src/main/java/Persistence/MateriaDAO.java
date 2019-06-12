@@ -31,4 +31,9 @@ public class MateriaDAO extends GenericMongoDAO<Materia> {
         ObjectId objectId = new ObjectId(materia.getId());
         this.mongoCollection.update("{ _id: # }", objectId).with("{ $set: { administradores: # }}", administradores);
     }
+
+    public boolean existeMateriaConId(String idMateria) {
+        ObjectId objectId = new ObjectId(idMateria);
+        return !this.find("{ _id: # }", objectId).isEmpty();
+    }
 }

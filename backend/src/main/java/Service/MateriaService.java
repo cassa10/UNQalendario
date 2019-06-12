@@ -60,4 +60,8 @@ public class MateriaService {
         materia.agregarAdministrador(usuario);
         this.materiaDAO.agregarAdministradores(materia,materia.getAdministradores());
     }
+
+    public boolean existeMateriaConId(String idMateria) {
+        return this.materiaDAO.existeMateriaConId(idMateria);
+    }
 }
