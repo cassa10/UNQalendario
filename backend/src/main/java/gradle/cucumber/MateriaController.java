@@ -40,15 +40,17 @@ public class MateriaController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value ="/tarea/{idMateria}")
-    public Materia agregarTareaEnMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> body){
-
+    public ResponseEntity agregarTareaEnMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> body){
+        if(! this.gestorMaterias.existeMateriaConId(idMateria)){
+            return new ResponseEntity<>("Path Invalido", HttpStatus.NOT_FOUND);
+        }
         String fechaString = body.get("fechaEntrega");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
 
         Tarea tarea = new Tarea(body.get("nombreTarea"),LocalDate.parse(fechaString, formatter));
         gestorMaterias.agregarTarea(idMateria,tarea);
 
-        return gestorMaterias.get(idMateria);
+        return ResponseEntity.ok(gestorMaterias.get(idMateria));
     }
 
     @RequestMapping(method = RequestMethod.POST, value ="/administracion/{idMateria}")

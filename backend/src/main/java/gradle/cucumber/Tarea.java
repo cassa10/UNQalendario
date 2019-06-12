@@ -28,4 +28,14 @@ public class Tarea {
         return this.fechaTarea.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
     }
 
+    @Override
+    public boolean equals(Object obj){
+        if (this == obj) return true;
+        if (obj == null) return false;
+        if (this.getClass() != obj.getClass()) return false;
+        Tarea that = (Tarea) obj;
+        if (! (this.getNombre().equals(that.getNombre()) && this.getFecha().equals(that.getFecha()))) return false;
+        return true;
+    }
+
 }
