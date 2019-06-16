@@ -14,8 +14,6 @@ import java.util.HashMap;
 @CrossOrigin
 @RestController
 public class MateriaController {
-    //TODO
-    // TESTIAR METEDOS EN GRIS(NO TESTEADO)
 
     private MateriaService gestorMaterias = new MateriaService();
     private UsuarioService gestorUsuario = new UsuarioService();
@@ -71,7 +69,4 @@ public class MateriaController {
             return new ResponseEntity<>("Datos Invalidos", HttpStatus.NOT_FOUND);
         }
     }
-
-
-
 }
