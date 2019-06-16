@@ -28,4 +28,13 @@ public class UsuarioDAO extends GenericMongoDAO<Usuario> {
         ObjectId idMongo = new ObjectId(idUsuario);
         return ! this.find("{ _id: # }", idMongo).isEmpty();
     }
+
+    public void updateNotificacionesDeUsuarios(List<Usuario> usuarios) {
+        usuarios.stream().forEach(user -> this.updateNotificaciones(user));
+    }
+
+    private void updateNotificaciones(Usuario user) {
+            ObjectId objectId = new ObjectId(user.getId());
+            this.mongoCollection.update("{ _id: # }", objectId).with("{ $set: { notificaciones: # }}", user.getNotificaciones());
+    }
 }

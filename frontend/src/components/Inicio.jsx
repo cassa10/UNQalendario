@@ -107,6 +107,46 @@ class Inicio extends React.Component {
     ));
   }
 
+  crearTextoDeDiasRestantes(daysLeft) {
+    if (daysLeft >= 0) {
+      if (daysLeft > 0) {
+        return `${daysLeft} día(s) restantes`;
+      }
+      return 'Hoy se entrega';
+    }
+    return 'Tarea finalizada';
+  }
+
+  handleMensajeDeNoti(noti) {
+    const daysLeft = Math.round((new Date(noti.fecha)
+      .getTime() - new Date().getTime()) / 86400000) + 1;
+    return (
+      <div className="textoDiasRestantes">
+        {this.crearTextoDeDiasRestantes(daysLeft)}
+      </div>
+    );
+  }
+
+  crearVisualizacionNotificaciones() {
+    if (this.state.usuario !== '') {
+      console.log(this.state);
+      return (
+        this.state.usuario.notificaciones.map(noti => (
+          <div className="col-12 col-md-4" key={noti.id}>
+            <div className="card-materia">
+              <div className="header">
+                <h5 className="card-titulo ">
+                  {noti.nombre}
+                </h5>
+              </div>
+              {this.handleMensajeDeNoti(noti)}
+            </div>
+          </div>
+        )));
+    }
+    return (null);
+  }
+
   crearVisualizacionMateriasSuscritas() {
     return this.state.materiasSuscritasDelUsuario.map(materia => (
       <div className="col-12 col-md-4" key={materia.id}>
@@ -127,6 +167,17 @@ class Inicio extends React.Component {
     ));
   }
 
+  visualizarMensajeDeNotis() {
+    if (this.state.usuario !== '') {
+      return (
+        <div>
+          Notificaciones({this.state.usuario.notificaciones.length})
+        </div>
+      );
+    }
+    return (null);
+  }
+
   render() {
     return (
       <div className="container">
@@ -145,6 +196,14 @@ class Inicio extends React.Component {
             </h4>
           </div>
           {this.crearVisualizacionMaterias()}
+        </div>
+        <div className="row">
+          <div className="col-12 titulo-banner">
+            <h4 className="titulo-materias-divider">
+              {this.visualizarMensajeDeNotis()}
+            </h4>
+          </div>
+          {this.crearVisualizacionNotificaciones()}
         </div>
       </div>
     );
