@@ -6,6 +6,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -73,14 +74,29 @@ public class UNQalendarioAdminAgregaUsuarioAdminAUnaMateria {
         this.materias.set(index,this.materiaController.getMateria(idMateria));
     }
 
-    @Then("^Se retorna un ResponseEntity ok y la materia \"([^\"]*)\" posee un admin que es este usuario$")
+    @Then("^Se retorna un ResponseEntity ok con body Materia Updated y la materia \"([^\"]*)\" posee un admin que es este usuario$")
     public void assertResponseEntityOkYLaMateriaPoseeUnAdminQueEsEsteUsuario(String indexIncMateria){
         int index = Integer.parseInt(indexIncMateria) - 1;
 
         //200 = ok
         assertEquals(this.responseTest.getStatusCodeValue(),200);
+        assertEquals(this.responseTest.getBody(),"Materia Updated");
 
         assertEquals(this.materias.get(index).getAdministradores().size(),1);
         assertTrue(this.materias.get(index).getAdministradores().contains(this.usuario));
     }
+
+    @When("^MateriaController agrega administrador a \"([^\"]*)\" en una materia que no existe$")
+    public void materiaControllerAgregaAdminAUnaMateriaQueNoExiste(String usuario){
+        HashMap<String,String> data = new HashMap<>();
+        data.put("usuario",usuario);
+        responseTest = materiaController.agregarAdministradorAUnaMateria(ObjectId.get().toString(),data);
+    }
+
+    @Then("^Se retorna un ResponseEntity not found con body Datos Invalidos$")
+    public void assertResponseEntityNotFoundConBodyDatosInvalidos(){
+        assertEquals(responseTest.getBody(),"Datos Invalidos");
+        assertEquals(responseTest.getStatusCodeValue(),404);
+    }
+
 }
