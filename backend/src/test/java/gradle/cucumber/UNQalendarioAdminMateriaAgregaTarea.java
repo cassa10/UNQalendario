@@ -43,8 +43,9 @@ public class UNQalendarioAdminMateriaAgregaTarea {
     public void crearUnUsuarioYUnaMateria() throws UsuarioYaExiste{
         this.usuario = new Usuario("pepe","123","Pepe","Grillo");
         this.materia = new Materia("Ser un Grillo");
-        usuarioController.guardarUsuario(usuario);
-        materiaController.save(materia);
+
+        this.usuario = usuarioController.guardarUsuario(usuario);
+        this.materia = materiaController.save(materia);
     }
 
     @And("^Ese usuario es administrador de esa materia$")
@@ -56,7 +57,7 @@ public class UNQalendarioAdminMateriaAgregaTarea {
 
     @And("^Una tarea \"([^\"]*)\" con fecha \"([^\"]*)\"$")
     public void crearDataRequestTarea(String nombre, String fecha){
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yy");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         this.tarea = new Tarea(nombre,LocalDate.parse(fecha,formatter));
     }
@@ -68,6 +69,7 @@ public class UNQalendarioAdminMateriaAgregaTarea {
         String fechaStr = tarea.getFecha().format(formatter);
 
         HashMap<String,String> data = new HashMap<>();
+        data.put("usuario",this.usuario.getId());
         data.put("nombreTarea",tarea.getNombre());
         data.put("fechaEntrega",fechaStr);
         this.responseTest = materiaController.agregarTareaEnMateria(materia.getId(),data);
