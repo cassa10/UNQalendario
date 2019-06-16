@@ -64,4 +64,8 @@ public class MateriaService {
     public boolean existeMateriaConId(String idMateria) {
         return this.materiaDAO.existeMateriaConId(idMateria);
     }
+
+    public boolean elUsuarioEsAdminDeMateria(String idMateria, String idUsuario) {
+        return this.materiaDAO.existeAdministradorEnMateria(idMateria,idUsuario);
+    }
 }

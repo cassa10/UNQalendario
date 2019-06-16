@@ -44,6 +44,12 @@ public class MateriaController {
         if(! this.gestorMaterias.existeMateriaConId(idMateria)){
             return new ResponseEntity<>("Path Invalido", HttpStatus.NOT_FOUND);
         }
+
+        String idUsuario = body.get("usuario");
+        if(! this.gestorMaterias.elUsuarioEsAdminDeMateria(idMateria,idUsuario)){
+            return new ResponseEntity<>("Usuario Invalido",HttpStatus.NOT_FOUND);
+        }
+
         String fechaString = body.get("fechaEntrega");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
