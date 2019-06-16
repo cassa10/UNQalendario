@@ -36,4 +36,8 @@ public class MateriaDAO extends GenericMongoDAO<Materia> {
         ObjectId objectId = new ObjectId(idMateria);
         return !this.find("{ _id: # }", objectId).isEmpty();
     }
+
+    public boolean existeAdministradorEnMateria(String idMateria, String idUsuario) {
+        return this.get(idMateria).getAdministradores().stream().anyMatch(adm -> adm.getId().equals(idUsuario));
+    }
 }

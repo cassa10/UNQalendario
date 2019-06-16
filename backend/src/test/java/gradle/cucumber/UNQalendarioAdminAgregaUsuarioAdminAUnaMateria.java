@@ -6,6 +6,7 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
+import org.bson.types.ObjectId;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -73,14 +74,75 @@ public class UNQalendarioAdminAgregaUsuarioAdminAUnaMateria {
         this.materias.set(index,this.materiaController.getMateria(idMateria));
     }
 
-    @Then("^Se retorna un ResponseEntity ok y la materia \"([^\"]*)\" posee un admin que es este usuario$")
+    @Then("^Se retorna un ResponseEntity ok con body Materia Updated y la materia \"([^\"]*)\" posee un admin que es este usuario$")
     public void assertResponseEntityOkYLaMateriaPoseeUnAdminQueEsEsteUsuario(String indexIncMateria){
         int index = Integer.parseInt(indexIncMateria) - 1;
 
         //200 = ok
         assertEquals(this.responseTest.getStatusCodeValue(),200);
+        assertEquals(this.responseTest.getBody(),"Materia Updated");
 
         assertEquals(this.materias.get(index).getAdministradores().size(),1);
+        assertTrue(this.materias.get(index).getAdministradores().contains(this.usuario));
+    }
+
+    @When("^MateriaController agrega administrador a \"([^\"]*)\" en una materia que no existe$")
+    public void materiaControllerAgregaAdminAUnaMateriaQueNoExiste(String usuario){
+        HashMap<String,String> data = new HashMap<>();
+        data.put("usuario",usuario);
+        responseTest = materiaController.agregarAdministradorAUnaMateria(ObjectId.get().toString(),data);
+    }
+
+    @Then("^Se retorna un ResponseEntity not found con body Datos Invalidos$")
+    public void assertResponseEntityNotFoundConBodyDatosInvalidos(){
+        assertEquals(responseTest.getBody(),"Datos Invalidos");
+        assertEquals(responseTest.getStatusCodeValue(),404);
+    }
+
+    @And("^El \"([^\"]*)\" es admin de la materia \"([^\"]*)\"$")
+    public void hacerUsuarioAdminDeLaMateriaDelIndexPrevio(String usuario,String indexIncStr) throws UsuarioYaExiste{
+        int index = Integer.parseInt(indexIncStr)-1;
+        String idMateria = materias.get(index).getId();
+
+        HashMap<String,String> data = new HashMap<>();
+        data.put("usuario",usuario);
+
+        this.materiaController.agregarAdministradorAUnaMateria(idMateria,data);
+    }
+
+    @And("^Se crea \"([^\"]*)\" siendo admin de la materia \"([^\"]*)\"$")
+    public void crearUsuarioYHacerloAdminDeLaMateriaDelIndexPrevio(String usuario,String indexIncStr) throws UsuarioYaExiste{
+        int index = Integer.parseInt(indexIncStr)-1;
+        String idMateria = materias.get(index).getId();
+
+        Usuario user = new Usuario(usuario,"passwordX","NombreX","ApellidoX");
+        this.usuarios.add(this.usuarioController.guardarUsuario(user));
+
+        HashMap<String,String> data = new HashMap<>();
+        data.put("usuario",usuario);
+
+        this.materiaController.agregarAdministradorAUnaMateria(idMateria,data);
+    }
+
+    @Then("^Se retorna un ResponseEntity not found con body Datos Invalidos y la materia \"([^\"]*)\" no posee admins$")
+    public void assertResponseEntityNotFoundYBodyDatosInvalidosYMateriaNoPoseeAdmins(String indexIncStr){
+        assertEquals(responseTest.getBody(),"Datos Invalidos");
+        assertEquals(responseTest.getStatusCodeValue(),404);
+
+        int index = Integer.parseInt(indexIncStr) - 1;
+        assertTrue(this.materias.get(index).getAdministradores().isEmpty());
+    }
+
+    @Then("^Se retorna un ResponseEntity ok con body Materia Updated y la materia \"([^\"]*)\" posee \"([^\"]*)\" admins incluyendo a este usuario y a los anteriores$")
+    public void assertResponseEntityOkConBodyMateriaUpdatedYLaMateriaEnIndexNPoseeKAdmines(String indexIncStr,String sizeAdminsStr){
+        int sizeAdmins = Integer.parseInt(sizeAdminsStr);
+        int index = Integer.parseInt(indexIncStr) - 1;
+
+        assertEquals(this.responseTest.getStatusCodeValue(),200);
+        assertEquals(this.responseTest.getBody(),"Materia Updated");
+
+        assertEquals(this.materias.get(index).getAdministradores().size(),sizeAdmins);
+        assertTrue(this.materias.get(index).getAdministradores().containsAll(this.usuarios));
         assertTrue(this.materias.get(index).getAdministradores().contains(this.usuario));
     }
 }

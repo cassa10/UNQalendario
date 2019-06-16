@@ -14,8 +14,6 @@ import java.util.HashMap;
 @CrossOrigin
 @RestController
 public class MateriaController {
-    //TODO
-    // TESTIAR METEDOS EN GRIS(NO TESTEADO)
 
     private MateriaService gestorMaterias = new MateriaService();
     private UsuarioService gestorUsuario = new UsuarioService();
@@ -44,6 +42,12 @@ public class MateriaController {
         if(! this.gestorMaterias.existeMateriaConId(idMateria)){
             return new ResponseEntity<>("Path Invalido", HttpStatus.NOT_FOUND);
         }
+
+        String idUsuario = body.get("usuario");
+        if(! this.gestorMaterias.elUsuarioEsAdminDeMateria(idMateria,idUsuario)){
+            return new ResponseEntity<>("Usuario Invalido",HttpStatus.NOT_FOUND);
+        }
+
         String fechaString = body.get("fechaEntrega");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
@@ -55,17 +59,15 @@ public class MateriaController {
 
     @RequestMapping(method = RequestMethod.POST, value ="/administracion/{idMateria}")
     public ResponseEntity agregarAdministradorAUnaMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> data){
-        Materia materia = this.gestorMaterias.get(idMateria);
         String usuarioNombre = data.get("usuario");
-        if(this.gestorUsuario.existeNombreUsuario(usuarioNombre) || this.gestorMaterias.existeMateriaConId(idMateria)){
-            Usuario usuario = gestorUsuario.getUsuarioPorNombre(usuarioNombre);
-            gestorMaterias.agregarAdministrador(materia, usuario);
-            return ResponseEntity.ok("Materia Updated");
-        }else{
-            return new ResponseEntity<>("Datos Invalidos", HttpStatus.NOT_FOUND);
+
+        if(! (this.gestorMaterias.existeMateriaConId(idMateria) && this.gestorUsuario.existeNombreUsuario(usuarioNombre)) ){
+            return new ResponseEntity<>("Datos Invalidos",HttpStatus.NOT_FOUND);
         }
+
+        Materia materia = this.gestorMaterias.get(idMateria);
+        Usuario usuario = gestorUsuario.getUsuarioPorNombre(usuarioNombre);
+        gestorMaterias.agregarAdministrador(materia, usuario);
+        return ResponseEntity.ok("Materia Updated");
     }
-
-
-
 }
