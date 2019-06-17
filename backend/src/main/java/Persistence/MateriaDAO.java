@@ -41,7 +41,5 @@ public class MateriaDAO extends GenericMongoDAO<Materia> {
         return this.get(idMateria).getAdministradores().stream().anyMatch(adm -> adm.getId().equals(idUsuario));
     }
 
-    public void updateUsuarios(String idMateria, List<Usuario> suscriptores) {
-        this.mongoCollection.update("{ _id: # }", idMateria).with("{ $set: { suscriptores: # }}", suscriptores);
-    }
+
 }

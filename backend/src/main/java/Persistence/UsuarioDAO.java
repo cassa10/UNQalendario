@@ -1,5 +1,6 @@
 package Persistence;
 
+import gradle.cucumber.Tarea;
 import gradle.cucumber.Usuario;
 import org.bson.types.ObjectId;
 
@@ -29,12 +30,17 @@ public class UsuarioDAO extends GenericMongoDAO<Usuario> {
         return ! this.find("{ _id: # }", idMongo).isEmpty();
     }
 
-    public void updateNotificacionesDeUsuarios(List<Usuario> usuarios) {
-        usuarios.stream().forEach(user -> this.updateNotificaciones(user));
+    public void updateNotificacionesDeUsuarios(List<Usuario> usuarios, Tarea tarea) {
+        usuarios.stream().forEach(user -> this.updateNotificaciones(user,tarea));
     }
 
-    private void updateNotificaciones(Usuario user) {
-            ObjectId objectId = new ObjectId(user.getId());
-            this.mongoCollection.update("{ _id: # }", objectId).with("{ $set: { notificaciones: # }}", user.getNotificaciones());
+    private void updateNotificaciones(Usuario user, Tarea tarea) {
+        Usuario usuarioRecuperado = this.get(user.getId());
+
+        usuarioRecuperado.agregarNotificacion(tarea);
+
+        ObjectId objectId = new ObjectId(user.getId());
+
+        this.mongoCollection.update("{ _id: # }", objectId).with("{ $set: { notificaciones: # }}", usuarioRecuperado.getNotificaciones());
     }
 }

@@ -58,8 +58,7 @@ public class MateriaService {
 
         List<Usuario> suscriptores = materia.getSuscriptores();
 
-        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores);
-        materiaDAO.updateUsuarios(idMateria,suscriptores);
+        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea);
         materiaDAO.agregarTareas(idMateria,materia.getTareas());
     }
 
