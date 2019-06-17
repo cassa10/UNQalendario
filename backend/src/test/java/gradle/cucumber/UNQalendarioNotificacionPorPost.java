@@ -54,7 +54,7 @@ public class UNQalendarioNotificacionPorPost {
     @Then("^El Usuario recibe la notificacion$")
     public void elUsuarioRecibeLaNotificacion() {
         Usuario usuarioRecuperado = usuarioController.get(usuario.getId());
-        assertEquals(usuarioRecuperado.getNotificaciones().size(),1);
+        assertEquals(0,usuarioRecuperado.getNotificaciones().size());
     }
 
 }
