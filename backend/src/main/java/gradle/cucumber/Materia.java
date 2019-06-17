@@ -65,7 +65,6 @@ public class Materia {
 
     public void agregarTarea(Tarea tarea) {
         this.tareas.add(tarea);
-        this.suscriptores.forEach(usuario -> usuario.agregarNotificacion(tarea));
     }
 
     public void agregarAdministrador(Usuario nuevoAdmin) {

@@ -1,6 +1,7 @@
 package Service;
 
 import Persistence.MateriaDAO;
+import Persistence.UsuarioDAO;
 import gradle.cucumber.Materia;
 import gradle.cucumber.Tarea;
 import gradle.cucumber.Usuario;
@@ -9,9 +10,11 @@ import java.util.List;
 
 public class MateriaService {
     private MateriaDAO materiaDAO;
+    private UsuarioDAO usuarioDAO;
 
     public MateriaService() {
         this.materiaDAO = new MateriaDAO();
+        this.usuarioDAO = new UsuarioDAO();
     }
 
     public List<Materia> getMaterias() {
@@ -53,6 +56,9 @@ public class MateriaService {
         Materia materia = materiaDAO.get(idMateria);
         materia.agregarTarea(tarea);
 
+        List<Usuario> suscriptores = materia.getSuscriptores();
+
+        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea);
         materiaDAO.agregarTareas(idMateria,materia.getTareas());
     }
 

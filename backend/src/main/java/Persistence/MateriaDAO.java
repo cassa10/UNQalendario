@@ -40,4 +40,6 @@ public class MateriaDAO extends GenericMongoDAO<Materia> {
     public boolean existeAdministradorEnMateria(String idMateria, String idUsuario) {
         return this.get(idMateria).getAdministradores().stream().anyMatch(adm -> adm.getId().equals(idUsuario));
     }
+
+
 }
