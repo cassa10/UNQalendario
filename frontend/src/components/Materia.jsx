@@ -125,6 +125,11 @@ class Materia extends React.Component {
     if (this.state.tarea.nombreTarea === '' || this.state.tarea.fechaEntrega === '') {
       this.setErrorCorrepondiente();
     } else {
+      console.log({
+        fechaEntrega: this.state.tarea.fechaEntrega,
+        nombreTarea: this.state.tarea.nombreTarea,
+        usuario: this.props.location.state.idUsuario,
+      });
       API.post(`/tarea/${this.state.materia.id}`, {
         fechaEntrega: this.state.tarea.fechaEntrega,
         nombreTarea: this.state.tarea.nombreTarea,
