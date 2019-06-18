@@ -1,15 +1,12 @@
 package gradle.cucumber;
 
-import Persistence.DummyObject;
-import Service.MateriaService;
-import Service.UsuarioService;
+import Service.UNQalendarioService;
+import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import org.junit.Assert;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -17,15 +14,19 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class UNQalendarioNotificacionPorPost {
     private Usuario usuario;
     private UsuarioController usuarioController;
-    private UsuarioService usuarioService;
     private Materia materia;
     private Usuario docente;
     private MateriaController materiaController;
+    private UNQalendarioService unqalendarioService = new UNQalendarioService();
 
-    @Given("^Un UsuarioController y un UsuarioServicee$")
+    @After
+    public void cleanUpDataBase(){
+        unqalendarioService.destroy();
+    }
+
+    @Given("^Un UsuarioController$")
     public void setUpUsuarioController() throws UsuarioYaExiste {
         this.usuarioController = new UsuarioController();
-        this.usuarioService = new UsuarioService();
         this.materiaController = new MateriaController();
         this.materia =  this.materiaController.save(new Materia("Intro"));
         this.docente = new Usuario("dios","1234");
@@ -96,5 +97,19 @@ public class UNQalendarioNotificacionPorPost {
         assertEquals(3,usuarioRecuperado.getNotificaciones().size());
     }
 
+    @When("^Se intenta postear una tarea erroneamente$")
+    public void seIntentaPostearUnaTareaErroneamente(){
+        HashMap<String,String> data = new HashMap<>();
+        data.put("fechaEntrega","25/07/2019");
+        data.put("nombreTarea","Tarea Erronea");
+        data.put("usuario","DOCENTE QUE NO EXISTE");
+        this.materiaController.agregarTareaEnMateria(materia.getId(),data);
+    }
+
+    @Then("^El Usuario solo tiene una notificacion$")
+    public void assertUsuarioTieneUnaNotificacion(){
+        Usuario usuarioRecuperado = usuarioController.get(usuario.getId());
+        assertEquals(1,usuarioRecuperado.getNotificaciones().size());
+    }
 
 }
