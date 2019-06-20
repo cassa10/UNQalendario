@@ -9,18 +9,19 @@
 
 - Como administrador quiero poder hacer a un profesor administrador de su materia **(5 puntos)** | **(Completada)**
 
+- Como usuario quiero que se visualicen mejor las tareas. **(3 puntos)** | **(Completada)**
 
-### **Total de Story Points:  18**
+### **Total de Story Points:  21**
 
-  - **Obtenidos: 18**
+  - **Obtenidos: 21**
 
   - **Restantes: 0**
 ---
 
 ## Retrospectiva:
 
-  -**Buenas**: Fue un muy buen sprint, logramos completar todas las user stories, y tuvimos dailys casi todos los dias con un resultado positivo en cada una de ellas.
+  - **Buenas**: Fue un muy buen sprint, logramos completar todas las user stories, y tuvimos dailys casi todos los dias con un resultado positivo en cada una de ellas.
   
-  -**Malas** : Falto daily en uno o dos dias.
+  - **Malas** : Falto daily en uno o dos dias.
 
 [Volver](https://github.com/cassa10/UNQalendario)
