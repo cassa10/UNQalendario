@@ -9,15 +9,18 @@
 
 - Como usuario quiero que cuando el docente elimina la tarea, se elimine en mis notificaciones. (5 Puntos)
 
+## Spikes:
 
-### **Total de Story Points:  21**
+- Investigar aplicar tests en la UI. (4 Puntos)
+
+
+### **Total de Story Points:  25**
 
   - **Obtenidos: **
 
   - **Restantes: **
 
 ---
-
 ## Retrospectiva:
 
   -**Buenas**: 
