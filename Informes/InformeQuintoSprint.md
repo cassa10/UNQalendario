@@ -9,12 +9,14 @@
 
 - Como usuario quiero que cuando el docente elimina la tarea, se elimine en mis notificaciones. **(5 Puntos)** |
 
+- Como Admin de una materia quiero poder agregar tareas sin ser suscriptor de esta primera. **(2 puntos)**|
+
 ## Spikes:
 
 - Investigar aplicar tests en la UI. **(4 Puntos)** |
 
 
-### **Total de Story Points: 25**
+### **Total de Story Points: 27**
 
   - **Obtenidos: - **
 
