@@ -79,6 +79,21 @@ class Inicio extends React.Component {
       </p>);
   }
 
+  agregarVerMateriaSiSoyAdmin(materia) {
+    const adminFilter = materia.administradores
+      .map(u => u.nombreUsuario).filter(u => u === this.state.usuario.nombreUsuario);
+    if (adminFilter.length === 1) {
+      return (
+        <p role="presentation" className="card-name-bottom" onClick={() => this.goToMateria(materia.id)}>
+          Ver
+        </p>
+      );
+    }
+    return (
+      undefined
+    );
+  }
+
   crearVisualizacionMaterias() {
     const materiasNoSuscritas = this.state.materiasFiltradas
       .filter(m => this.state.materiasSuscritasDelUsuario
@@ -98,6 +113,7 @@ class Inicio extends React.Component {
           </div>
           {this.ponerNombreDocente(materia)}
           <div>
+            {this.agregarVerMateriaSiSoyAdmin(materia)}
             <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
               SUSCRIBIRSE
             </p>
@@ -129,7 +145,6 @@ class Inicio extends React.Component {
 
   crearVisualizacionNotificaciones() {
     if (this.state.usuario !== '') {
-      console.log(this.state);
       return (
         this.state.usuario.notificaciones.map(noti => (
           <div className="col-12 col-md-4" key={noti.id}>
