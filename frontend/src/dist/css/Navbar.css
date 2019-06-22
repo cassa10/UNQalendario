@@ -20,3 +20,39 @@
     border: 1px solid #DAC8C8;
     border-bottom: 1px solid black;
 }
+
+.bell{
+    background-color:transparent;
+    background-repeat: no-repeat;
+    
+    height: 30px;
+    width: 30px;
+    margin-left: 15px;
+}
+
+.itemNotificacion{
+    height: text;
+    width: text
+}
+
+.transparente{
+    background-color: transparent;
+    border-style: None;
+    color:transparent;
+}
+.transparente:hover{
+    background-color: transparent;
+    border-style: None;
+    color:transparent
+}
+.transparente:active{
+    background-color: transparent;
+    border-style: None;
+    color:transparent
+}
+.transparente:visited{
+    background-color: transparent;
+    border-style: None;
+    color:transparent
+}
+

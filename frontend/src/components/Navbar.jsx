@@ -1,14 +1,25 @@
 import React from 'react';
 import '../dist/css/Navbar.css';
+import Dropdown from 'react-bootstrap/Dropdown';
+import DropdownMenu from 'react-bootstrap/DropdownMenu';
+import bellIcon from '../dist/icons/bell_icon.png';
+import API from '../service/api';
 
 class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      usuario:''
     };
   }
 
   componentDidMount() {
+    this.traerUsuario();
+  }
+
+  traerUsuario() {
+    API.get(`/usuario/${this.props.location.state.username}`)
+      .then(response => this.setState({ usuario: response }));
   }
 
   headerNavbar() {
@@ -17,6 +28,15 @@ class Navbar extends React.Component {
         <p role="presentation" className="navbar-brand titulo-navbar" onClick={() => this.goToInicio()}>UNQalendario</p>
       </div>
     );
+  }
+
+  renderNotifications() {
+    if (this.state.usuario !== '' && this.state.usuario.notificaciones.length) {
+      return (this.state.usuario.notificaciones.map(
+        noti => <Dropdown.Item className="itemNotificacion"> {noti.nombre},{noti.fecha} </Dropdown.Item>,
+      ));
+    }
+    return (<Dropdown.Item className="itemNotificacion"> Uuuh!, no tenes notificaciones :( </Dropdown.Item>);
   }
 
   render() {
@@ -33,6 +53,14 @@ class Navbar extends React.Component {
               <input className="inputSearch" type="text" placeholder="Buscar Materia" aria-label="Search" />
               <img role="presentation" alt="lupa" src="https://image.flaticon.com/icons/svg/70/70376.svg" height="16" />
             </form>
+            <Dropdown drop="down" className="transparente">
+              <Dropdown.Toggle id="dropdown-basic" className="transparente">
+                <img src={bellIcon} alt="" className="bell" />
+                <DropdownMenu>
+                  {this.renderNotifications()}
+                </DropdownMenu>
+              </Dropdown.Toggle>
+            </Dropdown>
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
                 <p className="nav-link" href="/inicio">INICIO</p>
