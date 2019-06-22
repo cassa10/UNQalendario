@@ -143,6 +143,8 @@ class Inicio extends React.Component {
     );
   }
 
+<<<<<<< HEAD
+=======
   crearVisualizacionNotificaciones() {
     if (this.state.usuario !== '') {
       return (
@@ -162,6 +164,7 @@ class Inicio extends React.Component {
     return (null);
   }
 
+>>>>>>> d8a80a927729ecb1de0f24bea810a190d42b33ce
   crearVisualizacionMateriasSuscritas() {
     return this.state.materiasSuscritasDelUsuario.map(materia => (
       <div className="col-12 col-md-4" key={materia.id}>
@@ -182,17 +185,6 @@ class Inicio extends React.Component {
     ));
   }
 
-  visualizarMensajeDeNotis() {
-    if (this.state.usuario !== '') {
-      return (
-        <div>
-          Notificaciones({this.state.usuario.notificaciones.length})
-        </div>
-      );
-    }
-    return (null);
-  }
-
   render() {
     return (
       <div className="container">
@@ -211,14 +203,6 @@ class Inicio extends React.Component {
             </h4>
           </div>
           {this.crearVisualizacionMaterias()}
-        </div>
-        <div className="row">
-          <div className="col-12 titulo-banner">
-            <h4 className="titulo-materias-divider">
-              {this.visualizarMensajeDeNotis()}
-            </h4>
-          </div>
-          {this.crearVisualizacionNotificaciones()}
         </div>
       </div>
     );

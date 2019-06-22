@@ -1,5 +1,7 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 import API from '../service/api';
+
 
 class Materia extends React.Component {
   constructor(props) {
@@ -130,13 +132,31 @@ class Materia extends React.Component {
         nombreTarea: this.state.tarea.nombreTarea,
         usuario: this.props.location.state.idUsuario,
       });
-      API.post(`/tarea/${this.state.materia.id}`, {
-        fechaEntrega: this.state.tarea.fechaEntrega,
-        nombreTarea: this.state.tarea.nombreTarea,
-        usuario: this.props.location.state.idUsuario,
-      })
-        .then(response => this.setState({ materia: response }), this.cancelarTarea())
-        .catch(error => console.log(error.response));
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: `¿Quieres confirmar la tarea ${this.state.tarea.nombreTarea} para la fecha: ${this.state.tarea.fechaEntrega}?`,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#58D68D',
+        cancelButtonColor: '#F97E56',
+        confirmButtonText: 'Confirmar!',
+        cancelButtonText: 'Volver atras',
+      }).then((result) => {
+        if (result.value) {
+          API.post(`/tarea/${this.state.materia.id}`, {
+            fechaEntrega: this.state.tarea.fechaEntrega,
+            nombreTarea: this.state.tarea.nombreTarea,
+            usuario: this.props.location.state.idUsuario,
+          })
+            .then(response => this.setState({ materia: response }), this.cancelarTarea())
+            .catch(error => console.log(error.response));
+          Swal.fire(
+            'Completado!',
+            'La tarea fue publicada',
+            'success',
+          );
+        }
+      });
     }
   }
 

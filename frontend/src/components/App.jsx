@@ -16,9 +16,9 @@ export default class App extends React.Component {
     return (
       <BrowserRouter>
         <Switch>
-          <Route path="/inicio" render={props => <div><Navbar /> <Inicio {...props} /> </div>} />
+          <Route path="/inicio" render={props => <div><Navbar {...props} /> <Inicio {...props} /> </div>} />
           <Route path="/crearCuenta" render={() => <CreacionCuenta />} />
-          <Route path="/materia/{id}" render={props => <div><Navbar /> <Materia {...props} /></div>} />
+          <Route path="/materia/{id}" render={props => <div><Navbar {...props} /> <Materia {...props} /></div>} />
           <Route exact path="/administracion" render={() => <Administracion />} />
           <Route path="/" render={props => <div><InicioSession {...props} /> </div>} />
         </Switch>
