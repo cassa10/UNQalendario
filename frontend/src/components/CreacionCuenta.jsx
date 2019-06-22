@@ -102,7 +102,7 @@ class CreacionCuenta extends React.Component {
     }
     return (
       <div className="wrap-input100">
-        <input className={classname} type="text" id="usuario" onChange={event => this.handlerName(event)} />
+        <input className={classname} type="text" id="nombre" onChange={event => this.handlerName(event)} />
         <span className="focus-input100" data-placeholder="Nombre" />
       </div>
     );
@@ -110,12 +110,12 @@ class CreacionCuenta extends React.Component {
 
   inputLastName() {
     let classname = 'input100';
-    if (this.state.name !== '') {
+    if (this.state.lastName !== '') {
       classname = 'input100 has-val';
     }
     return (
       <div className="wrap-input100">
-        <input className={classname} type="text" id="usuario" onChange={event => this.handlerLastName(event)} />
+        <input className={classname} type="text" id="apellido" onChange={event => this.handlerLastName(event)} />
         <span className="focus-input100" data-placeholder="Apellido" />
       </div>
     );

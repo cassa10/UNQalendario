@@ -1,6 +1,6 @@
 import React from 'react';
+import Swal from 'sweetalert2';
 import API from '../service/api';
-import Swal from 'sweetalert2'
 
 
 class Materia extends React.Component {

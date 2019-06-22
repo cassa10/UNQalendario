@@ -79,6 +79,21 @@ class Inicio extends React.Component {
       </p>);
   }
 
+  agregarVerMateriaSiSoyAdmin(materia) {
+    const adminFilter = materia.administradores
+      .map(u => u.nombreUsuario).filter(u => u === this.state.usuario.nombreUsuario);
+    if (adminFilter.length === 1) {
+      return (
+        <p role="presentation" className="card-name-bottom" onClick={() => this.goToMateria(materia.id)}>
+          Ver
+        </p>
+      );
+    }
+    return (
+      undefined
+    );
+  }
+
   crearVisualizacionMaterias() {
     const materiasNoSuscritas = this.state.materiasFiltradas
       .filter(m => this.state.materiasSuscritasDelUsuario
@@ -98,6 +113,7 @@ class Inicio extends React.Component {
           </div>
           {this.ponerNombreDocente(materia)}
           <div>
+            {this.agregarVerMateriaSiSoyAdmin(materia)}
             <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
               SUSCRIBIRSE
             </p>
@@ -127,6 +143,28 @@ class Inicio extends React.Component {
     );
   }
 
+<<<<<<< HEAD
+=======
+  crearVisualizacionNotificaciones() {
+    if (this.state.usuario !== '') {
+      return (
+        this.state.usuario.notificaciones.map(noti => (
+          <div className="col-12 col-md-4" key={noti.id}>
+            <div className="card-materia">
+              <div className="header">
+                <h5 className="card-titulo ">
+                  {noti.nombre}
+                </h5>
+              </div>
+              {this.handleMensajeDeNoti(noti)}
+            </div>
+          </div>
+        )));
+    }
+    return (null);
+  }
+
+>>>>>>> d8a80a927729ecb1de0f24bea810a190d42b33ce
   crearVisualizacionMateriasSuscritas() {
     return this.state.materiasSuscritasDelUsuario.map(materia => (
       <div className="col-12 col-md-4" key={materia.id}>
