@@ -15,7 +15,7 @@ Nro | Nombre       		| Legajo | Mail
 4   |NicolasAlvarez		|  33073 |nicolas.alv3@gmail.com
 5   | Jose Cassano 		|  34798 |cassanojoseluis@gmail.com
 
-----
+---
 ## Para correr el proyecto localmente:
 - Tener instalado: 
     - Mongodb 
@@ -29,7 +29,11 @@ Nro | Nombre       		| Legajo | Mail
 - Escribir en la consola npm install y luego npm start **(Importar solo la carpeta backend en IntelliJ antes de ejecutar npm)**
 - Abrir localhost:3000 en browser
 
-----
+---
+## Informe de Spikes
+
+1. ### [Informe de Selenium WebDriver](Informes/Spikes/InformeSeleniumWebDriver.md)
+---
 
 ## Informes de Sprints:
 
