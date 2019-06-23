@@ -32,7 +32,7 @@ Nro | Nombre       		| Legajo | Mail
 ---
 ## Informe de Spikes
 
-1. ### [Informe de Selenium](Informes/InformeDeSelenium.md)
+1. ### [Informe de Selenium WebDriver](Informes/Spikes/InformeSeleniumWebDriver.md)
 ---
 
 ## Informes de Sprints:
