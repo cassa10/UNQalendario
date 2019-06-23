@@ -143,28 +143,6 @@ class Inicio extends React.Component {
     );
   }
 
-<<<<<<< HEAD
-=======
-  crearVisualizacionNotificaciones() {
-    if (this.state.usuario !== '') {
-      return (
-        this.state.usuario.notificaciones.map(noti => (
-          <div className="col-12 col-md-4" key={noti.id}>
-            <div className="card-materia">
-              <div className="header">
-                <h5 className="card-titulo ">
-                  {noti.nombre}
-                </h5>
-              </div>
-              {this.handleMensajeDeNoti(noti)}
-            </div>
-          </div>
-        )));
-    }
-    return (null);
-  }
-
->>>>>>> d8a80a927729ecb1de0f24bea810a190d42b33ce
   crearVisualizacionMateriasSuscritas() {
     return this.state.materiasSuscritasDelUsuario.map(materia => (
       <div className="col-12 col-md-4" key={materia.id}>
