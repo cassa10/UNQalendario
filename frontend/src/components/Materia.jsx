@@ -1,5 +1,6 @@
 import React from 'react';
 import Swal from 'sweetalert2';
+import { TiTrash } from 'react-icons/ti'
 import API from '../service/api';
 
 
@@ -80,6 +81,9 @@ class Materia extends React.Component {
           <div>
             {this.crearTextoDeDiasRestantes(daysLeft)}
           </div>
+          <div className="col-3">
+            {this.crearBotonEliminar(tarea)}
+          </div>
         </div>
       </div>
     );
@@ -93,11 +97,56 @@ class Materia extends React.Component {
     ));
   }
 
-  crearBotonAdministracion() {
-    if (this.state.materia.administradores
-      .map(a => a.id).includes(this.props.location.state.idUsuario)) {
+  eliminarTarea(tarea) {
+    return (
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: `Si la eliminas, no podras recuperar a la tarea ${tarea.nombre} `,
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#BB002D',
+        cancelButtonColor: '#007E60',
+        confirmButtonText: 'Eliminar',
+        cancelButtonText: 'Cancelar',
+      }).then((result) => {
+        if (result.value) {
+          Swal.fire(
+            'Listo!',
+            `${tarea.nombre} ha sido eliminada`,
+            'success',
+          );
+          console.log(tarea);
+          API.post(`/eliminarTarea/${this.props.location.state.idMateria}`, {
+            usuario: `${this.props.location.state.idUsuario}`,
+            nombreTarea: `${tarea.nombre}`,
+            fechaEntrega: `${this.formato(tarea.fecha)}`,
+          }).then(response => this.setState({ materia: response }))
+            .catch(error => console.log(error.response));
+        }
+      })
+    );
+  }
+
+  crearBotonEliminar(tarea) {
+    if (this.esUsuarioAdmin()) {
       return (
-        <button type="button" className="btn btn-danger mb-4" data-toggle="modal" data-target="#exampleModal">
+        <button type="button" className="btn btn-danger" onClick={() => this.eliminarTarea(tarea)}>
+          <TiTrash className="trashButton" />
+        </button>
+      );
+    }
+    return null;
+  }
+
+  esUsuarioAdmin() {
+    return (this.state.materia.administradores
+      .map(a => a.id).includes(this.props.location.state.idUsuario));
+  }
+
+  crearBotonAdministracion() {
+    if (this.esUsuarioAdmin()) {
+      return (
+        <button type="button" className="btn btn-success mb-4" data-toggle="modal" data-target="#exampleModal">
           Nueva Tarea
         </button>
       );
@@ -123,6 +172,35 @@ class Materia extends React.Component {
     this.setState({ errorModalTituloTarea: '', tarea: { ...oldTarea, nombreTarea: event.target.value } });
   }
 
+  swalYAPIPost() {
+    return (Swal.fire({
+      title: '¿Estas seguro?',
+      text: `¿Quieres confirmar la tarea ${this.state.tarea.nombreTarea} para la fecha: ${this.state.tarea.fechaEntrega}?`,
+      type: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#58D68D',
+      cancelButtonColor: '#F97E56',
+      confirmButtonText: 'Confirmar!',
+      cancelButtonText: 'Volver atras',
+    }).then((result) => {
+      if (result.value) {
+        API.post(`/tarea/${this.state.materia.id}`, {
+          fechaEntrega: this.state.tarea.fechaEntrega,
+          nombreTarea: this.state.tarea.nombreTarea,
+          usuario: this.props.location.state.idUsuario,
+        })
+          .then(response => this.setState({ materia: response }), this.cancelarTarea())
+          .catch(error => console.log(error.response));
+        Swal.fire(
+          'Completado!',
+          'La tarea fue publicada',
+          'success',
+        );
+      }
+    })
+    );
+  }
+
   crearTareaNueva() {
     if (this.state.tarea.nombreTarea === '' || this.state.tarea.fechaEntrega === '') {
       this.setErrorCorrepondiente();
@@ -132,31 +210,7 @@ class Materia extends React.Component {
         nombreTarea: this.state.tarea.nombreTarea,
         usuario: this.props.location.state.idUsuario,
       });
-      Swal.fire({
-        title: '¿Estas seguro?',
-        text: `¿Quieres confirmar la tarea ${this.state.tarea.nombreTarea} para la fecha: ${this.state.tarea.fechaEntrega}?`,
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#58D68D',
-        cancelButtonColor: '#F97E56',
-        confirmButtonText: 'Confirmar!',
-        cancelButtonText: 'Volver atras',
-      }).then((result) => {
-        if (result.value) {
-          API.post(`/tarea/${this.state.materia.id}`, {
-            fechaEntrega: this.state.tarea.fechaEntrega,
-            nombreTarea: this.state.tarea.nombreTarea,
-            usuario: this.props.location.state.idUsuario,
-          })
-            .then(response => this.setState({ materia: response }), this.cancelarTarea())
-            .catch(error => console.log(error.response));
-          Swal.fire(
-            'Completado!',
-            'La tarea fue publicada',
-            'success',
-          );
-        }
-      });
+      this.swalYAPIPost();
     }
   }
 
