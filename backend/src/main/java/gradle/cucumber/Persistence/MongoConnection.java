@@ -1,9 +1,7 @@
-package Persistence;
+package gradle.cucumber.Persistence;
 
 import com.mongodb.MongoClient;
 import org.jongo.Jongo;
-
-import java.net.UnknownHostException;
 
 /**
  * As per documentation:

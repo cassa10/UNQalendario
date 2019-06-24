@@ -1,8 +1,8 @@
 package gradle.cucumber;
 
-import Service.MateriaService;
+import gradle.cucumber.Service.MateriaService;
 
-import Service.UsuarioService;
+import gradle.cucumber.Service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +52,11 @@ public class MateriaController {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
         Tarea tarea = new Tarea(body.get("nombreTarea"),LocalDate.parse(fechaString, formatter));
+
+        if(this.gestorMaterias.laTareaExisteEnMateria(idMateria,tarea)){
+            return new ResponseEntity<>("La tarea ya existe",HttpStatus.BAD_REQUEST);
+        }
+
         gestorMaterias.agregarTarea(idMateria,tarea);
 
         return ResponseEntity.ok(gestorMaterias.get(idMateria));
@@ -71,7 +76,7 @@ public class MateriaController {
         return ResponseEntity.ok("Materia Updated");
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value ="/administracion/{idMateria}")
+    @RequestMapping(method = RequestMethod.DELETE, value ="/tarea/{idMateria}")
     public ResponseEntity eliminarTareaEnMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> body) {
 
         if(! this.gestorMaterias.existeMateriaConId(idMateria)){
@@ -85,8 +90,8 @@ public class MateriaController {
 
         String fechaString = body.get("fechaEntrega");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
         Tarea tarea = new Tarea(body.get("nombreTarea"),LocalDate.parse(fechaString, formatter));
+
         gestorMaterias.eliminarTarea(idMateria,tarea);
 
         return ResponseEntity.ok(gestorMaterias.get(idMateria));

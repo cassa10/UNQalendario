@@ -1,7 +1,7 @@
 
 
-import Persistence.DummyDAO;
-import Persistence.DummyObject;
+import gradle.cucumber.Persistence.DummyDAO;
+import gradle.cucumber.Persistence.DummyObject;
 import junit.framework.TestCase;
 import org.junit.Test;
 

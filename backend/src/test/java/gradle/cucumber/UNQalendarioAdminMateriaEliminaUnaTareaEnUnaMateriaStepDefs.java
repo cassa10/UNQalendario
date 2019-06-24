@@ -1,15 +1,13 @@
 package gradle.cucumber;
 
-import Service.MateriaService;
-import Service.UNQalendarioService;
-import cucumber.api.PendingException;
+import gradle.cucumber.Service.MateriaService;
+import gradle.cucumber.Service.UNQalendarioService;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import org.bson.types.ObjectId;
-import org.junit.Assert;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;
@@ -20,7 +18,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class UNQalendarioDocenteEliminaUnaTareaEnUnaMateriaQueAdministraStepDefs {
+public class UNQalendarioAdminMateriaEliminaUnaTareaEnUnaMateriaStepDefs {
     private UNQalendarioService unqalendarioService = new UNQalendarioService();
     private MateriaController materiaController;
     private UsuarioController usuarioController;

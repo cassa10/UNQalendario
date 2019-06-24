@@ -1,4 +1,4 @@
-package Persistence;
+package gradle.cucumber.Persistence;
 
 import gradle.cucumber.Materia;
 import gradle.cucumber.Tarea;
@@ -47,4 +47,7 @@ public class MateriaDAO extends GenericMongoDAO<Materia> {
     }
 
 
+    public boolean existeTareaEnMateria(String idMateria, Tarea tarea) {
+        return this.get(idMateria).getTareas().stream().anyMatch(t -> t.equals(tarea));
+    }
 }

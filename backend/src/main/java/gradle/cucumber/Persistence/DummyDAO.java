@@ -1,4 +1,4 @@
-package Persistence;
+package gradle.cucumber.Persistence;
 
 public class DummyDAO extends GenericMongoDAO<DummyObject> {
 

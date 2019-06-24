@@ -1,10 +1,9 @@
-package Persistence;
+package gradle.cucumber.Persistence;
 
 import org.bson.types.ObjectId;
 import org.jongo.Jongo;
 import org.jongo.MongoCollection;
 import org.jongo.MongoCursor;
-import org.jongo.Update;
 
 import java.io.IOException;
 import java.util.ArrayList;
