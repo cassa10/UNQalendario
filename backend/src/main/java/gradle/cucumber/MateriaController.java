@@ -70,4 +70,25 @@ public class MateriaController {
         gestorMaterias.agregarAdministrador(materia, usuario);
         return ResponseEntity.ok("Materia Updated");
     }
+    
+    @RequestMapping(method = RequestMethod.DELETE, value ="/administracion/{idMateria}")
+    public ResponseEntity eliminarTareaEnMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> body) {
+
+        if(! this.gestorMaterias.existeMateriaConId(idMateria)){
+            return new ResponseEntity<>("Path Invalido", HttpStatus.NOT_FOUND);
+        }
+
+        String idUsuario = body.get("usuario");
+        if(! this.gestorMaterias.elUsuarioEsAdminDeMateria(idMateria,idUsuario)){
+            return new ResponseEntity<>("Usuario Invalido",HttpStatus.NOT_FOUND);
+        }
+
+        String fechaString = body.get("fechaEntrega");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        Tarea tarea = new Tarea(body.get("nombreTarea"),LocalDate.parse(fechaString, formatter));
+        gestorMaterias.eliminarTarea(idMateria,tarea);
+
+        return ResponseEntity.ok(gestorMaterias.get(idMateria));
+    }
 }

@@ -41,5 +41,10 @@ public class MateriaDAO extends GenericMongoDAO<Materia> {
         return this.get(idMateria).getAdministradores().stream().anyMatch(adm -> adm.getId().equals(idUsuario));
     }
 
+    public void eliminarTarea(String idMateria, List<Tarea> tareas) {
+        ObjectId objectId = new ObjectId(idMateria);
+        this.mongoCollection.update("{ _id: # }", objectId).with("{ $set: { tareas: # }}", tareas);
+    }
+
 
 }

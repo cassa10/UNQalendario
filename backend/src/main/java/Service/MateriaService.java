@@ -74,4 +74,14 @@ public class MateriaService {
     public boolean elUsuarioEsAdminDeMateria(String idMateria, String idUsuario) {
         return this.materiaDAO.existeAdministradorEnMateria(idMateria,idUsuario);
     }
+    public void eliminarTarea(String idMateria, Tarea tarea) {
+
+        Materia materia = materiaDAO.get(idMateria);
+        materia.eliminarTarea(tarea);
+
+        List<Usuario> suscriptores = materia.getSuscriptores();
+
+        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea);
+        materiaDAO.eliminarTarea(idMateria,materia.getTareas());
+    }
 }
