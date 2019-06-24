@@ -85,4 +85,8 @@ public class Usuario {
     public void eliminarNotificacion(Tarea tarea) {
         this.notificaciones.remove(tarea);
     }
+
+    public void setId(String newId){
+        this.id = newId;
+    }
 }
