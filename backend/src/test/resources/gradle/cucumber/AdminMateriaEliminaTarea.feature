@@ -27,3 +27,22 @@ Feature: Administrador de una materia elimina una tarea a esa materia
         And Una tareaa "Parcial" con fecha "18/11/2029"
         When El segundo Usuario pide a la MateriaController eliminar esta tarea en esa Materia
         Then Se retorna un response ok con esta Materia que no posee ninguna materia en el body
+
+
+    Scenario: Un Usuario intenta eliminar una tarea a una materia y al no ser admin retorna un response not found con Usuario Invalido en el body
+        Given Un setup una materiaController y usuarioControllerr
+        And Un usuario y una materiaa
+        And Ese usuario es administrador de esa materiaa
+        And Otro usuario no es administrador de esa materia
+        And Una tareaa "Parcial" con fecha "18/11/2029"
+        And MateriaController se le pide agregar esta tarea en esa Materiaa
+        When MateriaController se le pide eliminar esta tarea en esa Materia con el otro usuario
+        Then Se retorna un response not found con "Usuario Invalido" en el body y la materia contiene la tarea anterior
+
+
+    Scenario: Un Usuario intenta eliminar una tarea a una materia que no existe y retorna un response not found con Path Invalido en el body
+        Given Un setup una materiaController y usuarioControllerr
+        And Un usuario nuevoo
+        And Una tareaa "Parcial" con fecha "18/11/2029"
+        When MateriaController se le pide eliminar esta tarea en una Materia que no existe
+        Then Se retornaa un response not found con "Path Invalido" en el body

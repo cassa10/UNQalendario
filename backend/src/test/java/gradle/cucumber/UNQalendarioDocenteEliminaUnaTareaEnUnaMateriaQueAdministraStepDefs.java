@@ -25,6 +25,7 @@ public class UNQalendarioDocenteEliminaUnaTareaEnUnaMateriaQueAdministraStepDefs
     private MateriaController materiaController;
     private UsuarioController usuarioController;
     private Usuario usuario;
+    private Usuario otroUsuario;
     private Materia materia;
     private ResponseEntity responseTest;
     private Tarea tarea;
@@ -47,6 +48,7 @@ public class UNQalendarioDocenteEliminaUnaTareaEnUnaMateriaQueAdministraStepDefs
         materiaService = new MateriaService();
         materia = null;
         usuario = null;
+        otroUsuario = null;
         tarea = null;
         tareas = new ArrayList<>();
         usuarios = new ArrayList<>();
@@ -174,5 +176,65 @@ public class UNQalendarioDocenteEliminaUnaTareaEnUnaMateriaQueAdministraStepDefs
         this.responseTest = materiaController.eliminarTareaEnMateria(materia.getId(),data);
 
         materia = this.materiaController.getMateria(materia.getId());
+    }
+
+    @Then("^Se retorna un response not found con \"([^\"]*)\" en el body y la materia contiene la tarea anterior$")
+    public void seRetornaUnResponseNotFoundConEnElBodyYLaMateriaContieneLaTareaAnterior(String mensajeBody) {
+        assertEquals(this.responseTest.getStatusCodeValue(),404);
+
+        assertEquals(this.responseTest.getBody(),mensajeBody);
+
+        assertTrue(this.materia.getTareas().contains(this.tarea));
+    }
+
+    @And("^Otro usuario no es administrador de esa materia$")
+    public void otroUsuarioNoEsAdministradorDeEsaMateria() throws UsuarioYaExiste {
+        this.otroUsuario = new Usuario("noAdmin","123","NoAdmin","DeMateria");
+        this.otroUsuario = usuarioController.guardarUsuario(otroUsuario);
+
+    }
+
+    @When("^MateriaController se le pide eliminar esta tarea en esa Materia con el otro usuario$")
+    public void materiacontrollerSeLePideEliminarEstaTareaEnEsaMateriaConElOtroUsuario() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        String fechaStr = tarea.getFecha().format(formatter);
+
+        HashMap<String,String> data = new HashMap<>();
+        data.put("usuario",this.otroUsuario.getId());
+        data.put("nombreTarea",tarea.getNombre());
+        data.put("fechaEntrega",fechaStr);
+        this.responseTest = materiaController.eliminarTareaEnMateria(materia.getId(),data);
+
+        materia = this.materiaController.getMateria(materia.getId());
+    }
+
+    @And("^Un usuario nuevoo$")
+    public void unUsuarioNuevoo() throws UsuarioYaExiste {
+        this.usuario = new Usuario("pepe","123","Pepe","Grillo");
+        this.usuario = usuarioController.guardarUsuario(usuario);
+
+    }
+
+    @When("^MateriaController se le pide eliminar esta tarea en una Materia que no existe$")
+    public void materiacontrollerSeLePideEliminarEstaTareaEnUnaMateriaQueNoExiste() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
+        String fechaStr = tarea.getFecha().format(formatter);
+
+        HashMap<String,String> data = new HashMap<>();
+        data.put("usuario",this.usuario.getId());
+        data.put("nombreTarea",tarea.getNombre());
+        data.put("fechaEntrega",fechaStr);
+
+        //No hay materias asique este id siempre va a concluir en un id inexistente.
+        this.responseTest = materiaController.eliminarTareaEnMateria(ObjectId.get().toString(),data);
+    }
+
+    @Then("^Se retornaa un response not found con \"([^\"]*)\" en el body$")
+    public void seRetornaaUnResponseNotFoundConEnElBody(String mensajeBody) {
+        assertEquals(this.responseTest.getStatusCodeValue(),404);
+
+        assertEquals(this.responseTest.getBody(),mensajeBody);
     }
 }
