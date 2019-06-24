@@ -8,6 +8,15 @@ Feature: Administrador de una materia agrega una tarea a esa materia
         When MateriaController se le pide agregar esta tarea en esa Materia
         Then Se retorna un response ok con esta Materia que posee solamente esta tarea en el body
 
+    Scenario: Admin de una materia agrega una tarea donde ya existe una identica en esa materia y retorna un response bad request la tarea ya existe en el body
+        Given Un setup una materiaController y usuarioController
+        And Un usuario y una materia
+        And Ese usuario es administrador de esa materia
+        And Una tarea "Parcial" con fecha "18/11/2029"
+        And Existe una tarea identica a la anterior
+        When MateriaController se le pide agregar esta tarea en esa Materia
+        Then Se retorna un response Bad Request "La tarea ya existe" en el body y la materia sigue intacta
+
     Scenario: Un Usuario intenta agregar una tarea a una materia y al no ser admin retorna un response not found con Usuario Invalido en el body
         Given Un setup una materiaController y usuarioController
         And Un usuario y una materia

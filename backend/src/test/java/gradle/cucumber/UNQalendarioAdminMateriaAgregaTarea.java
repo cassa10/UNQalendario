@@ -206,4 +206,21 @@ public class UNQalendarioAdminMateriaAgregaTarea {
 
         materia = this.materiaController.getMateria(materia.getId());
     }
+
+    @And("^Existe una tarea identica a la anterior$")
+    public void existeMateriaIdenticaALaAnterior(){
+        this.materiaService.agregarTarea(this.materia.getId(),this.tarea);
+    }
+
+    @Then("^Se retorna un response Bad Request \"([^\"]*)\" en el body y la materia sigue intacta$")
+    public void assertResponseBadRequestConBody(String body){
+
+        //400 is bad request.
+        assertEquals(this.responseTest.getStatusCodeValue(),400);
+        assertEquals(this.responseTest.getBody(),body);
+
+        List<Tarea> tareasDeMateria = this.materiaService.get(materia.getId()).getTareas();
+        assertEquals(tareasDeMateria.size(),1);
+        assertTrue(tareasDeMateria.contains(tarea));
+    }
 }
