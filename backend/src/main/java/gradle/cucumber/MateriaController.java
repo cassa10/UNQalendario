@@ -70,6 +70,8 @@ public class MateriaController {
         gestorMaterias.agregarAdministrador(materia, usuario);
         return ResponseEntity.ok("Materia Updated");
     }
+    
+    @RequestMapping(method = RequestMethod.DELETE, value ="/administracion/{idMateria}")
     public ResponseEntity eliminarTareaEnMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> body) {
 
         if(! this.gestorMaterias.existeMateriaConId(idMateria)){
