@@ -1,7 +1,7 @@
 package gradle.cucumber;
 
-import Service.MateriaService;
-import Service.UNQalendarioService;
+import gradle.cucumber.Service.MateriaService;
+import gradle.cucumber.Service.UNQalendarioService;
 import cucumber.api.java.After;
 import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;

@@ -1,8 +1,8 @@
 package gradle.cucumber;
 
-import Service.MateriaService;
+import gradle.cucumber.Service.MateriaService;
 
-import Service.UsuarioService;
+import gradle.cucumber.Service.UsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

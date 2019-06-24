@@ -1,10 +1,8 @@
-package Persistence;
+package gradle.cucumber.Persistence;
 
 
 import org.jongo.marshall.jackson.oid.MongoId;
 import org.jongo.marshall.jackson.oid.MongoObjectId;
-
-import java.util.Objects;
 
 
 public class DummyObject {

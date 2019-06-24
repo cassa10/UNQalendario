@@ -1,7 +1,7 @@
-package Service;
+package gradle.cucumber.Service;
 
-import Persistence.MateriaDAO;
-import Persistence.UsuarioDAO;
+import gradle.cucumber.Persistence.MateriaDAO;
+import gradle.cucumber.Persistence.UsuarioDAO;
 import gradle.cucumber.Materia;
 import gradle.cucumber.Tarea;
 import gradle.cucumber.Usuario;
