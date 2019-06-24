@@ -20,7 +20,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
-public class UNQalendarioDocenteEliminaUnaTareaEnUnaMateriaQueAdministraStepDefs {
+public class UNQalendarioAdminMateriaEliminaUnaTareaEnUnaMateriaStepDefs {
     private UNQalendarioService unqalendarioService = new UNQalendarioService();
     private MateriaController materiaController;
     private UsuarioController usuarioController;

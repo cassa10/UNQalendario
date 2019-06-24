@@ -58,7 +58,7 @@ public class MateriaService {
 
         List<Usuario> suscriptores = materia.getSuscriptores();
 
-        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea);
+        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea,false);
         materiaDAO.agregarTareas(idMateria,materia.getTareas());
     }
 
@@ -81,7 +81,11 @@ public class MateriaService {
 
         List<Usuario> suscriptores = materia.getSuscriptores();
 
-        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea);
+        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea,true);
         materiaDAO.eliminarTarea(idMateria,materia.getTareas());
+    }
+
+    public boolean laTareaExisteEnMateria(String idMateria, Tarea tarea) {
+        return this.materiaDAO.existeTareaEnMateria(idMateria,tarea);
     }
 }

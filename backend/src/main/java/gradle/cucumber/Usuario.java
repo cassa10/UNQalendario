@@ -81,4 +81,8 @@ public class Usuario {
     public List<Tarea> getNotificaciones(){
         return this.notificaciones;
     }
+
+    public void eliminarNotificacion(Tarea tarea) {
+        this.notificaciones.remove(tarea);
+    }
 }
