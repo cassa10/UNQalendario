@@ -76,7 +76,7 @@ public class MateriaController {
         return ResponseEntity.ok("Materia Updated");
     }
     
-    @RequestMapping(method = RequestMethod.DELETE, value ="/tarea/{idMateria}")
+    @RequestMapping(method = RequestMethod.POST, value ="/eliminarTarea/{idMateria}")
     public ResponseEntity eliminarTareaEnMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> body) {
 
         if(! this.gestorMaterias.existeMateriaConId(idMateria)){
