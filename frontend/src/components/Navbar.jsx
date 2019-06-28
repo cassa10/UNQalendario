@@ -33,7 +33,7 @@ class Navbar extends React.Component {
   renderNotifications() {
     if (this.state.usuario !== '' && this.state.usuario.notificaciones.length) {
       return (this.state.usuario.notificaciones.map(
-        noti => <Dropdown.Item className="itemNotificacion"> {noti.nombre},{noti.fecha} </Dropdown.Item>,
+        noti => <Dropdown.Item key={`${noti.nombre}_${noti.fecha}`} className="itemNotificacion"> {noti.nombre},{noti.fecha} </Dropdown.Item>,
       ));
     }
     return (<Dropdown.Item className="itemNotificacion"> Uuuh!, no tenes notificaciones :( </Dropdown.Item>);
