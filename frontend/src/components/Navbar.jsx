@@ -9,7 +9,7 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      usuario:''
+      usuario: '',
     };
   }
 
@@ -20,6 +20,13 @@ class Navbar extends React.Component {
   traerUsuario() {
     API.get(`/usuario/${this.props.location.state.username}`)
       .then(response => this.setState({ usuario: response }));
+  }
+
+  goToInicio() {
+    this.props.history.push({
+      pathname: '/inicio',
+      state: { username: this.state.usuario.id },
+    });
   }
 
   headerNavbar() {
@@ -33,7 +40,7 @@ class Navbar extends React.Component {
   renderNotifications() {
     if (this.state.usuario !== '' && this.state.usuario.notificaciones.length) {
       return (this.state.usuario.notificaciones.map(
-        noti => <Dropdown.Item className="itemNotificacion"> {noti.nombre},{noti.fecha} </Dropdown.Item>,
+        noti => <Dropdown.Item key={`${noti.nombre}_${noti.fecha}`} className="itemNotificacion"> {noti.nombre},{noti.fecha} </Dropdown.Item>,
       ));
     }
     return (<Dropdown.Item className="itemNotificacion"> Uuuh!, no tenes notificaciones :( </Dropdown.Item>);

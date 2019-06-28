@@ -54,7 +54,11 @@ class Inicio extends React.Component {
   goToMateria(id) {
     this.props.history.push({
       pathname: '/materia/{id}',
-      state: { idMateria: id, idUsuario: this.props.location.state.username },
+      state: {
+        idMateria: id,
+        username: this.props.location.state.username,
+        idUsuario: this.props.location.state.username,
+      },
     });
   }
 
