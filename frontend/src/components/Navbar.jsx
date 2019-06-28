@@ -9,7 +9,7 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      usuario:''
+      usuario: '',
     };
   }
 
@@ -20,6 +20,13 @@ class Navbar extends React.Component {
   traerUsuario() {
     API.get(`/usuario/${this.props.location.state.username}`)
       .then(response => this.setState({ usuario: response }));
+  }
+
+  goToInicio() {
+    this.props.history.push({
+      pathname: '/inicio',
+      state: { username: this.state.usuario.id },
+    });
   }
 
   headerNavbar() {
