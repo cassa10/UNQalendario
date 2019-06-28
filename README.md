@@ -46,3 +46,5 @@ Nro | Nombre       		| Legajo | Mail
 4. ### [Informe del cuarto sprint](Informes/InformeCuartoSprint.md)
 
 5. ### [Informe del quinto sprint](Informes/InformeQuintoSprint.md)
+
+6. ### [Informe del sexto sprint](Informes/InformeSextoSprint.md)
