@@ -98,6 +98,17 @@ class Inicio extends React.Component {
     );
   }
 
+  crearEresAdministrador(materia) {
+    const adminFilter = materia.administradores
+      .map(u => u.nombreUsuario).filter(u => u === this.state.usuario.nombreUsuario);
+    if (adminFilter.length === 1) {
+      return (
+        <span className="badge badge-pill badge-info adminInfo">Eres administrador</span>
+      );
+    }
+    return (null);
+  }
+
   crearVisualizacionMaterias() {
     const materiasNoSuscritas = this.state.materiasFiltradas
       .filter(m => this.state.materiasSuscritasDelUsuario
@@ -113,6 +124,7 @@ class Inicio extends React.Component {
           <div className="header">
             <h5 className="card-titulo ">
               {materia.nombre}
+              {this.crearEresAdministrador(materia)}
             </h5>
           </div>
           {this.ponerNombreDocente(materia)}
@@ -154,6 +166,7 @@ class Inicio extends React.Component {
           <div className="header">
             <h5 className="card-titulo ">
               {materia.nombre}
+              {this.crearEresAdministrador(materia)}
             </h5>
           </div>
           {this.ponerNombreDocente(materia)}
