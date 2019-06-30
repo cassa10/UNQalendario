@@ -55,4 +55,22 @@
     border-style: None;
     color:transparent
 }
+.dropdown:not(.open) ul.dropdown-menu{
+    display:block !important;
+    opacity:0;
+    pointer-events:none;  
+} 
 
+.header-user-icon{
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 18px;
+    color:black;
+}
+
+.logout{
+    color: crimson
+}
+
+.user-icon{
+    margin-top: 0px
+}
