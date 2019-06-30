@@ -10,7 +10,13 @@ class Navbar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      usuario: '',
+      usuario: {
+        id: '',
+        nombreUsuario: '',
+        nombrePersona: '',
+        apellido: '',
+        notificaciones: [],
+      },
     };
   }
 
@@ -42,6 +48,20 @@ class Navbar extends React.Component {
     return (name.charAt(0).toUpperCase() + name.slice(1));
   }
 
+  mostrarNombreYApellidoSiTiene(usuario) {
+    if (usuario.apellido !== '' || usuario.nombrePersona !== '') {
+      return (
+        <span className="userNombreYApellidoNav">
+          <span className="pipeDelNombreUsuario"> | </span>
+          <span className="font-weight-normal navbarUsuarioNombreYApellido">
+            {`${this.nameCapitalized(this.state.usuario.nombrePersona)} ${this.nameCapitalized(this.state.usuario.apellido)}`}
+          </span>
+        </span>
+      );
+    }
+    return (undefined);
+  }
+
   renderNotifications() {
     if (this.state.usuario !== '' && this.state.usuario.notificaciones.length) {
       return (this.state.usuario.notificaciones.map(
@@ -51,13 +71,15 @@ class Navbar extends React.Component {
     return (<Dropdown.Item className="itemNotificacion"> Uuuh!, no tenes notificaciones :( </Dropdown.Item>);
   }
 
-
   renderNombreUsuario() {
-    if (this.state.usuario !== '') {
-      return (<Dropdown.Header className="header-user-icon">{this.nameCapitalized(this.state.usuario.nombrePersona)}</Dropdown.Header>
-      );
-    }
-    return (null);
+    return (
+      <Dropdown.Header className="header-user-icon">
+        <span className="font-italic navbarNombreUsuario">
+          {`@${this.state.usuario.nombreUsuario} `}
+        </span>
+        {this.mostrarNombreYApellidoSiTiene(this.state.usuario)}
+      </Dropdown.Header>
+    );
   }
 
   render() {
@@ -74,14 +96,6 @@ class Navbar extends React.Component {
               <input className="inputSearch" type="text" placeholder="Buscar Materia" aria-label="Search" />
               <img role="presentation" alt="lupa" src="https://image.flaticon.com/icons/svg/70/70376.svg" height="16" />
             </form>
-            <ul className="navbar-nav mr-auto">
-              <li className="nav-item active">
-                <p className="nav-link" href="/inicio">INICIO</p>
-              </li>
-              <li className="nav-item">
-                <p className="nav-link" href="/materias">MATERIAS</p>
-              </li>
-            </ul>
             <Dropdown drop="down" className="transparente">
               <Dropdown.Toggle id="dropdown-basic" className="transparente">
                 <img src={bellIcon} alt="" className="bell" />

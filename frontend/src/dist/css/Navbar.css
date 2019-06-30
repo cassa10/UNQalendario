@@ -74,3 +74,19 @@
 .user-icon{
     margin-top: 0px
 }
+
+.userNombreYApellidoNav{
+    color: gray;
+}
+
+.navbarNombreUsuario{
+    color: blue;
+}
+
+.pipeDelNombreUsuario{
+    color: gray;
+}
+
+.navbarUsuarioNombreYApellido{
+    color: gray;
+}
