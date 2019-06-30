@@ -3,6 +3,7 @@ import '../dist/css/Navbar.css';
 import Dropdown from 'react-bootstrap/Dropdown';
 import DropdownMenu from 'react-bootstrap/DropdownMenu';
 import bellIcon from '../dist/icons/bell_icon.png';
+import userIcon from '../dist/icons/user_icon.png';
 import API from '../service/api';
 
 class Navbar extends React.Component {
@@ -37,6 +38,10 @@ class Navbar extends React.Component {
     );
   }
 
+  nameCapitalized(name) {
+    return (name.charAt(0).toUpperCase() + name.slice(1));
+  }
+
   renderNotifications() {
     if (this.state.usuario !== '' && this.state.usuario.notificaciones.length) {
       return (this.state.usuario.notificaciones.map(
@@ -44,6 +49,15 @@ class Navbar extends React.Component {
       ));
     }
     return (<Dropdown.Item className="itemNotificacion"> Uuuh!, no tenes notificaciones :( </Dropdown.Item>);
+  }
+
+
+  renderNombreUsuario() {
+    if (this.state.usuario !== '') {
+      return (<Dropdown.Header className="header-user-icon">{this.nameCapitalized(this.state.usuario.nombrePersona)}</Dropdown.Header>
+      );
+    }
+    return (null);
   }
 
   render() {
@@ -60,14 +74,6 @@ class Navbar extends React.Component {
               <input className="inputSearch" type="text" placeholder="Buscar Materia" aria-label="Search" />
               <img role="presentation" alt="lupa" src="https://image.flaticon.com/icons/svg/70/70376.svg" height="16" />
             </form>
-            <Dropdown drop="down" className="transparente">
-              <Dropdown.Toggle id="dropdown-basic" className="transparente">
-                <img src={bellIcon} alt="" className="bell" />
-                <DropdownMenu>
-                  {this.renderNotifications()}
-                </DropdownMenu>
-              </Dropdown.Toggle>
-            </Dropdown>
             <ul className="navbar-nav mr-auto">
               <li className="nav-item active">
                 <p className="nav-link" href="/inicio">INICIO</p>
@@ -76,6 +82,23 @@ class Navbar extends React.Component {
                 <p className="nav-link" href="/materias">MATERIAS</p>
               </li>
             </ul>
+            <Dropdown drop="down" className="transparente">
+              <Dropdown.Toggle id="dropdown-basic" className="transparente">
+                <img src={bellIcon} alt="" className="bell" />
+                <DropdownMenu alignRight>
+                  {this.renderNotifications()}
+                </DropdownMenu>
+              </Dropdown.Toggle>
+            </Dropdown>
+            <Dropdown drop="down" className="transparente user-icon">
+              <Dropdown.Toggle id="dropdown-basic" className="transparente">
+                <img src={userIcon} alt="" className="bell" />
+                <DropdownMenu alignRight>
+                  <Dropdown.Header>{this.renderNombreUsuario()}</Dropdown.Header>
+                  <Dropdown.Item className="logout" onClick={() => this.props.history.push('/')}>Cerrar sesión</Dropdown.Item>
+                </DropdownMenu>
+              </Dropdown.Toggle>
+            </Dropdown>
           </div>
         </div>
       </nav>
