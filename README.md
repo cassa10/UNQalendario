@@ -49,3 +49,9 @@ Nro | Nombre       		| Legajo | Mail
     - [**Demo**]()
 
 7. ### [Informe del septimo sprint](Informes/InformeSeptimoSprint.md)
+
+---
+
+## Grafico velocidad de equipo:
+
+![GraficoVelocidadEquipo](Informes/GraficoVelocidadEquipo.png)
