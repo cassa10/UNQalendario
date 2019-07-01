@@ -20,8 +20,15 @@
 
 ## Retrospectiva:
 
-  - Buenas : subimos la cantidad de puntos obtenidos en el sprint, y pudimos dedicarle un poco mas de tiempo.
-  - Malas : No llegamos a completar todos los user stories . Siguen faltando mas daily's para organizarse.
-  - Conclusion: Estimar mejor, definir cuidadosamente las user stories para que no sean tan grandes. Delegamos una persona (Nico) para acordarse hacer las daily's y un horario. 
+  - **Buenas**: 
+    - Subimos la cantidad de puntos obtenidos en el sprint. 
+    - Pudimos dedicarle un poco mas de tiempo al proyecto.
+  
+  - **Malas**: 
+    - No llegamos a completar todos los user stories. 
+    - Siguen faltando mas daily's para organizarse.
+
+  - **Conclusion**: 
+    - Estimar mejor, definir cuidadosamente las user stories para que no sean tan grandes. Delegamos una persona (Nico) para acordarse hacer las daily's y un horario. 
 
 [Volver](https://github.com/cassa10/UNQalendario)
