@@ -42,4 +42,8 @@
 
     - No pudimos llegar a mejorar una funcionalidad al completo, es decir, con un buen diseño, sin errores, etc. Ejemplo: la campanita de notificacion.
 
+  - **Conclusion**:
+    - Continuar con las dailys.
+    - Comunicacion cuando hay errores en una funcionalidad, con ello solucionarlas lo mas rapido posible. 
+
 ## [Volver](https://github.com/cassa10/UNQalendario)

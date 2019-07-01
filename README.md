@@ -42,7 +42,10 @@ Nro | Nombre       		| Legajo | Mail
 4. ### [Informe del cuarto sprint](Informes/InformeCuartoSprint.md)
 
 5. ### [Informe del quinto sprint](Informes/InformeQuintoSprint.md)
-    - [**Link Demo**](https://www.youtube.com/watch?v=rrMvdRYtuXQ)
+    - [**Demo**](https://www.youtube.com/watch?v=rrMvdRYtuXQ)
     - [**Informe spike de Test en UI: Selenium WebDriver**](Informes/Spikes/InformeSeleniumWebDriver.md)
 
 6. ### [Informe del sexto sprint](Informes/InformeSextoSprint.md)
+    - [**Demo**]()
+
+7. ### [Informe del septimo sprint](Informes/InformeSeptimoSprint.md)
