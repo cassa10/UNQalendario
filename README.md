@@ -46,7 +46,7 @@ Nro | Nombre       		| Legajo | Mail
     - [**Informe spike de Test en UI: Selenium WebDriver**](Informes/Spikes/InformeSeleniumWebDriver.md)
 
 6. ### [Informe del sexto sprint](Informes/InformeSextoSprint.md)
-    - [**Demo**]()
+    - [**Demo**](https://youtu.be/6lyjHQYeYJU)
 
 7. ### [Informe del septimo sprint](Informes/InformeSeptimoSprint.md)
 
