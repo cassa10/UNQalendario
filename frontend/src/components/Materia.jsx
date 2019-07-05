@@ -1,6 +1,7 @@
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import Swal from 'sweetalert2';
-import { TiTrash } from 'react-icons/ti'
+import { TiTrash } from 'react-icons/ti';
 import API from '../service/api';
 
 
@@ -268,8 +269,8 @@ class Materia extends React.Component {
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">Nueva Tarea</h5>
               </div>
-              <div className="modal-body">
-                <form>
+              <form>
+                <div className="modal-body">
                   <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Titulo</label>
                     <input type="text" className="form-control" placeholder="..." value={this.state.tarea.nombreTarea} onChange={event => this.handlerTituloTarea(event)} />
@@ -280,12 +281,12 @@ class Materia extends React.Component {
                     <input type="date" className="form-control" id="fecha1" min={this.getDiaActual()} pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" onChange={event => this.handlerFecha(event)} />
                   </div>
                   {this.handleSiExisteErrorEnFecha()}
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => this.cancelarTarea()}>Cancelar</button>
-                <button type="button" className="btn btn-primary" onClick={() => this.crearTareaNueva()}>Crear</button>
-              </div>
+                </div>
+                <div className="modal-footer">
+                  <button type="reset" className="btn btn-secondary" data-dismiss="modal" onClick={() => this.cancelarTarea()}>Cancelar</button>
+                  <button type="reset" className="btn btn-primary" onClick={() => this.crearTareaNueva()}>Crear</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
