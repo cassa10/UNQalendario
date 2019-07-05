@@ -1,8 +1,8 @@
 /* eslint-disable react/button-has-type */
 import React from 'react';
 import Swal from 'sweetalert2';
-import { TiTrash } from 'react-icons/ti';
 import API from '../service/api';
+import '../dist/css/Materia.css';
 
 
 class Materia extends React.Component {
@@ -79,10 +79,10 @@ class Materia extends React.Component {
           <div className="col-3">
             {tarea.nombre}
           </div>
-          <div>
+          <div className="col-5">
             {this.crearTextoDeDiasRestantes(daysLeft)}
           </div>
-          <div className="col-3">
+          <div className="col-1">
             {this.crearBotonEliminar(tarea)}
           </div>
         </div>
@@ -131,9 +131,7 @@ class Materia extends React.Component {
   crearBotonEliminar(tarea) {
     if (this.esUsuarioAdmin()) {
       return (
-        <button type="button" className="btn btn-danger" onClick={() => this.eliminarTarea(tarea)}>
-          <TiTrash className="trashButton" />
-        </button>
+        <span role="presentation" className="oi oi-trash" onClick={() => this.eliminarTarea(tarea)} />
       );
     }
     return null;

@@ -128,7 +128,7 @@ class Inicio extends React.Component {
             </h5>
           </div>
           {this.ponerNombreDocente(materia)}
-          <div>
+          <div className="row">
             {this.agregarVerMateriaSiSoyAdmin(materia)}
             <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
               SUSCRIBIRSE
