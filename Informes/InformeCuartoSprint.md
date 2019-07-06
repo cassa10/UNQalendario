@@ -20,8 +20,14 @@
 
 ## Retrospectiva:
 
-  - **Buenas**: Fue un muy buen sprint, logramos completar todas las user stories, y tuvimos dailys casi todos los dias con un resultado positivo en cada una de ellas.
+  - **Buenas**: 
+    - Fue un muy buen sprint, donde logramos completar todas las user stories. 
+    - Tuvimos dailys casi todos los dias con un resultado positivo en cada una de ellas.
   
-  - **Malas** : Falto daily en uno o dos dias.
+  - **Malas**: 
+    - Falto daily en uno o dos dias.
+
+  - **Conclusion** : 
+    - Tener dailys hace mejorar nuestra velocidad de equipo, junto a la comunicacion.
 
 [Volver](https://github.com/cassa10/UNQalendario)

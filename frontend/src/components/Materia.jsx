@@ -1,7 +1,8 @@
+/* eslint-disable react/button-has-type */
 import React from 'react';
 import Swal from 'sweetalert2';
-import { TiTrash } from 'react-icons/ti'
 import API from '../service/api';
+import '../dist/css/Materia.css';
 
 
 class Materia extends React.Component {
@@ -78,10 +79,10 @@ class Materia extends React.Component {
           <div className="col-3">
             {tarea.nombre}
           </div>
-          <div>
+          <div className="col-5">
             {this.crearTextoDeDiasRestantes(daysLeft)}
           </div>
-          <div className="col-3">
+          <div className="col-1">
             {this.crearBotonEliminar(tarea)}
           </div>
         </div>
@@ -130,9 +131,7 @@ class Materia extends React.Component {
   crearBotonEliminar(tarea) {
     if (this.esUsuarioAdmin()) {
       return (
-        <button type="button" className="btn btn-danger" onClick={() => this.eliminarTarea(tarea)}>
-          <TiTrash className="trashButton" />
-        </button>
+        <span role="presentation" className="oi oi-trash" onClick={() => this.eliminarTarea(tarea)} />
       );
     }
     return null;
@@ -268,8 +267,8 @@ class Materia extends React.Component {
               <div className="modal-header">
                 <h5 className="modal-title" id="exampleModalLabel">Nueva Tarea</h5>
               </div>
-              <div className="modal-body">
-                <form>
+              <form>
+                <div className="modal-body">
                   <div className="form-group">
                     <label htmlFor="exampleInputEmail1">Titulo</label>
                     <input type="text" className="form-control" placeholder="..." value={this.state.tarea.nombreTarea} onChange={event => this.handlerTituloTarea(event)} />
@@ -280,12 +279,12 @@ class Materia extends React.Component {
                     <input type="date" className="form-control" id="fecha1" min={this.getDiaActual()} pattern="[0-9]{4}/[0-9]{2}/[0-9]{2}" onChange={event => this.handlerFecha(event)} />
                   </div>
                   {this.handleSiExisteErrorEnFecha()}
-                </form>
-              </div>
-              <div className="modal-footer">
-                <button type="button" className="btn btn-secondary" data-dismiss="modal" onClick={() => this.cancelarTarea()}>Cancelar</button>
-                <button type="button" className="btn btn-primary" onClick={() => this.crearTareaNueva()}>Crear</button>
-              </div>
+                </div>
+                <div className="modal-footer">
+                  <button type="reset" className="btn btn-secondary" data-dismiss="modal" onClick={() => this.cancelarTarea()}>Cancelar</button>
+                  <button type="reset" className="btn btn-primary" onClick={() => this.crearTareaNueva()}>Crear</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
