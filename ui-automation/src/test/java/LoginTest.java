@@ -26,7 +26,7 @@ public class LoginTest extends BaseTest {
 
     @Test
     public void whenLoginWithRightDataHomePageIsDisplayed(){
-        Home homePage = loginPage.loginWith("uriel","uriel");
+        Home homePage = loginPage.loginWith("user","user");
         Assert.assertTrue(driver.findElement(homePage.getNavBarBy()).isDisplayed());
     }
 }

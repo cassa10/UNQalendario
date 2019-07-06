@@ -45,7 +45,7 @@ public class Login extends BasePage {
         driver.findElement(passwordInputFieldBy).sendKeys(password);
         submit();
         if (isElementVisible(errorMessageBy)){
-            return nul
+            return null;
         } else {
             return new Home(driver);
         }
