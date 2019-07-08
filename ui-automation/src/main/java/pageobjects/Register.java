@@ -25,7 +25,7 @@ public class Register extends BasePage{
     }
 
     private void submit(){
-        driver.findElement(submitBtnBy);
+        driver.findElement(submitBtnBy).click();
     }
 
     private void inputDataWith(String username, String password, String nombre, String apellido){
