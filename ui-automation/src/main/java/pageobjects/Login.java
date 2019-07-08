@@ -51,7 +51,7 @@ public class Login extends BasePage {
         }
     }
 
-    public void submit() {
+    private void submit() {
         driver.findElement(submitBtnBy).click();
     }
 }
