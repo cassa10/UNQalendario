@@ -7,7 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class Login extends BasePage {
-
+    private By loginContainerBy = By.cssSelector("div.logIn-containter");
     private By pageTitleBy = By.xpath("//h1[contains(text(),'UNQalendario')]");
     private By usernameInputFieldBy = By.id("username");
     private By submitBtnBy = By.cssSelector("button[type=submit]");
@@ -59,5 +59,9 @@ public class Login extends BasePage {
     public Register goToRegister() {
         driver.findElement(registrateBtnBy).click();
         return new Register(driver);
+    }
+
+    public By getLoginContainerBy() {
+        return loginContainerBy;
     }
 }

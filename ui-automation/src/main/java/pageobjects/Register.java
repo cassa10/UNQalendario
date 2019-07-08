@@ -13,8 +13,6 @@ public class Register extends BasePage{
     private By apellidoInputBy = By.id("apellido");
     private By submitBtnBy = By.cssSelector("button[type=submit]");
 
-    private WebDriver driver;
-
     public Register(WebDriver driver){
         super(driver);
         wait.until(visibilityOfElementLocated(loginContainerBy));
@@ -61,5 +59,4 @@ public class Register extends BasePage{
     public By getSubmitBtnBy() {
         return submitBtnBy;
     }
-
 }
