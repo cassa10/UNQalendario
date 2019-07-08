@@ -3,6 +3,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 import pageobjects.Home;
 import pageobjects.Login;
+import pageobjects.Register;
 
 public class LoginTest extends BaseTest {
 
@@ -28,5 +29,11 @@ public class LoginTest extends BaseTest {
     public void whenLoginWithRightDataHomePageIsDisplayed(){
         Home homePage = loginPage.loginWith("uriel","uriel");
         Assert.assertTrue(driver.findElement(homePage.getNavBarBy()).isDisplayed());
+    }
+
+    @Test
+    public void whenClickingOnRegisterNowRegisterPageOpens(){
+        Register registerPage = loginPage.goToRegister();
+        Assert.assertTrue(registerPage.isElementVisible(registerPage.getLoginContainerBy()));
     }
 }
