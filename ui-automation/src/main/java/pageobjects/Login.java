@@ -13,6 +13,7 @@ public class Login extends BasePage {
     private By submitBtnBy = By.cssSelector("button[type=submit]");
     private By passwordInputFieldBy = By.id("password");
     private By errorMessageBy = By.cssSelector("button[type=submit]");
+    private By registrateBtnBy = By.xpath("//a[@href='/crearCuenta']");
 
     public Login(WebDriver driver){
         super(driver);
@@ -53,5 +54,10 @@ public class Login extends BasePage {
 
     private void submit() {
         driver.findElement(submitBtnBy).click();
+    }
+
+    public Register goToRegister() {
+        driver.findElement(registrateBtnBy).click();
+        return new Register(driver);
     }
 }
