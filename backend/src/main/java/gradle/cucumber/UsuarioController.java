@@ -53,4 +53,10 @@ public class UsuarioController {
             return ResponseEntity.ok(this.usuarioService.getMaterias(idUsuario));
         }
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/desuscribir/{idMateria}")
+    public ResponseEntity desuscribirDeMateria(@PathVariable String idMateria, @RequestBody HashMap<String, String> data){
+        this.usuarioService.desuscribirDe(data.get("idUsuario"), idMateria);
+        return ResponseEntity.ok(this.usuarioService.getMaterias(data.get("idUsuario")));
+    }
 }
