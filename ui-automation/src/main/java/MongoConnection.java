@@ -18,4 +18,8 @@ public class MongoConnection {
     public void deleteAllUsers(){
         mongoClient.getDB("test").getCollection("Usuario").drop();
     }
+
+    public void deleteAllSubjects() {
+        mongoClient.getDB("test").getCollection("Materia").drop();
+    }
 }
