@@ -10,7 +10,6 @@ public class Administracion extends BasePage {
     private By materiaNameInputBy = By.id("inputPassword2");
     private By crearMateriaBtnBy = By.xpath("//button[contains(text(),'Crear')]");
     private By asignarDocenteBtnBy = By.xpath("//button[contains(text(),'Asignar')]");
-    private By materiasDropdownBy = By.xpath("//select[@class='form-control']");
     private By docenteUsernameInputBy = By.id("inputPassword3");
 
     public Administracion(WebDriver driver) {
@@ -30,6 +29,4 @@ public class Administracion extends BasePage {
         driver.findElement(docenteUsernameInputBy).sendKeys(username);
         driver.findElement(asignarDocenteBtnBy).click();
     }
-    //TODO test de crear materia y agregar un docente a esa materia.
-    //TODO testear lo de la US
 }

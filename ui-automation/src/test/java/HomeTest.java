@@ -10,13 +10,6 @@ public class HomeTest extends BaseTest{
 
     Login loginPage;
 
-    public void crearMateriaConProfesor(String nombreMateria){
-        String userDocente = "fede";
-        String passDocente = "fede";
-        registerNewUser(userDocente, passDocente, "Federico", "Sawady");
-        agregarDocenteAMateriaNueva(userDocente, nombreMateria );
-    }
-
     @BeforeMethod
     public void createNewLogin(){
         loginPage = new Login(driver);

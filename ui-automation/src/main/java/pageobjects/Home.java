@@ -42,4 +42,10 @@ public class Home extends BasePage {
     public WebElement getTitleOfSection(WebElement materiaCard){
         return materiaCard.findElement(By.xpath("ancestor::div[@class='row']/child::div/child::h4"));
     }
+
+    public Materia irAVerMateria(String nombreMateria) {
+        WebElement materiaCard = getMateriaCard(nombreMateria);
+        materiaCard.findElement(By.xpath("//p[contains(text(), 'Ver')]")).click();
+        return new Materia(driver);
+    }
 }

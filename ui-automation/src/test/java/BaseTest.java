@@ -45,4 +45,11 @@ public abstract class BaseTest {
         administracionPage.crearMateria(nombreMateria);
         administracionPage.agregarAdministradorAMateria(usernameDocente,nombreMateria);
     }
+
+    public void crearMateriaConProfesor(String nombreMateria){
+        String userDocente = "teacher";
+        String passDocente = "teacher";
+        registerNewUser(userDocente, passDocente, "Teach", "Er");
+        agregarDocenteAMateriaNueva(userDocente, nombreMateria );
+    }
 }
