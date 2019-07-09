@@ -35,10 +35,8 @@ public class AdministracionTest extends BaseTest {
     public void cuandoRegistroAUnProfesorEnUnaMateriaLeApareceLaMateriaEnHomePage(){
         String username = "fede";
         String password = "fede";
-        String nombre = "Federico";
-        String apellido = "Sawady";
         String nombreMateria = "Elementos";
-        registerNewUser(username, password, nombre, apellido);
+        registerNewUser(username, password, "Federico", "Sawady");
         driver.get("http://localhost:3000/administracion");
         administracionPage.crearMateria(nombreMateria);
         administracionPage.agregarAdministradorAMateria(username,nombreMateria);
