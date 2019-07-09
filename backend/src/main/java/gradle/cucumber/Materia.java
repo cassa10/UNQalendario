@@ -91,4 +91,7 @@ public class Materia {
     }
 
 
+    public void eliminarSuscriptor(Usuario usuarioRecuperado) {
+        this.getSuscriptores().remove(usuarioRecuperado);
+    }
 }

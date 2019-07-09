@@ -130,7 +130,7 @@ class Inicio extends React.Component {
           {this.ponerNombreDocente(materia)}
           <div className="row">
             {this.agregarVerMateriaSiSoyAdmin(materia)}
-            <p role="presentation" className="card-name-bottom" onClick={() => this.suscribirseAMateria(materia.id)}>
+            <p role="presentation" className="card-name-bottom suscribir" onClick={() => this.suscribirseAMateria(materia.id)}>
               SUSCRIBIRSE
             </p>
           </div>
@@ -159,6 +159,12 @@ class Inicio extends React.Component {
     );
   }
 
+  desuscribirDeMateria(idMateria) {
+    API.post(`/desuscribir/${idMateria}`, { idUsuario: this.props.location.state.username })
+      .then(response => this.setState({ materiasSuscritasDelUsuario: response }))
+      .catch(error => console.log(error.response.data));
+  }
+
   crearVisualizacionMateriasSuscritas() {
     return this.state.materiasSuscritasDelUsuario.map(materia => (
       <div className="col-12 col-md-4" key={materia.id}>
@@ -170,9 +176,12 @@ class Inicio extends React.Component {
             </h5>
           </div>
           {this.ponerNombreDocente(materia)}
-          <div>
+          <div className="row">
             <p role="presentation" className="card-name-bottom" onClick={() => this.goToMateria(materia.id)}>
               Ver
+            </p>
+            <p role="presentation" className="card-name-bottom desuscribir" onClick={() => this.desuscribirDeMateria(materia.id)}>
+              DESUSCRIBIR
             </p>
           </div>
         </div>
