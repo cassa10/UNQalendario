@@ -1,6 +1,7 @@
 package pageobjects;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
@@ -18,9 +19,19 @@ public class Administracion extends BasePage {
         wait.until(visibilityOfElementLocated(materiaNameInputBy));
     }
 
-    public void crearMateria(String nombre){
+    public Administracion crearMateria(String nombre){
         driver.findElement(materiaNameInputBy).sendKeys(nombre);
         driver.findElement(crearMateriaBtnBy).click();
+        return new Administracion(driver);
+    }
+
+    public boolean estaLaMateriaEnElMenu(String nombre){
+        try{
+            driver.findElement(By.xpath("//option[contains(text(),'"+nombre+"')]"));
+            return true;
+        }catch (NoSuchElementException e){
+            return false;
+        }
     }
 
     public void agregarAdministradorAMateria(String username, String nombreMateria) {
