@@ -38,6 +38,7 @@ public class Materia extends BasePage {
         driver.findElement(fechaNuevaTareaInputBy).sendKeys(mmddAAAA);
         driver.findElement(crearTareaBtnBy).click();
         wait.until(visibilityOfElementLocated(confirmarBtnBy)).click();
+        wait.until(visibilityOfElementLocated(By.xpath("//div[@role='alert']/descendant::div[text()='"+titulo+"']")));
     }
 
     public List<WebElement> getListOfTareas() {
