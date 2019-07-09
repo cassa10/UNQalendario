@@ -3,6 +3,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
+import pageobjects.Login;
+import pageobjects.Register;
 
 public abstract class BaseTest {
 
@@ -22,5 +24,11 @@ public abstract class BaseTest {
     @AfterClass(alwaysRun = true)
     public void tearDown(){
         driver.quit();
+    }
+
+    public Login registerNewUser(String username, String password, String nombre, String apellido){
+        driver.get("http://localhost:3000/crearCuenta");
+        Register register = new Register(driver);
+        return register.registerWith(username,password, nombre, apellido);
     }
 }

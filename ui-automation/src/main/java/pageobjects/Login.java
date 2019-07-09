@@ -7,12 +7,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class Login extends BasePage {
-
+    private By loginContainerBy = By.cssSelector("div.logIn-containter");
     private By pageTitleBy = By.xpath("//h1[contains(text(),'UNQalendario')]");
     private By usernameInputFieldBy = By.id("username");
     private By submitBtnBy = By.cssSelector("button[type=submit]");
     private By passwordInputFieldBy = By.id("password");
     private By errorMessageBy = By.cssSelector("button[type=submit]");
+    private By registrateBtnBy = By.xpath("//a[@href='/crearCuenta']");
 
     public Login(WebDriver driver){
         super(driver);
@@ -51,7 +52,16 @@ public class Login extends BasePage {
         }
     }
 
-    public void submit() {
+    private void submit() {
         driver.findElement(submitBtnBy).click();
+    }
+
+    public Register goToRegister() {
+        driver.findElement(registrateBtnBy).click();
+        return new Register(driver);
+    }
+
+    public By getLoginContainerBy() {
+        return loginContainerBy;
     }
 }
