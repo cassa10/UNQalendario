@@ -50,4 +50,9 @@ public class MateriaDAO extends GenericMongoDAO<Materia> {
     public boolean existeTareaEnMateria(String idMateria, Tarea tarea) {
         return this.get(idMateria).getTareas().stream().anyMatch(t -> t.equals(tarea));
     }
+
+    public void desuscribirUsuario(String idMateria, List<Usuario> suscriptores) {
+        ObjectId objectId = new ObjectId(idMateria);
+        this.mongoCollection.update("{ _id: # }", objectId).with("{ $set: { suscriptores: # }}", suscriptores);
+    }
 }
