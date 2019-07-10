@@ -34,7 +34,7 @@ Nro | Nombre       		| Legajo | Mail
 
 - Ir a la página de [ChromeDriver](http://chromedriver.chromium.org/downloads) y descargar la versión correspondiente a tu versión de Google Chrome y sistema operativo.
 - Una vez descargado, colocar el archivo descargado y descomprimido en la carpeta "ui-testing" dentro del proyecto.
-- Correr el proyecto como se explicó en la sección anterior, y luego, desde un IDE (recomendamos IntelliJ) hacer click derecho en la carpeta de tests, y desde ahí correrlo como test de TestNG.
+- Correr el proyecto como se explicó en la sección anterior, y luego, desde un IDE (recomendamos IntelliJ) hacer click derecho en el archivo `testng.xml` (que se encuentra en la raíz del proyecto), y seleccionar `run`.
 
 ---
 
