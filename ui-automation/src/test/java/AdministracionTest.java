@@ -25,20 +25,17 @@ public class AdministracionTest extends BaseTest {
 
     @Test
     public void cuandoCreoUnaNuevaMateriaApareceEnElMenu(){
-        String nombreMateria = "Elementos";
+        String nombreMateria = "DummyMateria1";
         administracionPage.crearMateria(nombreMateria);
-        By materiaBy = By.xpath("//option[contains(text(),'"+nombreMateria+"')]");
-        Assert.assertTrue(driver.findElement(materiaBy).isEnabled());
+        Assert.assertTrue(administracionPage.estaLaMateriaEnElMenu(nombreMateria));
     }
 
     @Test
     public void cuandoRegistroAUnProfesorEnUnaMateriaLeApareceLaMateriaEnHomePage(){
         String username = "fede";
         String password = "fede";
-        String nombre = "Federico";
-        String apellido = "Sawady";
-        String nombreMateria = "Elementos";
-        registerNewUser(username, password, nombre, apellido);
+        String nombreMateria = "DummyMateria2";
+        registerNewUser(username, password, "Federico", "Sawady");
         driver.get("http://localhost:3000/administracion");
         administracionPage.crearMateria(nombreMateria);
         administracionPage.agregarAdministradorAMateria(username,nombreMateria);

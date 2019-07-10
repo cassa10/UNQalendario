@@ -24,9 +24,7 @@ public class LoginTest extends BaseTest {
     public void whenLoginWithRightDataHomePageIsDisplayed(){
         String username  = "uriel";
         String password = "uriel";
-        String nombre = "Uriel";
-        String apellido = "Piñeyro";
-        Login loginPage = registerNewUser(username, password, nombre, apellido);
+        Login loginPage = registerNewUser(username, password, "Uriel", "Piñeyro");
         Home homePage = loginPage.loginWith(username, password);
         Assert.assertTrue(homePage.isElementVisible(homePage.getNavBarBy()));
     }
