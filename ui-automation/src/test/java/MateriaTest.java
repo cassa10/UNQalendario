@@ -37,9 +37,9 @@ public class MateriaTest extends BaseTest {
 
     @Test
     public void cuandoAgregoUnaMateriaNuevaNoTieneTareas(){
-        Login newLoginPage = registerNewUser(userDocente,passDocente, "Teach", "Er");
+        registerNewUser(userDocente,passDocente, "Teach", "Er");
         agregarDocenteAMateriaNueva(userDocente, nombreMateria);
-        driver.get("localhost:3000");
+        Login newLoginPage = new Login(driver);
         Home homePage = newLoginPage.loginWith(userDocente, passDocente);
         Materia materiaPage = homePage.irAVerMateria(nombreMateria);
         Assert.assertEquals(materiaPage.getListOfTareas().size(),0,"La materia tiene tareas, ");

@@ -1,3 +1,4 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="UNQalendarioTest">
     <test name="Register page load test">
         <classes>
