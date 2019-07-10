@@ -1,6 +1,7 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -17,16 +18,28 @@ public class MateriaTest extends BaseTest {
     private String passDocente = "teacher";
     private String nombreMateria = "DummyMateria";
 
+    @BeforeClass
+    private void rompePepeRompe(){
+        connection.deleteAllSubjects();
+        connection.deleteAllUsers();
+    }
+
     @BeforeMethod
     private void createNewLogin(){
         loginPage = new Login(driver);
     }
 
+    @AfterClass
+    private void deleteEverything(){
+        connection.deleteAllUsers();
+        connection.deleteAllSubjects();
+    }
+
     @Test
     public void cuandoAgregoUnaMateriaNuevaNoTieneTareas(){
-        registerNewUser(userDocente,passDocente, "Teach", "Er");
+        Login newLoginPage = registerNewUser(userDocente,passDocente, "Teach", "Er");
         agregarDocenteAMateriaNueva(userDocente, nombreMateria);
-        Login newLoginPage = new Login(driver);
+        driver.get("localhost:3000");
         Home homePage = newLoginPage.loginWith(userDocente, passDocente);
         Materia materiaPage = homePage.irAVerMateria(nombreMateria);
         Assert.assertEquals(materiaPage.getListOfTareas().size(),0,"La materia tiene tareas, ");
