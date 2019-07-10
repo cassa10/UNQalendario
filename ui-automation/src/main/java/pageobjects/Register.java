@@ -11,7 +11,7 @@ public class Register extends BasePage{
     private By passwordInputBy = By.id("password");
     private By nombreInputBy = By.id("nombre");
     private By apellidoInputBy = By.id("apellido");
-    private By submitBtnBy = By.xpath("//button[@type='submit']");
+    private By submitBtnBy = By.cssSelector("button[type=submit]");
 
     public Register(WebDriver driver){
         super(driver);
