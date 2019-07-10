@@ -2,7 +2,9 @@ package pageobjects;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
@@ -27,9 +29,9 @@ public class Administracion extends BasePage {
 
     public boolean estaLaMateriaEnElMenu(String nombre){
         try{
-            driver.findElement(By.xpath("//option[contains(text(),'"+nombre+"')]"));
+            wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//option[contains(text(),'"+nombre+"')]")));
             return true;
-        }catch (NoSuchElementException e){
+        }catch (TimeoutException e){
             return false;
         }
     }
