@@ -49,7 +49,7 @@ public class MateriaTest extends BaseTest {
     public void cuandoAgregoUnaTareaAUnaMateriaLaMateriaTieneUnaTarea(){
         Home homePage = loginPage.loginWith(userDocente, passDocente);
         Materia materiaPage = homePage.irAVerMateria(nombreMateria);
-        materiaPage.crearTarea("DummyTarea", "07202019");
+        materiaPage.crearTarea("DummyTarea", "07093019");
         List<WebElement> tareasList = materiaPage.getListOfTareas();
         Assert.assertEquals(tareasList.size(), 1, "La tarea no fue agregada, ");
         Assert.assertTrue(tareasList.get(0).findElement(By.xpath("/descendant::div[text()='DummyTarea']")).isDisplayed(),"No se muestra la tarea, ");
