@@ -4,7 +4,9 @@
 
  - Como Usuario quiero poder desuscribirme de una materia suscrita **(8 Puntos)** | **(Completa)**
  
- - Como Usuario quiero poder borrar una notificacion. **(8 Puntos)** |
+ - Como Usuario quiero poder borrar una notificacion. **(8 Puntos)** | **(Completa)**
+
+ - Como Usuario quiero poder ver cuantas notificaciones tengo sin chequear. **(5 Puntos)** | **(Completa)**
  
  - Corregir bug de visualización cuando se agrega una tarea nueva.*(Se guarda la visualizacion de la fecha anterior)* **(6 Puntos)** | **(Completa)**
 
@@ -25,11 +27,11 @@
  - Realizar un test de UI cuando inicio sesión y me suscribo a una materia, esta aparece en la sección Tus Materias **(5 puntos)** | **(Completa)**
 
 
-### **Total de Story Points: 48**
+### **Total de Story Points: 53**
 
-  - **Obtenidos: 40**
+  - **Obtenidos: 53**
 
-  - **Restantes: 8**
+  - **Restantes: 0**
 
 ---
 ## Retrospectiva:
