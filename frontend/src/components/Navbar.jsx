@@ -89,6 +89,15 @@ class Navbar extends React.Component {
       .then(response => this.setState({ usuario: response }));
   }
 
+  crearCantidadNotificacionesNuevas() {
+    if (this.state.usuario.nuevasNotificaciones !== 0) {
+      return (
+        <p className="form-inline my-2 my-lg-0 p-2 d-flex justify-content-center numeroNoti">{this.state.usuario.nuevasNotificaciones}</p>
+      );
+    }
+    return undefined;
+  }
+
   renderNotifications() {
     if (this.state.usuario !== '' && this.state.usuario.notificaciones.length) {
       return (this.state.usuario.notificaciones.map(
@@ -117,15 +126,6 @@ class Navbar extends React.Component {
     );
   }
 
-  crearCantidadNotificacionesNuevas() {
-    if (this.state.usuario.nuevasNotificaciones != 0) {
-      return (
-        <p className="form-inline my-2 my-lg-0 p-2 d-flex justify-content-center numeroNoti">{this.state.usuario.nuevasNotificaciones}</p>
-      );
-    }
-    return undefined;
-  }
-
   render() {
     return (
       <nav className="navbar navbar-expand-lg background-navbar">
@@ -136,10 +136,18 @@ class Navbar extends React.Component {
           </button>
           {console.log(this.state.usuario)}
           <div className="collapse navbar-collapse d-flex-lg bd-highlight" id="navbarSupportedContent">
-            <form className="form-inline my-2 my-lg-0 p-2 flex-grow-1 bd-highlight d-flex justify-content-center">
-              <input className="inputSearch" type="text" placeholder="Buscar Materia" aria-label="Search" />
-              <img role="presentation" alt="lupa" src="https://image.flaticon.com/icons/svg/70/70376.svg" height="16" />
-            </form>
+            {
+              // Sacar el div de debajo si se arregla el buscador
+            }
+            <div className="form-inline my-2 my-lg-0 p-2 flex-grow-1 bd-highlight d-flex justify-content-center"/>
+            {
+             // <form className="form-inline my-2 my-lg-0 p-2 flex-grow-1 bd-highlight d-flex
+             // justify-content-center">
+             // <input className="inputSearch" type="text"
+             // placeholder="Buscar Materia" aria-label="Search" />
+             // <img role="presentation" alt="lupa" src="https://image.flaticon.com/icons/svg/70/70376.svg" height="16" />
+             // </form>
+            }
             {this.crearCantidadNotificacionesNuevas()}
             <Dropdown drop="down" className="transparente" onClick={() => this.borrarNotificacionesNuevas()}>
               <Dropdown.Toggle id="dropdown-basic" className="transparente">
