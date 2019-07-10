@@ -48,7 +48,9 @@ public class Login extends BasePage {
         if (isElementVisible(errorMessageBy)){
             return null;
         } else {
-            return new Home(driver);
+            Home homeRet = new Home(driver);
+            homeRet.isElementVisible(homeRet.getNavBarBy());
+            return homeRet;
         }
     }
 
