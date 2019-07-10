@@ -16,6 +16,7 @@ class Navbar extends React.Component {
         nombrePersona: '',
         apellido: '',
         notificaciones: [],
+        nuevasNotificaciones: '',
       },
     };
   }
@@ -62,10 +63,44 @@ class Navbar extends React.Component {
     return (undefined);
   }
 
+  pushMateria(id) {
+    this.props.history.push({
+      pathname: '/materia/{id}',
+      state: {
+        idMateria: id,
+        username: this.props.location.state.username,
+        idUsuario: this.props.location.state.username,
+      },
+    });
+  }
+
+  formato(texto) {
+    return texto.replace(/^(\d{4})-(\d{2})-(\d{2})$/g, '$3/$2/$1');
+  }
+
+  borrarNotificacionesNuevas() {
+    const oldUsuario = this.state.usuario;
+    this.setState({ usuario: { ...oldUsuario, nuevasNotificaciones: 0 } });
+    API.post(`/borrarNotifiacionesVistas/${this.state.usuario.id}`);
+  }
+
+  borrarNotificacion(id) {
+    API.post(`/borrar/notificaciones/${this.state.usuario.id}`, { idTarea: id })
+      .then(response => this.setState({ usuario: response }));
+  }
+
   renderNotifications() {
     if (this.state.usuario !== '' && this.state.usuario.notificaciones.length) {
       return (this.state.usuario.notificaciones.map(
-        noti => <Dropdown.Item key={`${noti.nombre}_${noti.fecha}`} className="itemNotificacion"> {noti.nombre},{noti.fecha} </Dropdown.Item>,
+        noti => (
+          <Dropdown.Item key={`${noti.idMateria}_${noti.tarea.id}`} className="itemNotificacion">
+            <div className="row">
+              <h6 className="col-10" onClick={() => this.pushMateria(noti.idMateria)} role="presentation">{noti.titulo}</h6>
+              <span className="oi oi-circle-x col-2" role="presentation" onClick={() => this.borrarNotificacion(noti.tarea.id)} />
+              <p className="col-12" onClick={() => this.pushMateria(noti.idMateria)} role="presentation"> {noti.tarea.nombre} (Para el dia: {this.formato(noti.tarea.fecha)})</p>
+            </div>
+          </Dropdown.Item>
+        ),
       ));
     }
     return (<Dropdown.Item className="itemNotificacion"> Uuuh!, no tenes notificaciones :( </Dropdown.Item>);
@@ -82,6 +117,15 @@ class Navbar extends React.Component {
     );
   }
 
+  crearCantidadNotificacionesNuevas() {
+    if (this.state.usuario.nuevasNotificaciones != 0) {
+      return (
+        <p className="form-inline my-2 my-lg-0 p-2 d-flex justify-content-center numeroNoti">{this.state.usuario.nuevasNotificaciones}</p>
+      );
+    }
+    return undefined;
+  }
+
   render() {
     return (
       <nav className="navbar navbar-expand-lg background-navbar">
@@ -90,13 +134,14 @@ class Navbar extends React.Component {
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon" />
           </button>
-
+          {console.log(this.state.usuario)}
           <div className="collapse navbar-collapse d-flex-lg bd-highlight" id="navbarSupportedContent">
             <form className="form-inline my-2 my-lg-0 p-2 flex-grow-1 bd-highlight d-flex justify-content-center">
               <input className="inputSearch" type="text" placeholder="Buscar Materia" aria-label="Search" />
               <img role="presentation" alt="lupa" src="https://image.flaticon.com/icons/svg/70/70376.svg" height="16" />
             </form>
-            <Dropdown drop="down" className="transparente">
+            {this.crearCantidadNotificacionesNuevas()}
+            <Dropdown drop="down" className="transparente" onClick={() => this.borrarNotificacionesNuevas()}>
               <Dropdown.Toggle id="dropdown-basic" className="transparente">
                 <img src={bellIcon} alt="" className="bell" />
                 <DropdownMenu alignRight>

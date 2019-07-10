@@ -91,3 +91,11 @@
 .navbarUsuarioNombreYApellido{
     color: gray;
 }
+
+.numeroNoti{
+    color: black;
+    font-size: 15px;
+    border-radius: 100px;
+    border: 2px solid red;
+    transform: translateX(30px);
+}

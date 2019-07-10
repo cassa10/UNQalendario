@@ -1,3 +1,4 @@
+import gradle.cucumber.Materia;
 import gradle.cucumber.Persistence.UsuarioDAO;
 import gradle.cucumber.Service.UNQalendarioService;
 import gradle.cucumber.Tarea;
@@ -16,7 +17,7 @@ public class UsuarioDAOTest extends TestCase {
     private Usuario usuario1, usuario2;
     private UNQalendarioService UNQalendarioService;
     private UsuarioDAO usuarioDAO;
-    private Tarea notificacion1, notificacion2;
+    private Tarea tarea1, tarea2;
     private List<Usuario> usuarios;
 
     @Before
@@ -38,8 +39,10 @@ public class UsuarioDAOTest extends TestCase {
         usuarios.add(usuario1);
         usuarios.add(usuario2);
 
-        notificacion1 = new Tarea("Parcial", LocalDate.of(2020,1,2));
-        notificacion2 = new Tarea("Tarea Normal",LocalDate.of(2020,1,1));
+        tarea1 = new Tarea("Parcial", LocalDate.of(2020,1,2));
+        tarea1.setId("1");
+        tarea2 = new Tarea("Tarea Normal",LocalDate.of(2020,1,1));
+        tarea2.setId("2");
     }
 
     @After
@@ -49,68 +52,62 @@ public class UsuarioDAOTest extends TestCase {
 
     @Test
     public void testAgregarNotificacion(){
-        List<Tarea> tareas = new ArrayList<>();
-        tareas.add(notificacion1);
-
-
         //AGREGANDO Notificacion 1
-        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, notificacion1,false);
+        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, tarea1,false, new Materia());
 
         this.actualizarUsuariosDeLaDB();
 
         assertEquals(usuario1.getNotificaciones().size(),1);
-        assertTrue(usuario1.getNotificaciones().containsAll(tareas));
+        assertTrue(usuario1.getNotificaciones().stream().anyMatch(notificacion -> notificacion.getTarea().getId().equals(tarea1.getId())));
 
         assertEquals(usuario2.getNotificaciones().size(),1);
-        assertTrue(usuario2.getNotificaciones().containsAll(tareas));
+        assertTrue(usuario2.getNotificaciones().stream().anyMatch(notificacion -> notificacion.getTarea().getId().equals(tarea1.getId())));
 
         //AGREGANDO Notificacion 2
 
-        tareas.add(notificacion2);
-
-        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, notificacion2,false);
+        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, tarea2,false, new Materia());
 
         this.actualizarUsuariosDeLaDB();
 
         assertEquals(usuario1.getNotificaciones().size(),2);
-        assertTrue(usuario1.getNotificaciones().containsAll(tareas));
+        assertTrue(usuario1.getNotificaciones().stream().anyMatch(notificacion -> notificacion.getTarea().getId().equals(tarea2.getId())));
 
         assertEquals(usuario2.getNotificaciones().size(),2);
-        assertTrue(usuario2.getNotificaciones().containsAll(tareas));
+        assertTrue(usuario2.getNotificaciones().stream().anyMatch(notificacion -> notificacion.getTarea().getId().equals(tarea2.getId())));
     }
 
     @Test
     public void testAgregarDosNotificacionesYLuegoBorrarlas(){
 
         //AGREGANDO LAS NOTIFICACIONES
-        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, notificacion1,false);
-        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, notificacion2,false);
+        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, tarea1,false, new Materia());
+        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, tarea2,false, new Materia());
 
         //BORRANDO NOTIFICACION2
-        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, notificacion2,true);
+        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, tarea2,true, new Materia());
 
         this.actualizarUsuariosDeLaDB();
 
         assertEquals(usuario1.getNotificaciones().size(),1);
-        assertTrue(usuario1.getNotificaciones().contains(notificacion1));
+        assertTrue(usuario1.getNotificaciones().stream().anyMatch(notificacion -> notificacion.getTarea().getId().equals(tarea1.getId())));
 
         assertEquals(usuario2.getNotificaciones().size(),1);
-        assertTrue(usuario2.getNotificaciones().contains(notificacion1));
+        assertTrue(usuario2.getNotificaciones().stream().anyMatch(notificacion -> notificacion.getTarea().getId().equals(tarea1.getId())));
 
         //BORRANDO UNA NOTIFICACION QUE NO EXISTE NO HACE NADA
-        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, notificacion2,true);
+        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, tarea2,true, new Materia());
 
         this.actualizarUsuariosDeLaDB();
 
         assertEquals(usuario1.getNotificaciones().size(),1);
-        assertTrue(usuario1.getNotificaciones().contains(notificacion1));
+        assertTrue(usuario1.getNotificaciones().stream().anyMatch(notificacion -> notificacion.getTarea().getId().equals(tarea1.getId())));
 
         assertEquals(usuario2.getNotificaciones().size(),1);
-        assertTrue(usuario2.getNotificaciones().contains(notificacion1));
+        assertTrue(usuario2.getNotificaciones().stream().anyMatch(notificacion -> notificacion.getTarea().getId().equals(tarea1.getId())));
 
 
         //BORRANDO LA NOTIFICACION 1
-        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, notificacion1,true);
+        usuarioDAO.updateNotificacionesDeUsuarios(usuarios, tarea1,true, new Materia());
 
         this.actualizarUsuariosDeLaDB();
 

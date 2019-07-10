@@ -59,4 +59,16 @@ public class UsuarioController {
         this.usuarioService.desuscribirDe(data.get("idUsuario"), idMateria);
         return ResponseEntity.ok(this.usuarioService.getMaterias(data.get("idUsuario")));
     }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/borrarNotifiacionesVistas/{idUsuario}")
+    public ResponseEntity noHayNotifiacionesNuevas(@PathVariable String idUsuario) {
+        this.usuarioService.borrarNotifiacionesNuevas(idUsuario);
+        return ResponseEntity.ok("Ok");
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/borrar/notificaciones/{idUsuario}")
+    public ResponseEntity borrarNotifiacion(@PathVariable String idUsuario, @RequestBody HashMap<String,String> data) {
+        this.usuarioService.borrarNotificacion(idUsuario, data.get("idTarea"));
+        return ResponseEntity.ok(this.usuarioService.get(idUsuario));
+    }
 }
