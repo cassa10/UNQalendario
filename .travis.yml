@@ -1,7 +1,5 @@
 language: java
 services: mongodb
 
-before_script: cd backend
-
 after_success:
   - bash <(curl -s https://codecov.io/bash)

@@ -1,5 +1,6 @@
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -16,7 +17,9 @@ public abstract class BaseTest {
 
     @BeforeClass(alwaysRun = true)
     public static void setUp(){
-        driver=new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.setHeadless(true);
+        driver=new ChromeDriver(options);
         connection = new MongoConnection();
         connection.deleteAllUsers();
         connection.deleteAllSubjects();
