@@ -17,9 +17,7 @@ public abstract class BaseTest {
 
     @BeforeClass(alwaysRun = true)
     public static void setUp(){
-        ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
-        driver=new ChromeDriver(options);
+        driver=new ChromeDriver();
         connection = new MongoConnection();
         connection.deleteAllUsers();
         connection.deleteAllSubjects();
@@ -44,7 +42,6 @@ public abstract class BaseTest {
 
     public void agregarDocenteAMateriaNueva(String usernameDocente, String nombreMateria){
         Administracion administracionPage = new Administracion(driver);
-        driver.get("http://localhost:3000/administracion");
         administracionPage.crearMateria(nombreMateria);
         administracionPage.agregarAdministradorAMateria(usernameDocente,nombreMateria);
     }

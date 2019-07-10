@@ -5,6 +5,8 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.concurrent.TimeUnit;
+
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class Home extends BasePage {
@@ -33,6 +35,7 @@ public class Home extends BasePage {
         getMateriaCard(nombreMateria).
                 findElement(By.xpath("/descendant::p[@class='card-name-bottom suscribir']")).
                 click();
+        wait.until(visibilityOfElementLocated(By.xpath("//p[text()='DESUSCRIBIR']")));
     }
 
     public WebElement getMateriaCard(String nombreMateria){
@@ -45,7 +48,7 @@ public class Home extends BasePage {
 
     public Materia irAVerMateria(String nombreMateria) {
         WebElement materiaCard = getMateriaCard(nombreMateria);
-        materiaCard.findElement(By.xpath("//p[contains(text(), 'Ver')]")).click();
+        materiaCard.findElement(By.xpath("//p[text()='Ver']")).click();
         return new Materia(driver);
     }
 }
