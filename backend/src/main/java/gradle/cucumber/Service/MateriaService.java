@@ -54,11 +54,12 @@ public class MateriaService {
     public void agregarTarea(String idMateria, Tarea tarea) {
 
         Materia materia = materiaDAO.get(idMateria);
+        tarea.setId(tarea.getNombre() + materia.getId());
         materia.agregarTarea(tarea);
 
         List<Usuario> suscriptores = materia.getSuscriptores();
 
-        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea,false);
+        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea,false, materia);
         materiaDAO.agregarTareas(idMateria,materia.getTareas());
     }
 
@@ -77,11 +78,12 @@ public class MateriaService {
     public void eliminarTarea(String idMateria, Tarea tarea) {
 
         Materia materia = materiaDAO.get(idMateria);
+        tarea.setId(tarea.getNombre() + materia.getId());
         materia.eliminarTarea(tarea);
 
         List<Usuario> suscriptores = materia.getSuscriptores();
 
-        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea,true);
+        usuarioDAO.updateNotificacionesDeUsuarios(suscriptores,tarea,true, materia);
         materiaDAO.eliminarTarea(idMateria,materia.getTareas());
     }
 

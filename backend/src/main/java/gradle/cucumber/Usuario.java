@@ -14,7 +14,8 @@ public class Usuario {
     private String password;
     private String nombrePersona;
     private String apellido;
-    private List<Tarea> notificaciones;
+    private int nuevasNotificaciones;
+    private List<Notificacion> notificaciones;
 
     public Usuario() {
         this.setUp();
@@ -38,6 +39,7 @@ public class Usuario {
 
     private void setUp() {
         this.notificaciones = new ArrayList<>();
+        this.nuevasNotificaciones = 0;
     }
 
     public String getId() {
@@ -48,8 +50,13 @@ public class Usuario {
         return nombreUsuario;
     }
 
-    public void agregarNotificacion(Tarea tarea) {
-        this.notificaciones.add(tarea);
+    public void agregarNotificacion(Notificacion notificacion) {
+        this.notificaciones.add(0, notificacion);
+        this.nuevasNotificaciones++;
+    }
+
+    public void seVieronTodasLasNotifiaciones() {
+        this.nuevasNotificaciones = 0;
     }
 
     @Override
@@ -65,6 +72,14 @@ public class Usuario {
         return this.nombrePersona;
     }
 
+    public void setNuevasNotificaciones(int nuevasNotificaciones) {
+        this.nuevasNotificaciones = nuevasNotificaciones;
+    }
+
+    public int getNuevasNotificaciones() {
+        return nuevasNotificaciones;
+    }
+
     public String getApellido(){
         return this.apellido;
     }
@@ -78,12 +93,12 @@ public class Usuario {
         return this.getNombrePersona() +", "+this.getApellido();
     }
 
-    public List<Tarea> getNotificaciones(){
+    public List<Notificacion> getNotificaciones(){
         return this.notificaciones;
     }
 
-    public void eliminarNotificacion(Tarea tarea) {
-        this.notificaciones.remove(tarea);
+    public void eliminarNotificacion(String idTarea) {
+        this.notificaciones.removeIf(notificacion -> notificacion.getTarea().getId().contains(idTarea));
     }
 
     public void setId(String newId){
