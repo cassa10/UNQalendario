@@ -31,7 +31,7 @@ public class Home extends BasePage {
 
     public void suscribirAMateria(String nombreMateria) {
         getMateriaCard(nombreMateria).
-                findElement(By.xpath("descendant::p[@class='card-name-bottom suscribir']")).
+                findElement(By.xpath("/descendant::p[@class='card-name-bottom suscribir']")).
                 click();
     }
 
