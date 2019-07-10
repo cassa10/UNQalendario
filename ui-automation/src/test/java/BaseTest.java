@@ -18,7 +18,7 @@ public abstract class BaseTest {
     @BeforeClass(alwaysRun = true)
     public static void setUp(){
         ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
+        //options.setHeadless(true);
         driver=new ChromeDriver(options);
         connection = new MongoConnection();
         connection.deleteAllUsers();
