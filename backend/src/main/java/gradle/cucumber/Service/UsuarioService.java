@@ -67,4 +67,18 @@ public class UsuarioService {
 
         this.materiaDAO.desuscribirUsuario(idMateria, materiaRecuperado.getSuscriptores());
     }
+
+    public void borrarNotifiacionesNuevas(String idUsuario) {
+        Usuario usuarioRecuperado = this.usuarioDAO.get(idUsuario);
+        usuarioRecuperado.seVieronTodasLasNotifiaciones();
+
+        this.usuarioDAO.noHayNotificacionesVistas(idUsuario);
+    }
+
+    public void borrarNotificacion(String idUsuario, String idTarea) {
+        Usuario usuarioRecuperado = this.usuarioDAO.get(idUsuario);
+        usuarioRecuperado.eliminarNotificacion(idTarea);
+
+        this.usuarioDAO.actualizarNotifiaciones(idUsuario, usuarioRecuperado.getNotificaciones());
+    }
 }

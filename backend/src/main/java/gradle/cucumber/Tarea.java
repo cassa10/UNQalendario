@@ -6,6 +6,7 @@ import java.time.ZoneId;
 import java.util.Date;
 
 public class Tarea {
+    private String id;
     private String nombreTarea;
     private Date fechaTarea;
 
@@ -15,7 +16,6 @@ public class Tarea {
 
     public Tarea(String nombre, LocalDate fecha) {
         this.nombreTarea=nombre;
-
         this.fechaTarea = Date.from(fecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
@@ -26,6 +26,14 @@ public class Tarea {
     public LocalDate getFecha() {
 
         return this.fechaTarea.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     @Override

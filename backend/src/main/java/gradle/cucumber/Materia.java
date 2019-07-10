@@ -87,7 +87,7 @@ public class Materia {
         return true;
     }
     public void eliminarTarea(Tarea tarea)  {
-        this.tareas.remove(tarea);
+        this.tareas.removeIf(tarea1 -> tarea1.getId().equals(tarea.getId()));
     }
 
 
